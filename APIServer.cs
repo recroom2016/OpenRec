@@ -207,9 +207,9 @@ namespace server
 						{
 							File.WriteAllText("SaveData\\avatar.txt", text);
 						}
-						if (Url == "settings/v2")
+						if (Url == "settings/v2/")
 						{
-							
+							s = Settings.GetPlayerSettings();
 						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);

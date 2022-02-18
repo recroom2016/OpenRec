@@ -24,6 +24,10 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\Profile\\username.txt", "DefaultUsername");
 			}
+			if (!(File.Exists("SaveData\\settings.txt")))
+			{
+				File.WriteAllText("SaveData\\settings.txt", Newtonsoft.Json.JsonConvert.SerializeObject(api.Settings.CreateDefaultSettings()));
+			}
 			if (!(File.Exists("SaveData\\profileimage.png")))
 			{
 				File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData("https://github.com/OpenRecRoom/OpenRec/raw/main/profileimage.png"));

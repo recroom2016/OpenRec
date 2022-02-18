@@ -175,6 +175,6 @@ namespace api
 		private static List<Setting> playerSettings;
 
 		// Token: 0x040000F1 RID: 241
-		public static string SettingsPath =  + "PlayerSettings.dat";
+		public static string SettingsPath = "SaveData\\settings.txt";
 	}
 }
