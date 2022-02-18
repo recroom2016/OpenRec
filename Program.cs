@@ -10,13 +10,13 @@ namespace start
     {
         static void Main(string[] args)
         {
-            Config.setup();
+            Setup.setup();
             goto Start;
 
             Start:
             Console.WriteLine("OpenRec - Open source RecNet server software.");
             Console.WriteLine("Made and provided by RecRoom 2016.");
-            Console.WriteLine("Download source code here: https://github.com/recroom2016/OpenRec.");
+            Console.WriteLine("Download source code here: https://github.com/recroom2016/OpenRec");
             Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             Console.WriteLine("1) Modify Settings" + Environment.NewLine + "2) Modify Profile" + Environment.NewLine + "3) Start Server");
             string readline = Console.ReadLine();
@@ -33,7 +33,7 @@ namespace start
                 if (readline3 == "1")
                 {
                     Console.Clear();
-                    Console.WriteLine("Current Username: " + File.ReadAllText("SaveData\\Profile\\username.txt)"));
+                    Console.WriteLine("Current Username: " + File.ReadAllText("SaveData\\Profile\\username.txt"));
                     Console.WriteLine("New Username: ");
                     string newusername = Console.ReadLine();
                     File.WriteAllText("SaveData\\Profile\\username.txt)", newusername);

@@ -1,75 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using gamesessions;
 
 namespace ws
 {
-	// Token: 0x02000029 RID: 41
+	// Token: 0x0200002A RID: 42
 	public class Notification
 	{
-		// Token: 0x06000104 RID: 260 RVA: 0x00004EF4 File Offset: 0x000030F4
+		// Token: 0x0600010B RID: 267
 		public static string ProcessRequest(string jsonData)
-		{ 
+		{
+			Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
 			string result;
+			if (dictionary.ContainsKey("api"))
+			{
+				string text = (string)dictionary["api"];
+				string text2 = text;
+				if (text2 != null)
+				{
+					if (text2 == "playerSubscriptions/v1/update")
+					{
+						Console.WriteLine("WebSocket.cs game client sent presence update.");
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, GameSessions.StatusSessionInstance()));
+					}
+					if (text2 == "heartbeat2")
+					{
+						Console.WriteLine("WebSocket.cs heartbeat 2 sent by game client.");
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(4, GameSessions.StatusSessionInstance()));
+					}
+				}
+				Console.WriteLine("WebSocket.cs unknown API call: " + text);
+				result = "";
+			}
+			else
 			{
 				result = jsonData;
 			}
 			return result;
 		}
 
-		// Token: 0x0200002A RID: 42
+		// Token: 0x0200002B RID: 43
 		public enum ResponseResult
 		{
-			// Token: 0x04000091 RID: 145
-			RelationshipChanged = 1,
 			// Token: 0x04000092 RID: 146
-			MessageReceived,
+			RelationshipChanged = 1,
 			// Token: 0x04000093 RID: 147
-			MessageDeleted,
+			MessageReceived,
 			// Token: 0x04000094 RID: 148
-			PresenceHeartbeatResponse,
+			MessageDeleted,
 			// Token: 0x04000095 RID: 149
-			SubscriptionListUpdated = 9,
+			PresenceHeartbeatResponse,
 			// Token: 0x04000096 RID: 150
-			SubscriptionUpdateProfile = 11,
+			SubscriptionListUpdated = 9,
 			// Token: 0x04000097 RID: 151
-			SubscriptionUpdatePresence,
+			SubscriptionUpdateProfile = 11,
 			// Token: 0x04000098 RID: 152
-			SubscriptionUpdateGameSession,
+			SubscriptionUpdatePresence,
 			// Token: 0x04000099 RID: 153
-			SubscriptionUpdateRoom,
+			SubscriptionUpdateGameSession,
 			// Token: 0x0400009A RID: 154
-			ModerationQuitGame = 20,
+			SubscriptionUpdateRoom,
 			// Token: 0x0400009B RID: 155
-			ModerationUpdateRequired,
+			ModerationQuitGame = 20,
 			// Token: 0x0400009C RID: 156
-			ModerationKick,
+			ModerationUpdateRequired,
 			// Token: 0x0400009D RID: 157
-			ModerationKickAttemptFailed,
+			ModerationKick,
 			// Token: 0x0400009E RID: 158
-			GiftPackageReceived = 30,
+			ModerationKickAttemptFailed,
 			// Token: 0x0400009F RID: 159
-			ProfileJuniorStatusUpdate = 40,
+			GiftPackageReceived = 30,
 			// Token: 0x040000A0 RID: 160
-			RelationshipsInvalid = 50,
+			ProfileJuniorStatusUpdate = 40,
 			// Token: 0x040000A1 RID: 161
+			RelationshipsInvalid = 50,
+			// Token: 0x040000A2 RID: 162
 			StorefrontBalanceAdd = 60
 		}
 
-		// Token: 0x0200002B RID: 43
+		// Token: 0x0200002C RID: 44
 		public class Reponse
 		{
-			// Token: 0x1700005C RID: 92
-			// (get) Token: 0x06000106 RID: 262 RVA: 0x000027DA File Offset: 0x000009DA
-			// (set) Token: 0x06000107 RID: 263 RVA: 0x000027E2 File Offset: 0x000009E2
+			// Token: 0x1700005F RID: 95
+			// (get) Token: 0x0600010D RID: 269
+			// (set) Token: 0x0600010E RID: 270
 			public int Id { get; set; }
 
-			// Token: 0x1700005D RID: 93
-			// (get) Token: 0x06000108 RID: 264 RVA: 0x000027EB File Offset: 0x000009EB
-			// (set) Token: 0x06000109 RID: 265 RVA: 0x000027F3 File Offset: 0x000009F3
+			// Token: 0x17000060 RID: 96
+			// (get) Token: 0x0600010F RID: 271
+			// (set) Token: 0x06000110 RID: 272
 			public object Msg { get; set; }
 
-			// Token: 0x0600010A RID: 266 RVA: 0x00004FC0 File Offset: 0x000031C0
+			// Token: 0x06000111 RID: 273
 			public static Notification.Reponse createResponse(int id, object msg)
 			{
 				return new Notification.Reponse

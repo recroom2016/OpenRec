@@ -8,7 +8,6 @@ namespace api
 {
     class Config
     {
-
 		public static void setup()
         {
 			Console.WriteLine("Setting up...");
@@ -28,7 +27,7 @@ namespace api
 			Console.WriteLine("Done!");
 			Console.Clear();
 		}
-
+		public static gamesessions.GameSessions.SessionInstance localGameSession;
 		public static Objective[][] dailyObjectives = new Objective[][]
 		{
 			new Objective[]

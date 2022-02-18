@@ -191,10 +191,26 @@ namespace server
                         {
 							s = ModerationBlockDetails;
                         }
-						if (Url == "messages/v2/get")
+                        if (Url == "messages/v2/get")
                         {
-							s = 
+                            s = BracketResponse;
                         }
+						if (Url == "relationships/v2/get")
+						{
+							s = BracketResponse;
+						}
+						if (Url == "avatar/v2")
+                        {
+							s = File.ReadAllText("SaveData\\avatar.txt");
+                        }
+						if (Url == "avatar/v2/set")
+						{
+							File.WriteAllText("SaveData\\avatar.txt", text);
+						}
+						if (Url == "settings/v2")
+						{
+							
+						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
@@ -212,12 +228,13 @@ namespace server
 				File.WriteAllText("crashdump.txt", Convert.ToString(ex4));
             }
         }
-
         public static ulong CachedPlayerID = 1;
 		public static ulong CachedPlatformID = 10000;
-		public static string VersionCheckResponse = "{\"ValidVersion\":true}";
+
 		public static string BlankResponse = "";
 		public static string BracketResponse = "[]";
+
+		public static string VersionCheckResponse = "{\"ValidVersion\":true}";
 		public static string ModerationBlockDetails = "{\"ReportCategory\":0,\"Duration\":0,\"GameSessionId\":0,\"Message\":\"\"}";
 		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"OpenRec\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2043-12-27T21:27:38.1880399-08:00\"}";
 		

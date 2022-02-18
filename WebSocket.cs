@@ -24,7 +24,7 @@ namespace ws
 			// Token: 0x06000013 RID: 19 RVA: 0x0000209D File Offset: 0x0000029D
 			protected override void OnMessage(MessageEventArgs e)
 			{
-				Console.WriteLine("WebSocket.cs called for. Not yet implemented.");
+				Console.WriteLine("WebSocket.cs called for.");
 				base.Send(Notification.ProcessRequest(e.Data));
 			}
 		}
