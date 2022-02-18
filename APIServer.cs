@@ -185,11 +185,15 @@ namespace server
 						}
 						if (Url == "images/v2/named")
                         {
-							s = BlankResponse;
+							s = ImagesV2Named;
                         }
 						if (Url == "PlayerReporting/v1/moderationBlockDetails")
                         {
 							s = ModerationBlockDetails;
+                        }
+						if (Url == "messages/v2/get")
+                        {
+							s = 
                         }
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -212,7 +216,8 @@ namespace server
         public static ulong CachedPlayerID = 1;
 		public static ulong CachedPlatformID = 10000;
 		public static string VersionCheckResponse = "{\"ValidVersion\":true}";
-		public static string BlankResponse = "[]";
+		public static string BlankResponse = "";
+		public static string BracketResponse = "[]";
 		public static string ModerationBlockDetails = "{\"ReportCategory\":0,\"Duration\":0,\"GameSessionId\":0,\"Message\":\"\"}";
 		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"OpenRec\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2043-12-27T21:27:38.1880399-08:00\"}";
 		

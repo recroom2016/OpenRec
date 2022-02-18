@@ -83,7 +83,7 @@ namespace api2018
 						}
 					}
 				},
-				Token = "NoKeyProvided",
+				Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTYxOTI4NzQ2MSwidmVycyI6IjIwMTcxMTE3X0VBIn0.-GqtcqPwAzr9ZJioTiz5v0Kl4HMMjH8hFMtVzQtRN5c",
 				FirstLoginOfTheDay = true,
 				AnalyticsSessionId = 392394UL,
 				CanUseScreenMode = true

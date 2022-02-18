@@ -15,9 +15,11 @@ namespace start
 
             Start:
             Console.WriteLine("OpenRec - Open source RecNet server software.");
+            Console.WriteLine("Made and provided by RecRoom 2016.");
+            Console.WriteLine("Download source code here: https://github.com/recroom2016/OpenRec.");
+            Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             Console.WriteLine("1) Modify Settings" + Environment.NewLine + "2) Modify Profile" + Environment.NewLine + "3) Start Server");
             string readline = Console.ReadLine();
-           
             if (readline == "1")
             {
                 Console.WriteLine("Not yet added in...");
@@ -25,7 +27,6 @@ namespace start
             }
             if (readline == "2")
             {
-                goto Start;
                 Console.Clear();
                 Console.WriteLine("1) Change Username" + Environment.NewLine + "2) Go Back");
                 string readline3 = Console.ReadLine();
@@ -38,18 +39,15 @@ namespace start
                     File.WriteAllText("SaveData\\Profile\\username.txt)", newusername);
                     Console.Clear();
                     goto Start;
-
                 }
                 if (readline3 == "2")
                 {
                     Console.Clear();
                     goto Start;
-
                 }
             }
             if (readline == "3")
             {
-
                 Console.WriteLine("Please select the version of RecRoom the server should host: (2016, 2017, 2018)");
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2016")
@@ -81,7 +79,7 @@ namespace start
             }
         }
 
-        public static string version = "";
+        public static string version = "0.1";
     }
 
 }
