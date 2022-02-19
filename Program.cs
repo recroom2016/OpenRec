@@ -3,6 +3,7 @@ using server;
 using System.IO;
 using ws;
 using api;
+using System.Net;
 
 namespace start
 {
@@ -14,16 +15,42 @@ namespace start
             goto Start;
 
             Start:
-            Console.WriteLine("OpenRec - Open source RecNet server software.");
+            Console.WriteLine("OpenRec - Open source RecNet server software. (Version: " + version + ")");
             Console.WriteLine("Made and provided by RecRoom 2016.");
             Console.WriteLine("Download source code here: https://github.com/recroom2016/OpenRec");
             Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
-            Console.WriteLine("1) Modify Settings" + Environment.NewLine + "2) Modify Profile" + Environment.NewLine + "3) Start Server");
+            if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt").Contains(version)))
+            {
+                Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt") + Environment.NewLine);
+            }
+            Console.WriteLine("1) Change Settings" + Environment.NewLine + "2) Modify Profile" + Environment.NewLine + "3) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
             {
-                Console.WriteLine("Not yet added in...");
-                goto Start;
+                goto TrueFalse;
+
+                TrueFalse:
+                Console.Clear();
+                Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Go Back");
+                string readline4 = Console.ReadLine();
+                if (readline4 == "1")
+                {
+                    if (File.ReadAllText("SaveData\\App\\sandbox.txt") == "Disabled")
+                    {
+                        File.WriteAllText("SaveData\\App\\sandbox.txt", "Enabled");
+                    }
+                    else
+                    {
+                        File.WriteAllText("SaveData\\App\\sandbox.txt", "Disabled");
+                    }
+                    goto TrueFalse;
+                }
+                if (readline4 == "2")
+                {
+                    Console.Clear();
+                    goto Start;
+                }
+
             }
             if (readline == "2")
             {
@@ -36,7 +63,7 @@ namespace start
                     Console.WriteLine("Current Username: " + File.ReadAllText("SaveData\\Profile\\username.txt"));
                     Console.WriteLine("New Username: ");
                     string newusername = Console.ReadLine();
-                    File.WriteAllText("SaveData\\Profile\\username.txt)", newusername);
+                    File.WriteAllText("SaveData\\Profile\\username.txt", newusername);
                     Console.Clear();
                     goto Start;
                 }
@@ -48,7 +75,7 @@ namespace start
             }
             if (readline == "3")
             {
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2016, 2017, 2018)");
+                Console.WriteLine("Please select the version of RecRoom the server should host: (2018)");
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2016")
                 {
@@ -79,7 +106,7 @@ namespace start
             }
         }
 
-        public static string version = "0.1";
+        public static string version = "0.2";
     }
 
 }

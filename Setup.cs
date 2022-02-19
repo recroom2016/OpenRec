@@ -11,6 +11,7 @@ namespace start
 		public static void setup()
 		{
 			Console.WriteLine("Setting up...");
+			Directory.CreateDirectory("SaveData\\App\\");
 			Directory.CreateDirectory("SaveData\\Profile\\");
 			if (!(File.Exists("SaveData\\avatar.txt")))
 			{
@@ -39,6 +40,10 @@ namespace start
 			if (!(File.Exists("SaveData\\settings.txt")))
 			{
 				File.WriteAllText("SaveData\\settings.txt", Newtonsoft.Json.JsonConvert.SerializeObject(api.Settings.CreateDefaultSettings()));
+			}
+			if (!(File.Exists("SaveData\\App\\sandbox.txt")))
+			{
+				File.WriteAllText("SaveData\\App\\sandbox.txt", "Disabled");
 			}
 			if (!(File.Exists("SaveData\\profileimage.png")))
 			{

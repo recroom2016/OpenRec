@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using api;
 using server;
-
+using System.IO;
 namespace gamesessions2018
 {
 	// Token: 0x02000020 RID: 32
@@ -11,14 +11,18 @@ namespace gamesessions2018
 		// Token: 0x060000BE RID: 190 RVA: 0x00004C08 File Offset: 0x00002E08
 		public static string JoinRandom(string jsonData)
 		{
-		
+			bool sandboxmode = false;
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
-			if (Config.localGameSession == null)
+			if (File.ReadAllText("SaveData\\App\\sandbox.txt") == "Enabled")
 			{
+				sandboxmode = true;
+			}
+			
+				{
 				Config.localGameSession = new GameSessions.SessionInstance
 				{
-					GameSessionId = 2842L,
-					RegionId = "au",
+					GameSessionId = 2018L,
+					RegionId = "us",
 					RoomId = joinRandomRequest.ActivityLevelIds[0],
 					RecRoomId = null,
 					EventId = null,
@@ -26,7 +30,7 @@ namespace gamesessions2018
 					Name = "OpenRec",
 					ActivityLevelId = joinRandomRequest.ActivityLevelIds[0],
 					Private = false,
-					Sandbox = false,
+					Sandbox = sandboxmode,
 					SupportsScreens = true,
 					SupportsVR = true,
 					GameInProgress = false,
@@ -34,12 +38,7 @@ namespace gamesessions2018
 					IsFull = false
 				};
 			}
-			else
-			{
-				Config.localGameSession.RoomId = joinRandomRequest.ActivityLevelIds[0];
-				Config.localGameSession.ActivityLevelId = joinRandomRequest.ActivityLevelIds[0];
-				Config.localGameSession.Sandbox = false;
-			}
+			
 			return JsonConvert.SerializeObject(new GameSessions.JoinResult
 			{
 				Result = 0,
@@ -64,20 +63,20 @@ namespace gamesessions2018
 		{
 			Console.WriteLine("[API][GameSession] Creating Room...");
 			GameSessions.CreateRequest createRequest = JsonConvert.DeserializeObject<GameSessions.CreateRequest>(jsonData);
-			if (Config.localGameSession == null)
+			
 			{
 				Config.localGameSession = new GameSessions.SessionInstance
 				{
-					GameSessionId = 2842L,
-					RegionId = "au",
+					GameSessionId = 2017L,
+					RegionId = "us",
 					RoomId = createRequest.ActivityLevelIds,
 					RecRoomId = null,
 					EventId = null,
 					CreatorPlayerId = (long?)APIServer.CachedPlayerID,
-					Name = "Dorm Room",
+					Name = "Custom Room",
 					ActivityLevelId = createRequest.ActivityLevelIds,
-					Private = true,
-					Sandbox = true,
+					Private = false,
+					Sandbox = createRequest.IsSandbox,
 					SupportsScreens = true,
 					SupportsVR = true,
 					GameInProgress = false,
@@ -85,12 +84,7 @@ namespace gamesessions2018
 					IsFull = false
 				};
 			}
-			else
-			{
-				Config.localGameSession.RoomId = createRequest.ActivityLevelIds;
-				Config.localGameSession.ActivityLevelId = createRequest.ActivityLevelIds;
-				Config.localGameSession.Sandbox = createRequest.IsSandbox;
-			}
+		
 			return JsonConvert.SerializeObject(new GameSessions.JoinResult
 			{
 				Result = 0,

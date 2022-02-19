@@ -53,7 +53,7 @@ namespace api2018
 					XP = 9999,
 					Level = 10,
 					RegistrationStatus = 2,
-					Developer = false,
+					Developer = true,
 					CanReceiveInvites = false,
 					ProfileImageName = name,
 					JuniorProfile = false,

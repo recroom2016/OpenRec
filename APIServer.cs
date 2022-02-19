@@ -264,9 +264,9 @@ namespace server
 							s = PlayerEventsResponse;
 						}
 						if (Url == "gamesessions/v2/joinrandom")
-                        {
+						{
 							s = gamesessions2018.GameSessions.JoinRandom(text);
-                        }
+						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;

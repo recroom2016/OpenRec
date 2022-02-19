@@ -52,7 +52,7 @@ namespace api
 			return JsonConvert.SerializeObject(new Config2
 			{
 				MessageOfTheDay = "Default MOTD",
-				CdnBaseUri = "http://img.rec.net/",
+				CdnBaseUri = "http://localhost:20182/",
 				LevelProgressionMaps = new List<LevelProgressionEntry>
 				{
 					new LevelProgressionEntry
