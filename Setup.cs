@@ -28,6 +28,10 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\equipment.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/equipment.txt"));
 			}
+			if (!(File.Exists("SaveData\\consumables.txt")))
+			{
+				File.WriteAllText("SaveData\\consumables.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/consumables.txt"));
+			}
 			if (!(File.Exists("SaveData\\Profile\\username.txt")))
 			{
 				File.WriteAllText("SaveData\\Profile\\username.txt", "DefaultUsername");

@@ -24,8 +24,6 @@ namespace server
 				Console.WriteLine("An Exception Occurred while Listening :" + ex.ToString());
 			}
 		}
-
-		
 		private void StartListen()
 		{
 			try
@@ -219,6 +217,26 @@ namespace server
 						{
 							s = File.ReadAllText("SaveData\\equipment.txt");
 						}
+						if (Url == "avatar/v1/saved")
+                        {
+							s = BracketResponse;
+                        }
+						if (Url == "consumables/v1/getUnlocked")
+						{
+							s = File.ReadAllText("SaveData\\consumables.txt");
+						}
+						if (Url == "avatar/v2/gifts")
+                        {
+							s = BracketResponse;
+                        }
+						if (Url == "storefronts/v1/allGiftDrops/2")
+                        {
+							s = BracketResponse;
+						}
+						if (Url == "storefronts/v2/2")
+                        {
+							s = "";
+                        }
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
