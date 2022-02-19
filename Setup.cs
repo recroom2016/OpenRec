@@ -20,6 +20,14 @@ namespace start
             {
 				File.WriteAllText("SaveData\\avatar.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avatar.txt"));
 			}
+			if (!(File.Exists("SaveData\\avataritems.txt")))
+			{
+				File.WriteAllText("SaveData\\avataritems.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avataritems.txt"));
+			}
+			if (!(File.Exists("SaveData\\equipment.txt")))
+			{
+				File.WriteAllText("SaveData\\equipment.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/equipment.txt"));
+			}
 			if (!(File.Exists("SaveData\\Profile\\username.txt")))
 			{
 				File.WriteAllText("SaveData\\Profile\\username.txt", "DefaultUsername");

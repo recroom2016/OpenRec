@@ -209,7 +209,15 @@ namespace server
 						}
 						if (Url == "settings/v2/")
 						{
-							s = Settings.GetPlayerSettings();
+							s = File.ReadAllText("SaveData\\settings.txt");
+						}
+						if (Url == "avatar/v3/items")
+                        {
+							s = File.ReadAllText("SaveData\\avataritems.txt");
+						}
+						if (Url == "equipment/v1/getUnlocked")
+						{
+							s = File.ReadAllText("SaveData\\equipment.txt");
 						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
