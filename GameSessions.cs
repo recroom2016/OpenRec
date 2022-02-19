@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using api;
 using server;
 
-namespace gamesessions
+namespace gamesessions2018
 {
 	// Token: 0x02000020 RID: 32
 	public class GameSessions

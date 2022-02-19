@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using api;
 using api2018;
+using Newtonsoft.Json;
 
 namespace server
 {
@@ -237,6 +238,10 @@ namespace server
                         {
 							s = "";
                         }
+						if (Url == "objectives/v1/myprogress")
+                        {
+							s = JsonConvert.SerializeObject(new Objective2018());
+						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;

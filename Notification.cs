@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using gamesessions;
+using gamesessions2018;
 
 namespace ws
 {

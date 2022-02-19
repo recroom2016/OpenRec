@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace storefront
+namespace storefront2018
 {
 	// Token: 0x0200003E RID: 62
 	internal class StoreFronts
