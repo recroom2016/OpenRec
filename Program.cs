@@ -4,6 +4,7 @@ using System.IO;
 using ws;
 using api;
 using System.Net;
+using System.Diagnostics;
 
 namespace start
 {
@@ -27,10 +28,10 @@ namespace start
             string readline = Console.ReadLine();
             if (readline == "1")
             {
-                goto TrueFalse;
-
-                TrueFalse:
                 Console.Clear();
+                goto Settings;
+
+                Settings:
                 Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Go Back");
                 string readline4 = Console.ReadLine();
                 if (readline4 == "1")
@@ -43,31 +44,89 @@ namespace start
                     {
                         File.WriteAllText("SaveData\\App\\sandbox.txt", "Disabled");
                     }
-                    goto TrueFalse;
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                    goto Settings;
                 }
-                if (readline4 == "2")
+                else if (readline4 == "2")
                 {
                     Console.Clear();
                     goto Start;
                 }
-
             }
             if (readline == "2")
             {
                 Console.Clear();
-                Console.WriteLine("1) Change Username" + Environment.NewLine + "2) Go Back");
+                goto Profile;
+
+                Profile:
+                Console.WriteLine("1) Change Username" + Environment.NewLine+ "2) Change Profile Image" + Environment.NewLine + "3) Go Back");
                 string readline3 = Console.ReadLine();
                 if (readline3 == "1")
                 {
-                    Console.Clear();
                     Console.WriteLine("Current Username: " + File.ReadAllText("SaveData\\Profile\\username.txt"));
                     Console.WriteLine("New Username: ");
                     string newusername = Console.ReadLine();
                     File.WriteAllText("SaveData\\Profile\\username.txt", newusername);
                     Console.Clear();
+                    Console.WriteLine("Success!");
                     goto Start;
                 }
-                if (readline3 == "2")
+                else if (readline3 == "2")
+                {
+                    Console.Clear();
+                    Console.WriteLine("1) Upload Media Link" + Environment.NewLine + "2) Drag Image onto this window" + Environment.NewLine + "3) Go Back");
+                    string readline4 = Console.ReadLine();
+                    if (readline4 == "1")
+                    {
+                        Console.WriteLine("Paste Media Link: ");
+                        string medialink = Console.ReadLine();
+                        try
+                        {
+                            File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData(medialink));
+                        }
+                        catch (Exception ex4)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid Media Link");
+                            goto Profile;
+                        }
+                        Console.Clear();
+                        Console.WriteLine("Success!");
+                        goto Start;
+                    }
+                    else if (readline4 == "2")
+                    {
+                        Console.WriteLine("Drag any image onto this window and press enter: ");
+                        string imagedir = Console.ReadLine();
+                        try
+                        {
+                            byte[] imagefile = File.ReadAllBytes(imagedir);
+                            File.Replace(imagedir, "SaveData\\profileimage.png", "backupfilename.png");
+                            File.WriteAllBytes(imagedir, imagefile);
+                        }
+                        catch (Exception ex4)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid Image (Make sure its on the same drive as OpenRec)");
+                            goto Profile;
+                        }
+                        Console.Clear();
+                        Console.WriteLine("Success!");
+                        goto Start;
+                    }
+                    else if (readline4 == "3")
+                    {
+                        Console.Clear();
+                        goto Start;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        goto Start;
+                    }
+                }
+                else if (readline3 == "3")
                 {
                     Console.Clear();
                     goto Start;
@@ -85,7 +144,7 @@ namespace start
                     new APIServer();
                     new WebSocket();
                 }
-                if (readline2 == "2017")
+                else if (readline2 == "2017")
                 {
                     version = "2017";
                     Console.Clear();
@@ -93,7 +152,7 @@ namespace start
                     new APIServer();
                     new WebSocket();
                 }
-                if (readline2 == "2018")
+                else if (readline2 == "2018")
                 {
                     version = "2018";
                     Console.Clear();
