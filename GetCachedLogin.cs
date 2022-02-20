@@ -12,6 +12,7 @@ namespace api2018
 		// Token: 0x0600033C RID: 828 RVA: 0x00008F30 File Offset: 0x00007130
 		public static string GetDebugLogin(ulong userid, ulong platformid)
 		{
+			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
 			string name = File.ReadAllText("SaveData\\Profile\\username.txt");
 			return JsonConvert.SerializeObject(new List<getcachedlogins>
 			{
@@ -21,7 +22,7 @@ namespace api2018
 					Username = name,
 					DisplayName = name,
 					XP = 9999,
-					Level = 10,
+					Level = level,
 					RegistrationStatus = 2,
 					Developer = true,
 					CanReceiveInvites = false,

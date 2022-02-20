@@ -5,42 +5,22 @@ using Newtonsoft.Json;
 
 namespace api
 {
-	// Token: 0x0200003C RID: 60
 	internal class Settings
 	{
-		// Token: 0x060001C1 RID: 449 RVA: 0x00002D10 File Offset: 0x00000F10
-		public static string GetPlayerSettings()
-		{
-			if (Settings.playerSettings == null)
-			{
-				if (File.Exists(Settings.SettingsPath))
-				{
-					Settings.playerSettings = Settings.LoadSettings();
-				}
-				else
-				{
-					Settings.playerSettings = Settings.CreateDefaultSettings();
-				}
-			}
-			return JsonConvert.SerializeObject(Settings.playerSettings);
-		}
-
-		// Token: 0x060001C2 RID: 450 RVA: 0x000061FC File Offset: 0x000043FC
 		public static void SetPlayerSettings(string jsonData)
 		{
 			if (jsonData == "")
-			{
-				Console.WriteLine("[Settings][Set] Json Data is empty.");
+			{ 
 				return;
 			}
 			Setting setting = JsonConvert.DeserializeObject<Setting>(jsonData);
-			for (int i = 0; i < Settings.playerSettings.Count; i++)
+			Settings.playerSettings = Settings.LoadSettings();
+			foreach (Setting setting2 in Settings.playerSettings)
 			{
-				if (Settings.playerSettings[i].Key == setting.Key)
+				if (setting2.Key == setting.Key)
 				{
-					Settings.playerSettings[i].Value = setting.Value;
+					setting2.Value = setting.Value;
 					Settings.SaveSettings(Settings.playerSettings);
-					return;
 				}
 			}
 			Settings.playerSettings.Add(new Setting
@@ -50,8 +30,15 @@ namespace api
 			});
 			Settings.SaveSettings(Settings.playerSettings);
 		}
-
-		// Token: 0x060001C3 RID: 451 RVA: 0x000062AC File Offset: 0x000044AC
+		public static List<Setting> LoadSettings()
+		{
+			return JsonConvert.DeserializeObject<List<Setting>>(File.ReadAllText(Environment.CurrentDirectory + Settings.SettingsPath));
+		}
+		public static void SaveSettings(List<Setting> settings)
+		{
+			File.WriteAllText(Environment.CurrentDirectory + Settings.SettingsPath, JsonConvert.SerializeObject(settings));
+		}
+		
 		public static List<Setting> CreateDefaultSettings()
 		{
 			return new List<Setting>
@@ -138,43 +125,10 @@ namespace api
 				}
 			};
 		}
-
-		// Token: 0x060001C4 RID: 452 RVA: 0x00006548 File Offset: 0x00004748
-		public static List<Setting> LoadSettings()
-		{
-			List<Setting> list = new List<Setting>();
-			using (BinaryReader binaryReader = new BinaryReader(File.Open(Settings.SettingsPath, FileMode.Open)))
-			{
-				while (binaryReader.BaseStream.Position != binaryReader.BaseStream.Length)
-				{
-					Setting item = new Setting
-					{
-						Key = binaryReader.ReadString(),
-						Value = binaryReader.ReadString()
-					};
-					list.Add(item);
-				}
-			}
-			return list;
-		}
-
-		// Token: 0x060001C5 RID: 453 RVA: 0x000065C8 File Offset: 0x000047C8
-		public static void SaveSettings(List<Setting> settings)
-		{
-			using (BinaryWriter binaryWriter = new BinaryWriter(File.Create("SaveData\\")))
-			{
-				foreach (Setting setting in settings)
-				{
-					binaryWriter.Write(setting.Key);
-					binaryWriter.Write(setting.Value);
-				}
-			}
-		}
-
-		// Token: 0x040000F0 RID: 240
+		
 		private static List<Setting> playerSettings;
 
-		// Token: 0x040000F1 RID: 241
-		public static string SettingsPath = "SaveData\\settings.txt";
+		
+		public static string SettingsPath = "\\SaveData\\settings.txt";
 	}
 }

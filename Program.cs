@@ -60,7 +60,7 @@ namespace start
                 goto Profile;
 
                 Profile:
-                Console.WriteLine("1) Change Username" + Environment.NewLine+ "2) Change Profile Image" + Environment.NewLine + "3) Go Back");
+                Console.WriteLine("1) Change Username" + Environment.NewLine+ "2) Change Profile Image" + Environment.NewLine + "3) Change Level" + Environment.NewLine + "4) Go Back");
                 string readline3 = Console.ReadLine();
                 if (readline3 == "1")
                 {
@@ -120,13 +120,18 @@ namespace start
                         Console.Clear();
                         goto Start;
                     }
-                    else
-                    {
-                        Console.Clear();
-                        goto Start;
-                    }
                 }
                 else if (readline3 == "3")
+                {
+                    Console.WriteLine("Current Level: " + File.ReadAllText("SaveData\\Profile\\level.txt"));
+                    Console.WriteLine("New Level: ");
+                    string newlevel = Console.ReadLine();
+                    File.WriteAllText("SaveData\\Profile\\level.txt", newlevel);
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                    goto Start;
+                }
+                else if (readline3 == "4")
                 {
                     Console.Clear();
                     goto Start;
@@ -165,7 +170,7 @@ namespace start
             }
         }
 
-        public static string version = "0.2";
+        public static string version = "0.3";
     }
 
 }

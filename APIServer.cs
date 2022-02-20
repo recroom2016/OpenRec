@@ -170,10 +170,18 @@ namespace server
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 						}
-						if (Url == "platformlogin/v1/logincached")
+						if (Url == "platformlogin/v1/loginaccount")
                         {
 							s = logincached.loginCache(CachedPlayerID, CachedPlatformID);
                         }
+						if (Url == "platformlogin/v1/createaccount")
+						{
+							s = logincached.loginCache(CachedPlayerID, CachedPlatformID);
+						}
+						if (Url == "platformlogin/v1/logincached")
+						{
+							s = logincached.loginCache(CachedPlayerID, CachedPlatformID);
+						}
 						if (Url == "relationships/v1/bulkignoreplatformusers")
 						{
 							s = BlankResponse;
@@ -210,6 +218,10 @@ namespace server
 						{
 							s = File.ReadAllText("SaveData\\settings.txt");
 						}
+						if (Url == "settings/v2/set")
+						{
+							Settings.SetPlayerSettings(text);
+						}
 						if (Url == "avatar/v3/items")
                         {
 							s = File.ReadAllText("SaveData\\avataritems.txt");
@@ -242,10 +254,9 @@ namespace server
                         {
 							s = JsonConvert.SerializeObject(new Objective2018());
 						}
-						
 						if (Url == "rooms/v1/myrooms")
                         {
-							s = BracketResponse;
+							s = File.ReadAllText("SaveData\\myrooms.txt");
                         }
 						if (Url == "rooms/v1/mybookmarkedrooms")
 						{

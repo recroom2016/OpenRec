@@ -37,6 +37,14 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\Profile\\username.txt", "DefaultUsername");
 			}
+			if (!(File.Exists("SaveData\\Profile\\level.txt")))
+			{
+				File.WriteAllText("SaveData\\Profile\\level.txt", "10");
+			}
+			if (!(File.Exists("SaveData\\myrooms.txt")))
+			{
+				File.WriteAllText("SaveData\\myrooms.txt", "[]");
+			}
 			if (!(File.Exists("SaveData\\settings.txt")))
 			{
 				File.WriteAllText("SaveData\\settings.txt", Newtonsoft.Json.JsonConvert.SerializeObject(api.Settings.CreateDefaultSettings()));
