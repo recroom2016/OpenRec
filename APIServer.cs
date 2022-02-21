@@ -278,12 +278,24 @@ namespace server
 						{
 							s = gamesessions2018.GameSessions.JoinRandom(text);
 						}
+						if (rawUrl == "//api/images/v4/uploadtransient?gameSessionId=2018")
+                        {
+							File.WriteAllBytes("SaveData\\Images\\image" + Convert.ToString(int.Parse(File.ReadAllText("SaveData\\Images\\count.txt") + 1)) + ".png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(text.Length - 48, 48)));
+                        }
+						if (Url == "avatar/v3/saved")
+						{
+							s = BracketResponse;
+						}
+						if (Url == "checklist/v1/current")
+						{
+							s = BracketResponse;
+						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
-						Thread.Sleep(400);
+						Thread.Sleep(100);
 						outputStream.Close();
 						this.listener.Stop();
 					}

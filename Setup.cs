@@ -11,6 +11,7 @@ namespace start
 		public static void setup()
 		{
 			Console.WriteLine("Setting up...");
+			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\App\\");
 			Directory.CreateDirectory("SaveData\\Profile\\");
 			if (!(File.Exists("SaveData\\avatar.txt")))
@@ -52,6 +53,10 @@ namespace start
 			if (!(File.Exists("SaveData\\App\\sandbox.txt")))
 			{
 				File.WriteAllText("SaveData\\App\\sandbox.txt", "Disabled");
+			}
+			if (!(File.Exists("SaveData\\Images\\count.txt")))
+			{
+				File.WriteAllText("SaveData\\Images\\count.txt", "0");
 			}
 			if (!(File.Exists("SaveData\\profileimage.png")))
 			{
