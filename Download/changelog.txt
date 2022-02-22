@@ -1,1 +1,8 @@
+Second release of OpenRec, with still only support for May 30th, 2018.
 
+-Added profile image changing function
+-Slightly improved UI
+-Added settings saving function
+-Added level changing feature
+
+by recroom2016
