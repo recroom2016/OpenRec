@@ -16,6 +16,7 @@ namespace start
             goto Start;
 
             Start:
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OpenRec - Open source RecNet server software. (Version: " + version + ")");
             Console.WriteLine("Made and provided by RecRoom 2016.");
             Console.WriteLine("Download source code here: https://github.com/recroom2016/OpenRec");
@@ -31,8 +32,8 @@ namespace start
                 Console.Clear();
                 goto Settings;
 
-                Settings:
-                Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Go Back");
+                Settings: //SaveData\\App\\privatedorm.txt
+                Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Private Dorm: " + File.ReadAllText("SaveData\\App\\privatedorm.txt") + Environment.NewLine + "3) Go Back");
                 string readline4 = Console.ReadLine();
                 if (readline4 == "1")
                 {
@@ -49,6 +50,20 @@ namespace start
                     goto Settings;
                 }
                 else if (readline4 == "2")
+                {
+                    if (File.ReadAllText("SaveData\\App\\privatedorm.txt") == "Disabled")
+                    {
+                        File.WriteAllText("SaveData\\App\\privatedorm.txt", "Enabled");
+                    }
+                    else
+                    {
+                        File.WriteAllText("SaveData\\App\\privatedorm.txt", "Disabled");
+                    }
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                    goto Settings;
+                }
+                else if (readline4 == "3")
                 {
                     Console.Clear();
                     goto Start;
@@ -139,7 +154,7 @@ namespace start
             }
             if (readline == "3")
             {
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2018)");
+                Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2016")
                 {
@@ -170,7 +185,7 @@ namespace start
             }
         }
 
-        public static string version = "0.3";
+        public static string version = "0.3.5";
     }
 
 }

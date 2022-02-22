@@ -3,6 +3,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>icon2.ico</ApplicationIcon>
+    <AssemblyName>OpenRec</AssemblyName>
+    <RootNamespace>OpenRec</RootNamespace>
+    <Authors>recroom2016</Authors>
+    <PackageIcon>icon2.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/recroom2016/OpenRec</RepositoryUrl>
+    <PackageProjectUrl>https://discord.gg/daC8QUhnFP</PackageProjectUrl>
+    <Company>OpenRec</Company>
+    <Version>0.4.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +23,13 @@
     <Reference Include="websocket-sharp">
       <HintPath>..\..\..\r16server\making new server\websocket-sharp.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Tucker\Downloads\icon2.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

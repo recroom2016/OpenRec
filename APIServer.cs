@@ -192,7 +192,7 @@ namespace server
 						}
 						if (Url == "images/v2/named")
                         {
-							s = ImagesV2Named;
+							s = BracketResponse;
                         }
 						if (Url == "PlayerReporting/v1/moderationBlockDetails")
                         {
@@ -278,7 +278,11 @@ namespace server
 						{
 							s = gamesessions2018.GameSessions.JoinRandom(text);
 						}
-						if (rawUrl == "//api/images/v4/uploadtransient?gameSessionId=2018")
+						if (Url == "gamesessions/v2/create")
+                        {
+							s = gamesessions2018.GameSessions.Create(text);
+                        }
+						if (rawUrl.Contains("images/v4/uploadtransient?gameSessionId=2018"))
                         {
 							File.WriteAllBytes("SaveData\\Images\\image" + Convert.ToString(int.Parse(File.ReadAllText("SaveData\\Images\\count.txt") + 1)) + ".png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(text.Length - 48, 48)));
                         }
