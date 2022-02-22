@@ -11,7 +11,7 @@ namespace api
 		{
 			return JsonConvert.SerializeObject(new Amplitude
 			{
-				AmplitudeKey = "e1693a1003671058b6abc356c8ba8d59"
+				AmplitudeKey = "NoKeyProvided"
 			});
 		}
 

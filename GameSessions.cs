@@ -65,20 +65,20 @@ namespace gamesessions2018
 		public static string Create(string jsonData)
 		{
 			Console.WriteLine("Custom Room Test...");
-			GameSessions.CreateRequest createRequest = JsonConvert.DeserializeObject<GameSessions.CreateRequest>(jsonData);
+			GameSessions.JoinRandomRequest createRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
 			{
 				Config.localGameSession = new GameSessions.SessionInstance
 				{
-					GameSessionId = 1L,
+					GameSessionId = 20181L,
 					RegionId = "us",
-					RoomId = createRequest.ActivityLevelIds,
+					RoomId = createRequest.ActivityLevelIds[0],
 					RecRoomId = null,
 					EventId = null,
 					CreatorPlayerId = (long?)APIServer.CachedPlayerID,
 					Name = "Custom Room",
-					ActivityLevelId = createRequest.ActivityLevelIds,
+					ActivityLevelId = createRequest.ActivityLevelIds[0],
 					Private = false,
-					Sandbox = createRequest.IsSandbox,
+					Sandbox = true,
 					SupportsScreens = true,
 					SupportsVR = true,
 					GameInProgress = false,
@@ -275,7 +275,7 @@ namespace gamesessions2018
 		{
 			public bool IsSandbox { get; set; }
 			
-			public string ActivityLevelIds { get; set; }
+			public string[] ActivityLevelIds { get; set; }
 			
 			public ulong[] ExpectedPlayerIds { get; set; }
 

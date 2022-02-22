@@ -23,11 +23,20 @@ namespace start
             Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt").Contains(version)))
             {
-                Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt") + Environment.NewLine);
+                Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt"));
             }
-            Console.WriteLine("1) Change Settings" + Environment.NewLine + "2) Modify Profile" + Environment.NewLine + "3) Start Server");
+            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
+            {
+                Console.Clear();
+                Console.WriteLine(new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/changelog.txt"));
+                Console.WriteLine("Press any key to continue:");
+                Console.ReadKey();
+                Console.Clear();
+                goto Start;
+            }
+            if (readline == "2")
             {
                 Console.Clear();
                 goto Settings;
@@ -69,7 +78,7 @@ namespace start
                     goto Start;
                 }
             }
-            if (readline == "2")
+            if (readline == "3")
             {
                 Console.Clear();
                 goto Profile;
@@ -152,7 +161,7 @@ namespace start
                     goto Start;
                 }
             }
-            if (readline == "3")
+            if (readline == "4")
             {
                 Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
                 string readline2 = Console.ReadLine();
