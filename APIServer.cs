@@ -10,10 +10,8 @@ using Newtonsoft.Json;
 
 namespace server
 {
-
 	internal class APIServer
 	{
-		
 		public APIServer()
 		{
 			try
@@ -74,6 +72,7 @@ namespace server
 							s = getorcreate.GetOrCreateArray((ulong.Parse(text.Remove(0, 32))));
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
+							File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(CachedPlayerID));
 						}
 						if (Url == "platformlogin/v6")
                         {
@@ -144,6 +143,7 @@ namespace server
 							s = getcachedlogins.GetDebugLogin(ulong.Parse(text.Remove(0, 32)), ulong.Parse(text.Remove(0, 22)));
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
+							File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(CachedPlayerID));
 						}
 						if (Url == "platformlogin/v1/loginaccount")
                         {
@@ -167,7 +167,7 @@ namespace server
 						}
 						if (Url == "images/v2/named")
                         {
-							s = BracketResponse;
+							s = ImagesV2Named;
                         }
 						if (Url == "PlayerReporting/v1/moderationBlockDetails")
                         {

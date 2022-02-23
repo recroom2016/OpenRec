@@ -10,7 +10,7 @@ namespace start
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Setup.setup();
             goto Start;
@@ -162,6 +162,30 @@ namespace start
                 }
             }
             if (readline == "4")
+            {
+                Console.Clear();
+                goto ChatStart;
+                
+                ChatStart:
+                Console.WriteLine("Pinging the chat servers...");
+                try
+                {
+                    string ping = new WebClient().DownloadString("https://openrecchat.loca.lt/ping");
+                }
+                catch (Exception ex4)
+                {
+                    Console.WriteLine("Chat servers currently offline...");
+                    Console.WriteLine("Press any key to continue:");
+                    Console.ReadKey();
+                    goto Start;
+                }
+                Console.WriteLine("Success!");
+                Console.WriteLine("Press any key to continue:");
+                Console.ReadKey();
+                OpenRecNet.RecNet();
+
+            }
+            if (readline == "5")
             {
                 Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
                 string readline2 = Console.ReadLine();

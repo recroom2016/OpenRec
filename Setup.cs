@@ -42,6 +42,10 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\Profile\\level.txt", "10");
 			}
+			if (!(File.Exists("SaveData\\Profile\\userid.txt")))
+			{
+				File.WriteAllText("SaveData\\Profile\\userid.txt", "2");
+			}
 			if (!(File.Exists("SaveData\\myrooms.txt")))
 			{
 				File.WriteAllText("SaveData\\myrooms.txt", "[]");
