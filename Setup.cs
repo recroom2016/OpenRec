@@ -62,6 +62,10 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\App\\privatedorm.txt", "Disabled");
 			}
+			if (!(File.Exists("SaveData\\App\\showopenrecinfo.txt")))
+			{
+				File.WriteAllText("SaveData\\App\\showopenrecinfo.txt", "Enabled");
+			}
 			if (!(File.Exists("SaveData\\Images\\count.txt")))
 			{
 				File.WriteAllText("SaveData\\Images\\count.txt", "0");

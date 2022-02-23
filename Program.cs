@@ -25,7 +25,7 @@ namespace start
             {
                 Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt"));
             }
-            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Start Server");
+            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) OpenRecNet" + Environment.NewLine + "5) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
             {
@@ -41,8 +41,8 @@ namespace start
                 Console.Clear();
                 goto Settings;
 
-                Settings: //SaveData\\App\\privatedorm.txt
-                Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Private Dorm: " + File.ReadAllText("SaveData\\App\\privatedorm.txt") + Environment.NewLine + "3) Go Back");
+                Settings:
+                Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Private Dorm: " + File.ReadAllText("SaveData\\App\\privatedorm.txt") + Environment.NewLine + "3) OpenRecNet Info Tab: " + File.ReadAllText("SaveData\\App\\showopenrecinfo.txt") + Environment.NewLine + "4) Go Back");
                 string readline4 = Console.ReadLine();
                 if (readline4 == "1")
                 {
@@ -73,6 +73,20 @@ namespace start
                     goto Settings;
                 }
                 else if (readline4 == "3")
+                {
+                    if (File.ReadAllText("SaveData\\App\\showopenrecinfo.txt") == "Disabled")
+                    {
+                        File.WriteAllText("SaveData\\App\\showopenrecinfo.txt", "Enabled");
+                    }
+                    else
+                    {
+                        File.WriteAllText("SaveData\\App\\showopenrecinfo.txt", "Disabled");
+                    }
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                    goto Settings;
+                }
+                else if (readline4 == "4")
                 {
                     Console.Clear();
                     goto Start;
