@@ -11,6 +11,7 @@ namespace start
         {
         }
 
+        //ignore this its a beta feature
         public static void RecNet()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -25,7 +26,7 @@ namespace start
             }
 
         ChatStart:
-            Console.WriteLine("Welcome to OpenRecNet!");
+            Console.WriteLine("Welcome to OpenRecChat (Beta)!");
             Console.WriteLine("You are logged in as " + File.ReadAllText("SaveData\\Profile\\username.txt" + "."));
             Console.WriteLine("Your UserID is " + File.ReadAllText("SaveData\\Profile\\userid.txt" + "."));
             Console.WriteLine("In the future, show this message?");

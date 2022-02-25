@@ -30,6 +30,7 @@ namespace server
 			this.listener.Prefixes.Add("http://localhost:20182/");
 			for (; ; )
 			{
+				//image server always send out profile image for now, might cause issues later but ill fix it when I need too
 				this.listener.Start();
 				Console.WriteLine("ImageServer.cs is listening.");
 				HttpListenerContext context = this.listener.GetContext();

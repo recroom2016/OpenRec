@@ -28,6 +28,7 @@ namespace server
 		{
 			try
 			{
+				//3 different servers for 3 different stages of the game, the apis change so much idk anymore
 				this.listener.Prefixes.Add("http://localhost:" + start.Program.version + "/");
 				if (start.Program.version == "2017")
 				{
@@ -90,6 +91,64 @@ namespace server
                         {
 							s = getorcreate.GetOrCreate(CachedPlayerID);
                         }
+						if (Url == "avatar/v2")
+						{
+							s = File.ReadAllText("SaveData\\avatar.txt");
+						}
+						if (Url == "avatar/v2/set")
+						{
+							//for later 2018 builds compatibility
+							if (!(text.Contains("FaceFeatures")))
+							{
+								string postdatacache = text;
+								text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData\\App\\facefeaturesadd.txt");
+							}
+							File.WriteAllText("SaveData\\avatar.txt", text);
+						}
+						if (Url == "messages/v2/get")
+						{
+							s = BracketResponse;
+						}
+						if (Url == "relationships/v2/get")
+						{
+							s = BracketResponse;
+						}
+						if (Url == "settings/v2/")
+						{
+							s = File.ReadAllText("SaveData\\settings.txt");
+						}
+						if (Url == "settings/v2/set")
+						{
+							Settings.SetPlayerSettings(text);
+						}
+						if (Url == "avatar/v3/items")
+						{
+							s = File.ReadAllText("SaveData\\avataritems.txt");
+						}
+						if (Url == "equipment/v1/getUnlocked")
+						{
+							s = File.ReadAllText("SaveData\\equipment.txt");
+						}
+						if (Url == "avatar/v2/gifts")
+						{
+							s = BracketResponse;
+						}
+						if (Url == "events/v3/list")
+						{
+							s = Events.list();
+						}
+						if (Url == "playerevents/v1/all")
+						{
+							s = PlayerEventsResponse;
+						}
+						if (Url == "gamesessions/v2/joinrandom")
+						{
+							s = gamesessions2018.GameSessions.JoinRandom(text);
+						}
+						if (Url == "gamesessions/v2/create")
+						{
+							s = gamesessions2018.GameSessions.Create(text);
+						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
@@ -111,6 +170,7 @@ namespace server
 						HttpListenerResponse response = context.Response;
 						string rawUrl = request.RawUrl;
 						string Url = "";
+						byte[] bytes = null;
 						if (rawUrl.StartsWith("/api/"))
 						{
 							Url = rawUrl.Remove(0, 5);
@@ -132,6 +192,14 @@ namespace server
 						Console.WriteLine("API Data: " + text);
 						if (Url.StartsWith("versioncheck"))
 						{
+							if (Url.Contains("201809"))
+                            {
+								CachedVersionMonth = 09;
+                            }
+							else
+                            {
+								CachedVersionMonth = 05;
+                            }
 							s = VersionCheckResponse;
 						}
 						if (Url == ("config/v2"))
@@ -161,6 +229,10 @@ namespace server
 						{
 							s = BlankResponse;
 						}
+						if (Url == "players/v1/list")
+                        {
+							s = BracketResponse;
+                        }
 						if (Url == "config/v1/amplitude")
 						{
 							s = Amplitude.amplitude();
@@ -173,6 +245,10 @@ namespace server
                         {
 							s = ModerationBlockDetails;
                         }
+						if (Url == "//api/chat/v2/myChats?mode=0&count=50")
+                        {
+							s = BracketResponse;
+                        }
                         if (Url == "messages/v2/get")
                         {
                             s = BracketResponse;
@@ -181,12 +257,33 @@ namespace server
 						{
 							s = BracketResponse;
 						}
+						if (Url == "gameconfigs/v1/all")
+                        {
+							s = File.ReadAllText("SaveData\\gameconfigs.txt");
+                        }
+						if (Url.StartsWith("storefronts"))
+                        {
+							if (CachedVersionMonth == 09)
+                            {
+								s = File.ReadAllText("SaveData\\storefronts2.txt");
+							}
+							else
+                            {
+								s = BracketResponse;
+                            }
+                        }
 						if (Url == "avatar/v2")
                         {
 							s = File.ReadAllText("SaveData\\avatar.txt");
                         }
 						if (Url == "avatar/v2/set")
 						{
+							//for later 2018 builds compatibility
+							if (!(text.Contains("FaceFeatures")))
+                            {
+								string postdatacache = text;
+								text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData\\App\\facefeaturesadd.txt");
+							}
 							File.WriteAllText("SaveData\\avatar.txt", text);
 						}
 						if (Url == "settings/v2/")
@@ -199,7 +296,15 @@ namespace server
 						}
 						if (Url == "avatar/v3/items")
                         {
-							s = File.ReadAllText("SaveData\\avataritems.txt");
+							if (CachedVersionMonth == 09)
+                            {
+								s = BracketResponse;
+							}
+							else
+                            {
+								s = File.ReadAllText("SaveData\\avataritems.txt");
+							}
+							
 						}
 						if (Url == "equipment/v1/getUnlocked")
 						{
@@ -211,19 +316,22 @@ namespace server
                         }
 						if (Url == "consumables/v1/getUnlocked")
 						{
-							s = File.ReadAllText("SaveData\\consumables.txt");
+							if (CachedVersionMonth == 09)
+							{
+								s = BracketResponse;
+							}
+							else
+							{
+								s = File.ReadAllText("SaveData\\consumables.txt");
+							}
 						}
 						if (Url == "avatar/v2/gifts")
                         {
 							s = BracketResponse;
                         }
-						if (Url == "storefronts/v1/allGiftDrops/2")
-                        {
-							s = BracketResponse;
-						}
 						if (Url == "storefronts/v2/2")
                         {
-							s = "";
+							s = BlankResponse;
                         }
 						if (Url == "objectives/v1/myprogress")
                         {
@@ -232,6 +340,10 @@ namespace server
 						if (Url == "rooms/v1/myrooms")
                         {
 							s = File.ReadAllText("SaveData\\myrooms.txt");
+                        }
+						if (Url == "rooms/v2/myrooms")
+                        {
+							s = BracketResponse;
                         }
 						if (Url == "rooms/v1/mybookmarkedrooms")
 						{
@@ -242,9 +354,9 @@ namespace server
 							s = BracketResponse;
 						}
 						if (Url == "events/v3/list")
-                        {
+						{
 							s = Events.list();
-                        }
+						}
 						if (Url == "playerevents/v1/all")
 						{
 							s = PlayerEventsResponse;
@@ -254,13 +366,19 @@ namespace server
 							s = gamesessions2018.GameSessions.JoinRandom(text);
 						}
 						if (Url == "gamesessions/v2/create")
-                        {
+						{
 							s = gamesessions2018.GameSessions.Create(text);
+						}
+						if (Url == "gamesessions/v3/joinroom")
+                        {
+							bytes = Encoding.UTF8.GetBytes((JsonConvert.SerializeObject(gamesessions2018.GameSessions2.JoinRoom(text))));
                         }
-						if (rawUrl.Contains("images/v4/uploadtransient?gameSessionId=2018"))
+						if (rawUrl.Contains("//api/images/v4/uploadtransient?gameSessionId=2018"))
                         {
 							File.WriteAllBytes("SaveData\\Images\\image" + Convert.ToString(int.Parse(File.ReadAllText("SaveData\\Images\\count.txt") + 1)) + ".png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(text.Length - 48, 48)));
-                        }
+							int imagecount = int.Parse(File.ReadAllText("SaveData\\Images\\count.txt"));
+							File.WriteAllText("SaveData\\Images\\count.txt", Convert.ToString(imagecount + 1));
+						}
 						if (Url == "avatar/v3/saved")
 						{
 							s = BracketResponse;
@@ -269,8 +387,15 @@ namespace server
 						{
 							s = BracketResponse;
 						}
+						if (Url == "presence/v1/setplayertype")
+                        {
+							s = BracketResponse;
+                        }
 						Console.WriteLine("API Response: " + s);
-						byte[] bytes = Encoding.UTF8.GetBytes(s);
+						if (!(Url == "gamesessions/v3/joinroom"))
+                        {
+							bytes = Encoding.UTF8.GetBytes(s);
+						}
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
@@ -288,6 +413,7 @@ namespace server
         }
         public static ulong CachedPlayerID = 1;
 		public static ulong CachedPlatformID = 10000;
+		public static int CachedVersionMonth = 01;
 
 		public static string BlankResponse = "";
 		public static string BracketResponse = "[]";

@@ -9,6 +9,7 @@ namespace server
 	// Token: 0x02000050 RID: 80
 	internal class NameServer
 	{
+		
 		// Token: 0x06000227 RID: 551 RVA: 0x00006D1C File Offset: 0x00004F1C
 		public NameServer()
 		{
@@ -26,6 +27,7 @@ namespace server
 		// Token: 0x06000228 RID: 552 RVA: 0x00006D84 File Offset: 0x00004F84
 		private void StartListen()
 		{
+			//nameserver is ONLY for 2018
 			this.listener.Prefixes.Add("http://localhost:20181/");
 			for (; ; )
 			{

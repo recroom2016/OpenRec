@@ -12,6 +12,7 @@ namespace start
     {
         static void Main()
         {
+            //startup for openrec
             Setup.setup();
             goto Start;
 
@@ -25,7 +26,7 @@ namespace start
             {
                 Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt"));
             }
-            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) OpenRecNet" + Environment.NewLine + "5) Start Server");
+            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
             {
@@ -42,37 +43,23 @@ namespace start
                 goto Settings;
 
                 Settings:
-                Console.WriteLine("1) Sandbox Mode: " + File.ReadAllText("SaveData\\App\\sandbox.txt") + Environment.NewLine + "2) Private Dorm: " + File.ReadAllText("SaveData\\App\\privatedorm.txt") + Environment.NewLine + "3) OpenRecNet Info Tab: " + File.ReadAllText("SaveData\\App\\showopenrecinfo.txt") + Environment.NewLine + "4) Go Back");
+                Console.WriteLine("1) Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt") + Environment.NewLine + "2) OpenRecNet Info Tab: " + File.ReadAllText("SaveData\\App\\showopenrecinfo.txt") + Environment.NewLine + "3) Reset SaveData" + Environment.NewLine + "4) Go Back");
                 string readline4 = Console.ReadLine();
                 if (readline4 == "1")
                 {
-                    if (File.ReadAllText("SaveData\\App\\sandbox.txt") == "Disabled")
+                    if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Disabled")
                     {
-                        File.WriteAllText("SaveData\\App\\sandbox.txt", "Enabled");
+                        File.WriteAllText("SaveData\\App\\privaterooms.txt", "Enabled");
                     }
                     else
                     {
-                        File.WriteAllText("SaveData\\App\\sandbox.txt", "Disabled");
+                        File.WriteAllText("SaveData\\App\\privaterooms.txt", "Disabled");
                     }
                     Console.Clear();
                     Console.WriteLine("Success!");
                     goto Settings;
                 }
                 else if (readline4 == "2")
-                {
-                    if (File.ReadAllText("SaveData\\App\\privatedorm.txt") == "Disabled")
-                    {
-                        File.WriteAllText("SaveData\\App\\privatedorm.txt", "Enabled");
-                    }
-                    else
-                    {
-                        File.WriteAllText("SaveData\\App\\privatedorm.txt", "Disabled");
-                    }
-                    Console.Clear();
-                    Console.WriteLine("Success!");
-                    goto Settings;
-                }
-                else if (readline4 == "3")
                 {
                     if (File.ReadAllText("SaveData\\App\\showopenrecinfo.txt") == "Disabled")
                     {
@@ -86,6 +73,27 @@ namespace start
                     Console.WriteLine("Success!");
                     goto Settings;
                 }
+                else if (readline4 == "3")
+                {
+                    File.Delete("SaveData\\avatar.txt");
+                    File.Delete("SaveData\\avataritems.txt"); 
+                    File.Delete("SaveData\\equipment.txt");
+                    File.Delete("SaveData\\consumables.txt");
+                    File.Delete("SaveData\\gameconfigs.txt");
+                    File.Delete("SaveData\\storefronts2.txt");
+                    File.Delete("SaveData\\Profile\\username.txt");
+                    File.Delete("SaveData\\Profile\\level.txt"); 
+                    File.Delete("SaveData\\Profile\\userid.txt");
+                    File.Delete("SaveData\\myrooms.txt"); 
+                    File.Delete("SaveData\\settings.txt");
+                    File.Delete("SaveData\\App\\privaterooms.txt");
+                    File.Delete("SaveData\\App\\showopenrecinfo.txt");
+                    File.Delete("SaveData\\App\\facefeaturesadd.txt");
+                    File.Delete("SaveData\\profileimage.png");
+                    Console.WriteLine("Success!");
+                    Setup.setup();
+                    goto Settings;
+                }
                 else if (readline4 == "4")
                 {
                     Console.Clear();
@@ -97,8 +105,8 @@ namespace start
                 Console.Clear();
                 goto Profile;
 
-                Profile:
-                Console.WriteLine("1) Change Username" + Environment.NewLine+ "2) Change Profile Image" + Environment.NewLine + "3) Change Level" + Environment.NewLine + "4) Go Back");
+            Profile:
+                Console.WriteLine("1) Change Username" + Environment.NewLine + "2) Change Profile Image" + Environment.NewLine + "3) Change Level" + Environment.NewLine + "4) Go Back");
                 string readline3 = Console.ReadLine();
                 if (readline3 == "1")
                 {
@@ -175,31 +183,8 @@ namespace start
                     goto Start;
                 }
             }
+            
             if (readline == "4")
-            {
-                Console.Clear();
-                goto ChatStart;
-                
-                ChatStart:
-                Console.WriteLine("Pinging the chat servers...");
-                try
-                {
-                    string ping = new WebClient().DownloadString("https://openrecchat.loca.lt/ping");
-                }
-                catch (Exception ex4)
-                {
-                    Console.WriteLine("Chat servers currently offline...");
-                    Console.WriteLine("Press any key to continue:");
-                    Console.ReadKey();
-                    goto Start;
-                }
-                Console.WriteLine("Success!");
-                Console.WriteLine("Press any key to continue:");
-                Console.ReadKey();
-                OpenRecNet.RecNet();
-
-            }
-            if (readline == "5")
             {
                 Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
                 string readline2 = Console.ReadLine();
@@ -230,9 +215,33 @@ namespace start
                     new WebSocket();
                 }
             }
+            if (readline == "5")
+            {
+                Console.Clear();
+                goto ChatStart;
+
+            ChatStart:
+                Console.WriteLine("Pinging the chat servers...");
+                try
+                {
+                    string ping = new WebClient().DownloadString("https://openrecchat.loca.lt/ping");
+                }
+                catch (Exception ex4)
+                {
+                    Console.WriteLine("Chat servers currently offline...");
+                    Console.WriteLine("Press any key to continue:");
+                    Console.ReadKey();
+                    goto Start;
+                }
+                Console.WriteLine("Success!");
+                Console.WriteLine("Press any key to continue:");
+                Console.ReadKey();
+                OpenRecNet.RecNet();
+
+            }
         }
 
-        public static string version = "0.3.5";
+        public static string version = "0.4.0";
     }
 
 }

@@ -12,13 +12,9 @@ namespace gamesessions2018
 		public static string JoinRandom(string jsonData)
 		{
 			long gamesessionid = 2018L;
-			bool sandboxmode = false;
+			Console.WriteLine("OpenRec GameSession Room");
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
-			if (File.ReadAllText("SaveData\\App\\sandbox.txt") == "Enabled")
-			{
-				sandboxmode = true;
-			}
-			if (File.ReadAllText("SaveData\\App\\privatedorm.txt") == "Enabled")
+			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
 			{
 				gamesessionid = new Random().Next(0, 100);
 			}
@@ -30,11 +26,11 @@ namespace gamesessions2018
 					RoomId = joinRandomRequest.ActivityLevelIds[0],
 					RecRoomId = null,
 					EventId = null,
-					CreatorPlayerId = (long?)APIServer.CachedPlayerID,
-					Name = "OpenRec",
+					CreatorPlayerId = 1243409L,
+					Name = "OpenRec Room",
 					ActivityLevelId = joinRandomRequest.ActivityLevelIds[0],
 					Private = false,
-					Sandbox = sandboxmode,
+					Sandbox = false,
 					SupportsScreens = true,
 					SupportsVR = true,
 					GameInProgress = false,
@@ -64,28 +60,31 @@ namespace gamesessions2018
 		// Token: 0x060000C0 RID: 192 RVA: 0x00004D24 File Offset: 0x00002F24
 		public static string Create(string jsonData)
 		{
-			Console.WriteLine("Custom Room Test...");
-			GameSessions.JoinRandomRequest createRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
+			long gamesessionid = 2016L;
+			Console.WriteLine("OpenRec GameSession Custom Room");
+			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
 			{
-				Config.localGameSession = new GameSessions.SessionInstance
-				{
-					GameSessionId = 20181L,
-					RegionId = "us",
-					RoomId = createRequest.ActivityLevelIds[0],
-					RecRoomId = null,
-					EventId = null,
-					CreatorPlayerId = (long?)APIServer.CachedPlayerID,
-					Name = "Custom Room",
-					ActivityLevelId = createRequest.ActivityLevelIds[0],
-					Private = false,
-					Sandbox = true,
-					SupportsScreens = true,
-					SupportsVR = true,
-					GameInProgress = false,
-					MaxCapacity = 20,
-					IsFull = false
-				};
+				gamesessionid = new Random().Next(0, 100);
 			}
+			GameSessions.CreateRequest createRequest = JsonConvert.DeserializeObject<GameSessions.CreateRequest>(jsonData);
+			Config.localGameSession = new GameSessions.SessionInstance
+			{
+				GameSessionId = gamesessionid,
+				RegionId = "us",
+				RoomId = createRequest.ActivityLevelId,
+				RecRoomId = null,
+				EventId = null,
+				CreatorPlayerId = 1243409L,
+				Name = "Custom Room",
+				ActivityLevelId = createRequest.ActivityLevelId,
+				Private = false,
+				Sandbox = true,
+				SupportsScreens = true,
+				SupportsVR = true,
+				GameInProgress = false,
+				MaxCapacity = 20,
+				IsFull = false
+			};
 			return JsonConvert.SerializeObject(new GameSessions.JoinResult
 			{
 				Result = 0,
@@ -270,16 +269,67 @@ namespace gamesessions2018
 			public GameSessions.RegionPing[] RegionPings { get; set; }
 		}
 
+		public class JoinRoomRequest2
+		{
+			// Token: 0x17000022 RID: 34
+			// (get) Token: 0x06000060 RID: 96 RVA: 0x00002345 File Offset: 0x00000545
+			// (set) Token: 0x06000061 RID: 97 RVA: 0x0000234D File Offset: 0x0000054D
+			public ulong[] ExpectedPlayerIds { get; set; }
+
+			// Token: 0x17000023 RID: 35
+			// (get) Token: 0x06000062 RID: 98 RVA: 0x00002356 File Offset: 0x00000556
+			// (set) Token: 0x06000063 RID: 99 RVA: 0x0000235E File Offset: 0x0000055E
+			public GameSessions.RegionPing[] RegionPings { get; set; }
+
+			// Token: 0x17000024 RID: 36
+			// (get) Token: 0x06000064 RID: 100 RVA: 0x00002367 File Offset: 0x00000567
+			// (set) Token: 0x06000065 RID: 101 RVA: 0x0000236F File Offset: 0x0000056F
+			public string[] RoomTags { get; set; }
+
+			// Token: 0x17000025 RID: 37
+			// (get) Token: 0x06000066 RID: 102 RVA: 0x00002378 File Offset: 0x00000578
+			// (set) Token: 0x06000067 RID: 103 RVA: 0x00002380 File Offset: 0x00000580
+			public string RoomName { get; set; }
+
+			// Token: 0x17000026 RID: 38
+			// (get) Token: 0x06000068 RID: 104 RVA: 0x00002389 File Offset: 0x00000589
+			// (set) Token: 0x06000069 RID: 105 RVA: 0x00002391 File Offset: 0x00000591
+			public string SceneName { get; set; }
+
+			// Token: 0x17000027 RID: 39
+			// (get) Token: 0x0600006A RID: 106 RVA: 0x0000239A File Offset: 0x0000059A
+			// (set) Token: 0x0600006B RID: 107 RVA: 0x000023A2 File Offset: 0x000005A2
+			public int AdditionalPlayerJoinMode { get; set; }
+
+			// Token: 0x17000028 RID: 40
+			// (get) Token: 0x0600006C RID: 108 RVA: 0x000023AB File Offset: 0x000005AB
+			// (set) Token: 0x0600006D RID: 109 RVA: 0x000023B3 File Offset: 0x000005B3
+			public bool Private { get; set; }
+		}
+		// Token: 0x02000025 RID: 37
+
 		// Token: 0x02000025 RID: 37
 		public class CreateRequest
 		{
-			public bool IsSandbox { get; set; }
-			
-			public string[] ActivityLevelIds { get; set; }
-			
+			// Token: 0x17000055 RID: 85
+			// (get) Token: 0x060000F2 RID: 242 RVA: 0x0000271C File Offset: 0x0000091C
+			// (set) Token: 0x060000F3 RID: 243 RVA: 0x00002724 File Offset: 0x00000924
+			public string ActivityLevelId { get; set; }
+
+			// Token: 0x17000056 RID: 86
+			// (get) Token: 0x060000F4 RID: 244 RVA: 0x0000272D File Offset: 0x0000092D
+			// (set) Token: 0x060000F5 RID: 245 RVA: 0x00002735 File Offset: 0x00000935
 			public ulong[] ExpectedPlayerIds { get; set; }
 
+			// Token: 0x17000057 RID: 87
+			// (get) Token: 0x060000F6 RID: 246 RVA: 0x0000273E File Offset: 0x0000093E
+			// (set) Token: 0x060000F7 RID: 247 RVA: 0x00002746 File Offset: 0x00000946
 			public GameSessions.RegionPing[] RegionPings { get; set; }
+
+			// Token: 0x17000058 RID: 88
+			// (get) Token: 0x060000F8 RID: 248 RVA: 0x0000274F File Offset: 0x0000094F
+			// (set) Token: 0x060000F9 RID: 249 RVA: 0x00002757 File Offset: 0x00000957
+			public bool IsSandbox { get; set; }
 		}
 
 		// Token: 0x02000026 RID: 38

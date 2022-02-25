@@ -10,7 +10,8 @@ namespace start
 	{
 		public static void setup()
 		{
-			Console.WriteLine("Setting up...");
+			//sets up all the important files so openrec doesnt crash like lame vaultserver xD
+			Console.WriteLine("Setting up... (May take a minute to download everything.)");
 			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\App\\");
 			Directory.CreateDirectory("SaveData\\Profile\\");
@@ -34,6 +35,14 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\consumables.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/consumables.txt"));
 			}
+			if (!(File.Exists("SaveData\\gameconfigs.txt")))
+			{
+				File.WriteAllText("SaveData\\gameconfigs.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/gameconfigs.txt"));
+			}
+			if (!(File.Exists("SaveData\\storefronts2.txt")))
+			{
+				File.WriteAllText("SaveData\\storefronts2.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/vaultButItsNewer/main/StoreFront2.json"));
+			}
 			if (!(File.Exists("SaveData\\Profile\\username.txt")))
 			{
 				File.WriteAllText("SaveData\\Profile\\username.txt", "DefaultUsername");
@@ -54,17 +63,17 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\settings.txt", Newtonsoft.Json.JsonConvert.SerializeObject(api.Settings.CreateDefaultSettings()));
 			}
-			if (!(File.Exists("SaveData\\App\\sandbox.txt")))
+			if (!(File.Exists("SaveData\\App\\privaterooms.txt")))
 			{
-				File.WriteAllText("SaveData\\App\\sandbox.txt", "Disabled");
-			}
-			if (!(File.Exists("SaveData\\App\\privatedorm.txt")))
-			{
-				File.WriteAllText("SaveData\\App\\privatedorm.txt", "Disabled");
+				File.WriteAllText("SaveData\\App\\privaterooms.txt", "Disabled");
 			}
 			if (!(File.Exists("SaveData\\App\\showopenrecinfo.txt")))
 			{
 				File.WriteAllText("SaveData\\App\\showopenrecinfo.txt", "Enabled");
+			}
+			if (!(File.Exists("SaveData\\App\\facefeaturesadd.txt")))
+			{
+				File.WriteAllText("SaveData\\App\\facefeaturesadd.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/facefeaturesadd.txt"));
 			}
 			if (!(File.Exists("SaveData\\Images\\count.txt")))
 			{
