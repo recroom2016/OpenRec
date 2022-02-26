@@ -74,7 +74,7 @@ namespace gamesessions2018
 				RoomId = createRequest.ActivityLevelId,
 				RecRoomId = null,
 				EventId = null,
-				CreatorPlayerId = 1243409L,
+				CreatorPlayerId = (long?)APIServer.CachedPlayerID,
 				Name = "Custom Room",
 				ActivityLevelId = createRequest.ActivityLevelId,
 				Private = false,

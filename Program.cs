@@ -241,7 +241,7 @@ namespace start
             }
         }
 
-        public static string version = "0.4.0";
+        public static string version = "0.4.1";
     }
 
 }
