@@ -1,3 +1,6 @@
+Patch:
+-Fixed the room creation feature
+
 Third public release of OpenRec, and probably the biggest update to date.
 
 Supports:
