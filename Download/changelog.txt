@@ -1,8 +1,15 @@
-Second release of OpenRec, with still only support for May 30th, 2018.
+Third public release of OpenRec, and probably the biggest update to date.
 
--Added profile image changing function
--Slightly improved UI
--Added settings saving function
--Added level changing feature
+Supports:
+-October 19th 2017
+-May 30th 2018
 
-by recroom2016
+-Sandbox mode now accessed through the room create button on the watch menu
+-Creating custom rooms now works
+-Reset Savedata Option
+-Singleplayer (Private Rooms) Option
+-Lots of backend and UI improvements
+
+Credits:
+@LucasOnDiscord#0210 - Adding potions
+@GabeTheFirst#7335 - Tester when my game was broken
