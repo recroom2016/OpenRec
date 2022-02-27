@@ -1,5 +1,6 @@
 Patch v0.4.2:
 -Fixed the issue with only hosts being able to start the games, now everyone is a host!
+-Added basic charades cards, now charades is possible!
 
 Patch v0.4.1:
 -Fixed the room creation feature
