@@ -11,6 +11,7 @@ namespace gamesessions2018
 		// Token: 0x060000BE RID: 190 RVA: 0x00004C08 File Offset: 0x00002E08
 		public static string JoinRandom(string jsonData)
 		{
+			long? creatorid = 1243409L;
 			long gamesessionid = 2018L;
 			Console.WriteLine("OpenRec GameSession Room");
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
@@ -18,26 +19,29 @@ namespace gamesessions2018
 			{
 				gamesessionid = new Random().Next(0, 100);
 			}
-			{
-				Config.localGameSession = new GameSessions.SessionInstance
-				{
-					GameSessionId = gamesessionid,
-					RegionId = "us",
-					RoomId = joinRandomRequest.ActivityLevelIds[0],
-					RecRoomId = null,
-					EventId = null,
-					CreatorPlayerId = 1243409L,
-					Name = "OpenRec Room",
-					ActivityLevelId = joinRandomRequest.ActivityLevelIds[0],
-					Private = false,
-					Sandbox = false,
-					SupportsScreens = true,
-					SupportsVR = true,
-					GameInProgress = false,
-					MaxCapacity = 20,
-					IsFull = false
-				};
+			if (start.Program.version == "2017")
+            {
+				creatorid = (long?)APIServer.CachedPlayerID;
 			}
+			Config.localGameSession = new GameSessions.SessionInstance
+			{
+				GameSessionId = gamesessionid,
+				RegionId = "us",
+				RoomId = joinRandomRequest.ActivityLevelIds[0],
+				RecRoomId = null,
+				EventId = null,
+				CreatorPlayerId = creatorid,
+				Name = "OpenRec Room",
+				ActivityLevelId = joinRandomRequest.ActivityLevelIds[0],
+				Private = false,
+				Sandbox = false,
+				SupportsScreens = true,
+				SupportsVR = true,
+				GameInProgress = false,
+				MaxCapacity = 20,
+				IsFull = false
+			};
+			
 			return JsonConvert.SerializeObject(new GameSessions.JoinResult
 			{
 				Result = 0,
@@ -67,6 +71,7 @@ namespace gamesessions2018
 				gamesessionid = new Random().Next(0, 100);
 			}
 			GameSessions.CreateRequest createRequest = JsonConvert.DeserializeObject<GameSessions.CreateRequest>(jsonData);
+
 			Config.localGameSession = new GameSessions.SessionInstance
 			{
 				GameSessionId = gamesessionid,

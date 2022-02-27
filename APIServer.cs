@@ -141,6 +141,10 @@ namespace server
 						{
 							s = PlayerEventsResponse;
 						}
+						if (Url == "activities/charades/v1/words")
+                        {
+							s = Activities.Charades.words();
+                        }
 						if (Url == "gamesessions/v2/joinrandom")
 						{
 							s = gamesessions2018.GameSessions.JoinRandom(text);
@@ -360,6 +364,10 @@ namespace server
 						if (Url == "playerevents/v1/all")
 						{
 							s = PlayerEventsResponse;
+						}
+						if (Url == "activities/charades/v1/words")
+						{
+							s = Activities.Charades.words();
 						}
 						if (Url == "gamesessions/v2/joinrandom")
 						{

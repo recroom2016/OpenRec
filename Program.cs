@@ -18,11 +18,11 @@ namespace start
 
             Start:
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("OpenRec - Open source RecNet server software. (Version: " + version + ")");
+            Console.WriteLine("OpenRec - Open source RecNet server software. (Version: " + appversion + ")");
             Console.WriteLine("Made and provided by RecRoom 2016.");
             Console.WriteLine("Download source code here: https://github.com/recroom2016/OpenRec");
             Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
-            if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt").Contains(version)))
+            if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt").Contains(appversion)))
             {
                 Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt"));
             }
@@ -186,7 +186,7 @@ namespace start
             
             if (readline == "4")
             {
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
+                Console.WriteLine("Please select the version of RecRoom the server should host: (2017 (Beta), 2018)");
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2016")
                 {
@@ -240,8 +240,8 @@ namespace start
 
             }
         }
-
-        public static string version = "0.4.1";
+        public static string version = "";
+        public static string appversion = "0.4.2";
     }
 
 }

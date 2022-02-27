@@ -55,14 +55,9 @@ namespace server
 				this.listener.Stop();
 			}
 		}
-	
-
 		public static string VersionCheckResponse = "{\"ValidVersion\":true}";
-
 		public static string BlankResponse = "";
 
-
-		// Token: 0x04000192 RID: 402
 		private HttpListener listener = new HttpListener();
 	}
 }
