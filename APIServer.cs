@@ -57,7 +57,7 @@ namespace server
 						}
 						else
 						{
-							Console.WriteLine("API Requested: " + rawUrl);
+							Console.WriteLine("API Requested (rawUrl): " + rawUrl);
 						}
 						Console.WriteLine("API Data: " + text);
 						if (Url.StartsWith("versioncheck"))
@@ -185,7 +185,7 @@ namespace server
 						}
 						else
 						{
-							Console.WriteLine("API Requested: " + rawUrl);
+							Console.WriteLine("API Requested (rawUrl): " + rawUrl);
 						}
 						string text;
 						string s = "";
