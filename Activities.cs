@@ -22,7 +22,7 @@ namespace api
                     },
                     new Activities.Charades.word
                     {
-                        EN_US = "orange",
+                        EN_US = "lemon",
                         Difficulty = 0
                     },
                     new Activities.Charades.word
