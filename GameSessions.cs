@@ -12,16 +12,20 @@ namespace gamesessions2018
 		public static string JoinRandom(string jsonData)
 		{
 			long? creatorid = 1243409L;
-			long gamesessionid = 2018L;
+			long gamesessionid = 20181L;
 			Console.WriteLine("OpenRec GameSession Room");
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
 			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
 			{
-				gamesessionid = new Random().Next(0, 100);
+				gamesessionid = new Random().Next(0, 99);
 			}
 			if (start.Program.version == "2017")
             {
 				creatorid = (long?)APIServer.CachedPlayerID;
+			}
+			if (start.Program.bannedflag == true)
+			{
+				gamesessionid = 100L;
 			}
 			Config.localGameSession = new GameSessions.SessionInstance
 			{
@@ -64,14 +68,17 @@ namespace gamesessions2018
 		// Token: 0x060000C0 RID: 192 RVA: 0x00004D24 File Offset: 0x00002F24
 		public static string Create(string jsonData)
 		{
-			long gamesessionid = 2016L;
+			long gamesessionid = 20161L;
 			Console.WriteLine("OpenRec GameSession Custom Room");
 			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
 			{
-				gamesessionid = new Random().Next(0, 100);
+				gamesessionid = new Random().Next(0, 99);
+			}
+			if (start.Program.bannedflag == true)
+			{
+				gamesessionid = 100L;
 			}
 			GameSessions.CreateRequest createRequest = JsonConvert.DeserializeObject<GameSessions.CreateRequest>(jsonData);
-
 			Config.localGameSession = new GameSessions.SessionInstance
 			{
 				GameSessionId = gamesessionid,

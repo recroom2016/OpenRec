@@ -28,7 +28,7 @@ namespace server
 		{
 			try
 			{
-				//3 different servers for 3 different stages of the game, the apis change so much idk anymore
+				//2 different servers for 2 different stages of the game, the apis change so much idk anymore
 				this.listener.Prefixes.Add("http://localhost:" + start.Program.version + "/");
 				if (start.Program.version == "2017")
 				{
@@ -74,6 +74,13 @@ namespace server
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 							File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(CachedPlayerID));
+							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+							{
+								Console.ForegroundColor = ConsoleColor.Red;
+								Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
+								Console.ForegroundColor = ConsoleColor.Green;
+								start.Program.bannedflag = true;
+							}
 						}
 						if (Url == "platformlogin/v6")
                         {
@@ -82,6 +89,10 @@ namespace server
 						if (Url == "PlayerReporting/v1/moderationBlockDetails")
 						{
 							s = ModerationBlockDetails;
+							if (start.Program.bannedflag == true)
+							{
+								s = Banned;
+							}
 						}
 						if (Url == "config/v1/amplitude")
 						{
@@ -175,6 +186,7 @@ namespace server
 						string rawUrl = request.RawUrl;
 						string Url = "";
 						byte[] bytes = null;
+						string signature = request.Headers.Get("X-RNSIG");
 						if (rawUrl.StartsWith("/api/"))
 						{
 							Url = rawUrl.Remove(0, 5);
@@ -216,6 +228,13 @@ namespace server
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 							File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(CachedPlayerID));
+							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+							{
+								Console.ForegroundColor = ConsoleColor.Red;
+								Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
+								Console.ForegroundColor = ConsoleColor.Green;
+								start.Program.bannedflag = true;
+							}
 						}
 						if (Url == "platformlogin/v1/loginaccount")
                         {
@@ -248,6 +267,10 @@ namespace server
 						if (Url == "PlayerReporting/v1/moderationBlockDetails")
                         {
 							s = ModerationBlockDetails;
+							if (start.Program.bannedflag == true)
+                            {
+								s = Banned;
+                            }
                         }
 						if (Url == "//api/chat/v2/myChats?mode=0&count=50")
                         {
@@ -381,11 +404,9 @@ namespace server
                         {
 							bytes = Encoding.UTF8.GetBytes((JsonConvert.SerializeObject(gamesessions2018.GameSessions2.JoinRoom(text))));
                         }
-						if (rawUrl.Contains("//api/images/v4/uploadtransient?gameSessionId=2018"))
-                        {
-							File.WriteAllBytes("SaveData\\Images\\image" + Convert.ToString(int.Parse(File.ReadAllText("SaveData\\Images\\count.txt") + 1)) + ".png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(text.Length - 48, 48)));
-							int imagecount = int.Parse(File.ReadAllText("SaveData\\Images\\count.txt"));
-							File.WriteAllText("SaveData\\Images\\count.txt", Convert.ToString(imagecount + 1));
+						if (rawUrl == "//api/sanitize/v1/isPure")
+						{
+							s = JsonConvert.SerializeObject(Sanitize.SanitizeRequest(text));
 						}
 						if (Url == "avatar/v3/saved")
 						{
@@ -430,7 +451,8 @@ namespace server
         public static string VersionCheckResponse = "{\"ValidVersion\":true}";
 		public static string ModerationBlockDetails = "{\"ReportCategory\":0,\"Duration\":0,\"GameSessionId\":0,\"Message\":\"\"}";
 		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"OpenRec\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2043-12-27T21:27:38.1880399-08:00\"}";
-		
+
+		public static string Banned = "{\"ReportCategory\":1,\"Duration\":10,\"GameSessionId\":100,\"Message\":\"You have been banned. You are probably a little kid and are now whining at your VR headset. If you aren't a little kid, DM me to appeal.\"}";
 		private HttpListener listener = new HttpListener();
 	}
 }

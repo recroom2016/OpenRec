@@ -53,7 +53,7 @@ namespace start
 			}
 			if (!(File.Exists("SaveData\\Profile\\userid.txt")))
 			{
-				File.WriteAllText("SaveData\\Profile\\userid.txt", "2");
+				File.WriteAllText("SaveData\\Profile\\userid.txt", "10000000");
 			}
 			if (!(File.Exists("SaveData\\myrooms.txt")))
 			{

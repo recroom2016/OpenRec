@@ -26,6 +26,16 @@ namespace start
             {
                 Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt"));
             }
+            if (File.Exists("SaveData\\Profile\\userid.txt"))
+            {
+                if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    bannedflag = true;
+                }
+            }
             Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
@@ -116,7 +126,7 @@ namespace start
                     File.WriteAllText("SaveData\\Profile\\username.txt", newusername);
                     Console.Clear();
                     Console.WriteLine("Success!");
-                    goto Start;
+                    goto Profile;
                 }
                 else if (readline3 == "2")
                 {
@@ -139,7 +149,7 @@ namespace start
                         }
                         Console.Clear();
                         Console.WriteLine("Success!");
-                        goto Start;
+                        goto Profile;
                     }
                     else if (readline4 == "2")
                     {
@@ -159,7 +169,7 @@ namespace start
                         }
                         Console.Clear();
                         Console.WriteLine("Success!");
-                        goto Start;
+                        goto Profile;
                     }
                     else if (readline4 == "3")
                     {
@@ -186,17 +196,9 @@ namespace start
             
             if (readline == "4")
             {
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2017 (Beta), 2018)");
+                Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
                 string readline2 = Console.ReadLine();
-                if (readline2 == "2016")
-                {
-                    version = "2016";
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: " + start.Program.version);
-                    new APIServer();
-                    new WebSocket();
-                }
-                else if (readline2 == "2017")
+                if (readline2 == "2017")
                 {
                     version = "2017";
                     Console.Clear();
@@ -215,33 +217,10 @@ namespace start
                     new WebSocket();
                 }
             }
-            if (readline == "5")
-            {
-                Console.Clear();
-                goto ChatStart;
-
-            ChatStart:
-                Console.WriteLine("Pinging the chat servers...");
-                try
-                {
-                    string ping = new WebClient().DownloadString("https://openrecchat.loca.lt/ping");
-                }
-                catch (Exception ex4)
-                {
-                    Console.WriteLine("Chat servers currently offline...");
-                    Console.WriteLine("Press any key to continue:");
-                    Console.ReadKey();
-                    goto Start;
-                }
-                Console.WriteLine("Success!");
-                Console.WriteLine("Press any key to continue:");
-                Console.ReadKey();
-                OpenRecNet.RecNet();
-
-            }
         }
         public static string version = "";
-        public static string appversion = "0.4.2";
+        public static string appversion = "0.5.0";
+        public static bool bannedflag = false;
     }
 
 }
