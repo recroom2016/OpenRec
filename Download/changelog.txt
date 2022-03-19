@@ -1,21 +1,12 @@
-Patch v0.4.2:
--Fixed the issue with only hosts being able to start the games, now everyone is a host!
--Added basic charades cards, now charades is possible!
-
-Patch v0.4.1:
--Fixed the room creation feature
-
-Third public release of OpenRec, and probably the biggest update to date.
+Fourth public release of OpenRec.
 
 Supports:
 -October 19th 2017
 -May 30th 2018
 
--Sandbox mode now accessed through the room create button on the watch menu
--Creating custom rooms now works
--Reset Savedata Option
--Singleplayer (Private Rooms) Option
--Lots of backend and UI improvements
+-Added banning system
+-Removed unnecessary code
+-Slight UI improvements
 
 Credits:
 @LucasOnDiscord#0210 - Adding potions
