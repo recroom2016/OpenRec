@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using gamesessions2018;
+using gamesesh2018;
 
 namespace ws
 {
@@ -21,16 +21,16 @@ namespace ws
 				{
 					if (text2 == "playerSubscriptions/v1/update")
 					{
-						Console.WriteLine("WebSocket.cs game client sent presence update.");
+						Console.WriteLine("[WSS] Game client sent presence update.");
 						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, GameSessions.StatusSessionInstance()));
 					}
 					if (text2 == "heartbeat2")
 					{
-						Console.WriteLine("WebSocket.cs heartbeat 2 sent by game client.");
+						Console.WriteLine("[WSS] Heartbeat 2 sent by game client.");
 						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(4, GameSessions.StatusSessionInstance()));
 					}
 				}
-				Console.WriteLine("WebSocket.cs unknown API call: " + text);
+				Console.WriteLine("[WSS] Unknown API call: " + text);
 				result = "";
 			}
 			else
@@ -43,39 +43,39 @@ namespace ws
 		// Token: 0x0200002B RID: 43
 		public enum ResponseResult
 		{
-			// Token: 0x04000092 RID: 146
+			// Token: 0x04000090 RID: 144
 			RelationshipChanged = 1,
-			// Token: 0x04000093 RID: 147
+			// Token: 0x04000091 RID: 145
 			MessageReceived,
-			// Token: 0x04000094 RID: 148
+			// Token: 0x04000092 RID: 146
 			MessageDeleted,
-			// Token: 0x04000095 RID: 149
+			// Token: 0x04000093 RID: 147
 			PresenceHeartbeatResponse,
-			// Token: 0x04000096 RID: 150
+			// Token: 0x04000094 RID: 148
 			SubscriptionListUpdated = 9,
-			// Token: 0x04000097 RID: 151
+			// Token: 0x04000095 RID: 149
 			SubscriptionUpdateProfile = 11,
-			// Token: 0x04000098 RID: 152
+			// Token: 0x04000096 RID: 150
 			SubscriptionUpdatePresence,
-			// Token: 0x04000099 RID: 153
+			// Token: 0x04000097 RID: 151
 			SubscriptionUpdateGameSession,
-			// Token: 0x0400009A RID: 154
+			// Token: 0x04000098 RID: 152
 			SubscriptionUpdateRoom,
-			// Token: 0x0400009B RID: 155
+			// Token: 0x04000099 RID: 153
 			ModerationQuitGame = 20,
-			// Token: 0x0400009C RID: 156
+			// Token: 0x0400009A RID: 154
 			ModerationUpdateRequired,
-			// Token: 0x0400009D RID: 157
+			// Token: 0x0400009B RID: 155
 			ModerationKick,
-			// Token: 0x0400009E RID: 158
+			// Token: 0x0400009C RID: 156
 			ModerationKickAttemptFailed,
-			// Token: 0x0400009F RID: 159
+			// Token: 0x0400009D RID: 157
 			GiftPackageReceived = 30,
-			// Token: 0x040000A0 RID: 160
+			// Token: 0x0400009E RID: 158
 			ProfileJuniorStatusUpdate = 40,
-			// Token: 0x040000A1 RID: 161
+			// Token: 0x0400009F RID: 159
 			RelationshipsInvalid = 50,
-			// Token: 0x040000A2 RID: 162
+			// Token: 0x040000A0 RID: 160
 			StorefrontBalanceAdd = 60
 		}
 

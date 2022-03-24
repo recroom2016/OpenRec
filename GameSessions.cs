@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using api;
 using server;
 using System.IO;
-namespace gamesessions2018
+namespace gamesesh2018
 {
 	// Token: 0x02000020 RID: 32
 	public class GameSessions
@@ -87,7 +87,7 @@ namespace gamesessions2018
 				RecRoomId = null,
 				EventId = null,
 				CreatorPlayerId = (long?)APIServer.CachedPlayerID,
-				Name = "Custom Room",
+				Name = "OpenRec Custom Room",
 				ActivityLevelId = createRequest.ActivityLevelId,
 				Private = false,
 				Sandbox = true,

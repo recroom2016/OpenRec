@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using WebSocketSharp;
 using WebSocketSharp.Server;
+using Newtonsoft.Json;
+using server;
+using start;
+using System.Net;
+using System.IO;
 
 namespace ws
 {
@@ -18,7 +24,6 @@ namespace ws
 			Console.WriteLine("WebSocket.cs is listening.");
 		}
 
-		// Token: 0x02000009 RID: 9
 		public class NotificationV2 : WebSocketBehavior
 		{
 			// Token: 0x06000013 RID: 19 RVA: 0x0000209D File Offset: 0x0000029D
@@ -26,6 +31,13 @@ namespace ws
 			{
 				Console.WriteLine("WebSocket.cs called for.");
 				base.Send(Notification.ProcessRequest(e.Data));
+				if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+				{
+					Console.ForegroundColor = ConsoleColor.Red;
+					Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
+					Console.ForegroundColor = ConsoleColor.Green;
+					start.Program.bannedflag = true;
+				}
 			}
 		}
 	}

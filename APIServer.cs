@@ -7,6 +7,7 @@ using api;
 using api2018;
 using api2017;
 using Newtonsoft.Json;
+using vaultgamesesh;
 
 namespace server
 {
@@ -74,7 +75,7 @@ namespace server
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 							File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(CachedPlayerID));
-							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
 							{
 								Console.ForegroundColor = ConsoleColor.Red;
 								Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
@@ -158,11 +159,15 @@ namespace server
                         }
 						if (Url == "gamesessions/v2/joinrandom")
 						{
-							s = gamesessions2018.GameSessions.JoinRandom(text);
+							s = gamesesh2018.GameSessions.JoinRandom(text);
 						}
 						if (Url == "gamesessions/v2/create")
 						{
-							s = gamesessions2018.GameSessions.Create(text);
+							s = gamesesh2018.GameSessions.Create(text);
+						}
+						if (rawUrl == "//api/sanitize/v1/isPure")
+						{
+							s = JsonConvert.SerializeObject(Sanitize.GetSanitize());
 						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -228,7 +233,7 @@ namespace server
 							CachedPlayerID = ulong.Parse(text.Remove(0, 32));
 							CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 							File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(CachedPlayerID));
-							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
 							{
 								Console.ForegroundColor = ConsoleColor.Red;
 								Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
@@ -288,7 +293,7 @@ namespace server
                         {
 							s = File.ReadAllText("SaveData\\gameconfigs.txt");
                         }
-						if (Url.StartsWith("storefronts"))
+						if (Url.StartsWith("storefronts/v3/giftdropstore"))
                         {
 							if (CachedVersionMonth == 09)
                             {
@@ -298,6 +303,10 @@ namespace server
                             {
 								s = BracketResponse;
                             }
+                        }
+						if (Url.StartsWith("storefronts/v3/balance/"))
+                        {
+							s = BracketResponse;
                         }
 						if (Url == "avatar/v2")
                         {
@@ -321,17 +330,17 @@ namespace server
 						{
 							Settings.SetPlayerSettings(text);
 						}
+						if (rawUrl == "//api/chat/v2/myChats?mode=0&count=50")
+                        {
+							s = BracketResponse;
+                        }
+						if (Url == "playersubscriptions/v1/my")
+                        {
+							s = BracketResponse;
+                        }
 						if (Url == "avatar/v3/items")
                         {
-							if (CachedVersionMonth == 09)
-                            {
-								s = BracketResponse;
-							}
-							else
-                            {
-								s = File.ReadAllText("SaveData\\avataritems.txt");
-							}
-							
+							s = File.ReadAllText("SaveData\\avataritems.txt");
 						}
 						if (Url == "equipment/v1/getUnlocked")
 						{
@@ -344,11 +353,11 @@ namespace server
 						if (Url == "consumables/v1/getUnlocked")
 						{
 							if (CachedVersionMonth == 09)
-							{
+                            {
 								s = BracketResponse;
-							}
+                            }
 							else
-							{
+                            {
 								s = File.ReadAllText("SaveData\\consumables.txt");
 							}
 						}
@@ -372,6 +381,10 @@ namespace server
                         {
 							s = BracketResponse;
                         }
+						if (Url == "rooms/v2/baserooms")
+                        {
+							s = File.ReadAllText("SaveData\\baserooms.txt");
+                        }
 						if (Url == "rooms/v1/mybookmarkedrooms")
 						{
 							s = BracketResponse;
@@ -394,19 +407,19 @@ namespace server
 						}
 						if (Url == "gamesessions/v2/joinrandom")
 						{
-							s = gamesessions2018.GameSessions.JoinRandom(text);
+							s = gamesesh2018.GameSessions.JoinRandom(text);
 						}
 						if (Url == "gamesessions/v2/create")
 						{
-							s = gamesessions2018.GameSessions.Create(text);
+							s = gamesesh2018.GameSessions.Create(text);
 						}
 						if (Url == "gamesessions/v3/joinroom")
-                        {
-							bytes = Encoding.UTF8.GetBytes((JsonConvert.SerializeObject(gamesessions2018.GameSessions2.JoinRoom(text))));
-                        }
+						{
+							s = JsonConvert.SerializeObject(c000041.m000030(text));
+						}
 						if (rawUrl == "//api/sanitize/v1/isPure")
 						{
-							s = JsonConvert.SerializeObject(Sanitize.SanitizeRequest(text));
+							s = JsonConvert.SerializeObject(Sanitize.GetSanitize());
 						}
 						if (Url == "avatar/v3/saved")
 						{
@@ -414,17 +427,30 @@ namespace server
 						}
 						if (Url == "checklist/v1/current")
 						{
-							s = BracketResponse;
+							s = ChecklistV1Current;
 						}
 						if (Url == "presence/v1/setplayertype")
                         {
 							s = BracketResponse;
                         }
-						Console.WriteLine("API Response: " + s);
-						if (!(Url == "gamesessions/v3/joinroom"))
+						if (Url == "challenge/v1/getCurrent")
                         {
-							bytes = Encoding.UTF8.GetBytes(s);
+							s = ChallengesV1GetCurrent;
+                        }
+						if (Url == "rooms/v1/featuredRoomGroup")
+                        {
+							s = BracketResponse;
+                        }
+						if (Url == "presence/v3/heartbeat")
+                        {
+							s = JsonConvert.SerializeObject(Notification2018.Reponse.createResponse(4, c000020.m000027()));
 						}
+						if (Url == "rooms/v1/featuredRoomGroup")
+                        {
+							s = new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/dormslideshow.txt");
+                        }
+						Console.WriteLine("API Response: " + s);
+						bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
@@ -451,8 +477,10 @@ namespace server
         public static string VersionCheckResponse = "{\"ValidVersion\":true}";
 		public static string ModerationBlockDetails = "{\"ReportCategory\":0,\"Duration\":0,\"GameSessionId\":0,\"Message\":\"\"}";
 		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"OpenRec\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2043-12-27T21:27:38.1880399-08:00\"}";
+		public static string ChallengesV1GetCurrent = "{\"Success\":true,\"Message\":\"OpenRec\"}";
+		public static string ChecklistV1Current = "[{\"Order\":0,\"Objective\":3000,\"Count\":3,\"CreditAmount\":100},{\"Order\":1,\"Objective\":3001,\"Count\":3,\"CreditAmount\":100},{\"Order\":2,\"Objective\":3002,\"Count\":3,\"CreditAmount\":100}]";
 
-		public static string Banned = "{\"ReportCategory\":1,\"Duration\":10,\"GameSessionId\":100,\"Message\":\"You have been banned. You are probably a little kid and are now whining at your VR headset. If you aren't a little kid, DM me to appeal.\"}";
+		public static string Banned = "{\"ReportCategory\":1,\"Duration\":10000000000000000,\"GameSessionId\":100,\"Message\":\"You have been banned. You are probably a little kid and are now whining at your VR headset. If you aren't a little kid, DM me to appeal.\"}";
 		private HttpListener listener = new HttpListener();
 	}
 }

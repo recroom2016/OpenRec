@@ -28,7 +28,7 @@ namespace server
 		private void StartListen()
 		{
 			//nameserver is ONLY for 2018
-			this.listener.Prefixes.Add("http://localhost:20181/");
+			this.listener.Prefixes.Add("http://localhost:56/");
 			for (; ; )
 			{
 				this.listener.Start();

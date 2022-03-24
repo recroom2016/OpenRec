@@ -15,6 +15,7 @@ namespace start
 			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\App\\");
 			Directory.CreateDirectory("SaveData\\Profile\\");
+			Directory.CreateDirectory("SaveData\\Rooms\\");
 			if (!(File.Exists("SaveData\\avatar.txt")))
 			{
 				File.WriteAllText("SaveData\\avatar.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avatar.txt"));
@@ -41,7 +42,11 @@ namespace start
 			}
 			if (!(File.Exists("SaveData\\storefronts2.txt")))
 			{
-				File.WriteAllText("SaveData\\storefronts2.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/vaultButItsNewer/main/StoreFront2.json"));
+				File.WriteAllText("SaveData\\storefronts2.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/storefront2.txt"));
+			}
+			if (!(File.Exists("SaveData\\baserooms.txt")))
+			{
+				File.WriteAllText("SaveData\\baserooms.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/baserooms.txt"));
 			}
 			if (!(File.Exists("SaveData\\Profile\\username.txt")))
 			{

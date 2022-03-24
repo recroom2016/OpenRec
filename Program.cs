@@ -5,6 +5,7 @@ using ws;
 using api;
 using System.Net;
 using System.Diagnostics;
+using vaultgamesesh;
 
 namespace start
 {
@@ -13,10 +14,12 @@ namespace start
         static void Main()
         {
             //startup for openrec
+            
             Setup.setup();
             goto Start;
 
             Start:
+            Console.Title = "OpenRec Startup Menu";
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OpenRec - Open source RecNet server software. (Version: " + appversion + ")");
             Console.WriteLine("Made and provided by RecRoom 2016.");
@@ -28,7 +31,7 @@ namespace start
             }
             if (File.Exists("SaveData\\Profile\\userid.txt"))
             {
-                if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+                if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
@@ -40,6 +43,7 @@ namespace start
             string readline = Console.ReadLine();
             if (readline == "1")
             {
+                Console.Title = "OpenRec Changelog";
                 Console.Clear();
                 Console.WriteLine(new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/changelog.txt"));
                 Console.WriteLine("Press any key to continue:");
@@ -53,6 +57,7 @@ namespace start
                 goto Settings;
 
                 Settings:
+                Console.Title = "OpenRec Settings Menu";
                 Console.WriteLine("1) Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt") + Environment.NewLine + "2) OpenRecNet Info Tab: " + File.ReadAllText("SaveData\\App\\showopenrecinfo.txt") + Environment.NewLine + "3) Reset SaveData" + Environment.NewLine + "4) Go Back");
                 string readline4 = Console.ReadLine();
                 if (readline4 == "1")
@@ -116,6 +121,7 @@ namespace start
                 goto Profile;
 
             Profile:
+                Console.Title = "OpenRec Profile Menu";
                 Console.WriteLine("1) Change Username" + Environment.NewLine + "2) Change Profile Image" + Environment.NewLine + "3) Change Level" + Environment.NewLine + "4) Go Back");
                 string readline3 = Console.ReadLine();
                 if (readline3 == "1")
@@ -196,30 +202,44 @@ namespace start
             
             if (readline == "4")
             {
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2017, 2018)");
+                Console.Title = "OpenRec Version Select";
+                Console.WriteLine("Please select the version of RecRoom the server should host: (2017, M2018, S2018)");
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2017")
                 {
+                    Console.Title = "OpenRec October 19th 2017";
                     version = "2017";
                     Console.Clear();
-                    Console.WriteLine("Version Selected: " + start.Program.version);
+                    Console.WriteLine("Version Selected: October 19th, 2017.");
                     new APIServer();
                     new WebSocket();
                 }
-                else if (readline2 == "2018")
+                else if ((readline2 == "M2018") || (readline2 == "m2018"))
                 {
+                    Console.Title = "OpenRec May 30th 2018";
                     version = "2018";
                     Console.Clear();
-                    Console.WriteLine("Version Selected: " + start.Program.version);
+                    Console.WriteLine("Version Selected: May 30th, 2018.");
                     new NameServer();
                     new ImageServer();
                     new APIServer();
                     new WebSocket();
                 }
+                else if ((readline2 == "S2018") || (readline2 == "s2018"))
+                {
+                    Console.Title = "OpenRec September 27th 2018";
+                    version = "2018";
+                    Console.Clear();
+                    Console.WriteLine("Version Selected: September 27th, 2018.");
+                    new NameServer();
+                    new ImageServer();
+                    new APIServer();
+                    new Late2018WebSock();
+                }
             }
         }
         public static string version = "";
-        public static string appversion = "0.5.0";
+        public static string appversion = "0.6.0";
         public static bool bannedflag = false;
     }
 
