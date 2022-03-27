@@ -1,25 +1,11 @@
 [
+    [
     {
-        "RoomId": 1,
-        "Name": "DormRoom",
-        "Description": "...",
+        "RoomId": 29,
+        "Name": "Custom Room",
+        "Description": "Custom Room",
         "CreatorPlayerId": 1,
         "ImageName": "DormRoom.png",
-        "State": 0,
-        "Accessibility": 1,
-        "SupportsLevelVoting": false,
-        "IsAGRoom": true,
-        "CloningAllowed": false,
-        "SupportsScreens": true,
-        "SupportsWalkVR": true,
-        "SupportsTeleportVR": true
-    },
-    {
-        "RoomId": 2,
-        "Name": "RecCenter",
-        "Description": "...",
-        "CreatorPlayerId": 1,
-        "ImageName": "RecCenter.png",
         "State": 0,
         "Accessibility": 1,
         "SupportsLevelVoting": false,
