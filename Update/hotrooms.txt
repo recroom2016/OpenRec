@@ -1,5 +1,4 @@
 [
-    [
     {
         "RoomId": 29,
         "Name": "Custom Room",
@@ -315,5 +314,4 @@
         "SupportsWalkVR": true,
         "SupportsTeleportVR": true
     }
-
 ]
