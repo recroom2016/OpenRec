@@ -27,7 +27,7 @@ namespace api
             Console.WriteLine("Done!");
             Console.Clear();
         }
-        public static gamesesh2018.GameSessions.SessionInstance localGameSession;
+        public static gamesesh.GameSessions.SessionInstance localGameSession;
         public static Objective[][] dailyObjectives = new Objective[][]
         {
             new Objective[]

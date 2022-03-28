@@ -16,6 +16,7 @@ namespace start
 			Directory.CreateDirectory("SaveData\\App\\");
 			Directory.CreateDirectory("SaveData\\Profile\\");
 			Directory.CreateDirectory("SaveData\\Rooms\\");
+			Directory.CreateDirectory("SaveData\\Rooms\\Downloaded\\");
 			if (!(File.Exists("SaveData\\avatar.txt")))
 			{
 				File.WriteAllText("SaveData\\avatar.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avatar.txt"));

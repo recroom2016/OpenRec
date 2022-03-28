@@ -39,7 +39,7 @@ namespace start
                     bannedflag = true;
                 }
             }
-            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Start Server");
+            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Custom Room Downloader" + Environment.NewLine + "5) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
             {
@@ -191,7 +191,7 @@ namespace start
                     File.WriteAllText("SaveData\\Profile\\level.txt", newlevel);
                     Console.Clear();
                     Console.WriteLine("Success!");
-                    goto Start;
+                    goto Profile;
                 }
                 else if (readline3 == "4")
                 {
@@ -199,13 +199,40 @@ namespace start
                     goto Start;
                 }
             }
-            
             if (readline == "4")
             {
+                Console.Title = "OpenRec Custom Room Downloader";
+                Console.Clear();
+                Console.WriteLine("Please type in the name of the room you would like to download: (Case sensitive)");
+                string roomname = Console.ReadLine();
+                Console.WriteLine("Now, please go to the link below and help us gather info about your room for you.");
+                Console.WriteLine("https://rooms.rec.net/rooms?name=" + roomname + "&include=297");
+                Console.WriteLine("Please find the string called ImageName and paste it below:");
+                string imagename = Console.ReadLine();
+                Console.WriteLine("Please find the string called UnitySceneId and paste it below:");
+                string roomsceneid = Console.ReadLine();
+                Console.WriteLine("Please find the string called DataBlob and paste it below:");
+                string datablob = Console.ReadLine();
+                CustomRooms.RoomDecode(roomname, roomsceneid, imagename, datablob);
+                goto Start;
+                
+            }
+            if (readline == "5")
+            {
                 Console.Title = "OpenRec Version Select";
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2017, M2018, S2018)");
+                Console.WriteLine("Please select the version of RecRoom the server should host: (2016, 2017, 2018)");
+                Console.WriteLine("fuck you all");
                 string readline2 = Console.ReadLine();
-                if (readline2 == "2017")
+                if (readline2 == "2016")
+                {
+                    Console.Title = "OpenRec December 25th, 2016";
+                    version = "2016";
+                    Console.Clear();
+                    Console.WriteLine("Version Selected: December 25th, 2016.");
+                    new APIServer();
+                    new WebSocket();
+                }
+                else if (readline2 == "2017")
                 {
                     Console.Title = "OpenRec October 19th 2017";
                     version = "2017";
@@ -214,27 +241,32 @@ namespace start
                     new APIServer();
                     new WebSocket();
                 }
-                else if ((readline2 == "M2018") || (readline2 == "m2018"))
+                else if (readline2 == "2018")
                 {
-                    Console.Title = "OpenRec May 30th 2018";
-                    version = "2018";
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: May 30th, 2018.");
-                    new NameServer();
-                    new ImageServer();
-                    new APIServer();
-                    new WebSocket();
-                }
-                else if ((readline2 == "S2018") || (readline2 == "s2018"))
-                {
-                    Console.Title = "OpenRec September 27th 2018";
-                    version = "2018";
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: September 27th, 2018.");
-                    new NameServer();
-                    new ImageServer();
-                    new APIServer();
-                    new Late2018WebSock();
+                    Console.WriteLine("May or September (Beta) 2018: (M, S)");
+                    string readline3 = Console.ReadLine();
+                    if ((readline3 == "M") || (readline3 == "m"))
+                    {
+                        Console.Title = "OpenRec May 30th 2018";
+                        version = "2018";
+                        Console.Clear();
+                        Console.WriteLine("Version Selected: May 30th, 2018.");
+                        new NameServer();
+                        new ImageServer();
+                        new APIServer();
+                        new WebSocket();
+                    }
+                    if ((readline3 == "S") || (readline3 == "s"))
+                    {
+                        Console.Title = "OpenRec September 27th 2018";
+                        version = "2018";
+                        Console.Clear();
+                        Console.WriteLine("Version Selected: September 27th, 2018.");
+                        new NameServer();
+                        new ImageServer();
+                        new APIServer();
+                        new Late2018WebSock();
+                    }
                 }
             }
         }

@@ -106,7 +106,7 @@ namespace api
 				new Setting
 				{
 					Key = "VoiceChat",
-					Value = 0f.ToString()
+					Value = 1f.ToString()
 				},
 				new Setting
 				{

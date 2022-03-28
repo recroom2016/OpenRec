@@ -43,6 +43,10 @@ namespace server
 				{
 					text = streamReader.ReadToEnd();
 				}
+				if (rawUrl.StartsWith("//room/"))
+                {
+					i = new WebClient().DownloadData("https://cdn.rec.net/" + rawUrl.Remove(0, 2));
+                }
 				Console.WriteLine("Image Requested: " + rawUrl);
 				Console.WriteLine("Image Data: " + text);
 				Console.WriteLine("Image Response: ");

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace vaultgamesesh
 {
@@ -52,7 +53,7 @@ namespace vaultgamesesh
 				}
 				else
 				{
-					c000041.f000043 = c00005d.f000050["DormRoom"];
+					c000041.f000043 = c00005d.f000050[File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt")];
 				}
 			}
 			int num = 0;
@@ -74,7 +75,7 @@ namespace vaultgamesesh
 			bool @private = c00006c.Private;
 			if (@private)
 			{
-				text += string.Format("Pri{0}", c000079.m000009()[0].Id);
+				text += string.Format("Pri{0}", server.APIServer.CachedPlayerID);
 			}
 			c000041.f000013 = new c000041.c000044
 			{

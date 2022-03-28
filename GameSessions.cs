@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using api;
 using server;
 using System.IO;
-namespace gamesesh2018
+namespace gamesesh
+
 {
 	// Token: 0x02000020 RID: 32
 	public class GameSessions
@@ -12,7 +13,7 @@ namespace gamesesh2018
 		public static string JoinRandom(string jsonData)
 		{
 			long? creatorid = 1243409L;
-			long gamesessionid = 20181L;
+			long gamesessionid = long.Parse(start.Program.version + "1");
 			Console.WriteLine("OpenRec GameSession Room");
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
 			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")

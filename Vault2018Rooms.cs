@@ -13,14 +13,24 @@ namespace vaultgamesesh
 		// Token: 0x06000011 RID: 17 RVA: 0x0000264C File Offset: 0x0000084C
 		public static Dictionary<string, c00005d.c000060> m00003a()
 		{
-			Dictionary<string, c00005d.c000060> result = new Dictionary<string, c00005d.c000060>();
+			Dictionary<string, c00005d.c000060> dictionary = new Dictionary<string, c00005d.c000060>();
 			string[] directories = Directory.GetDirectories(c000004.m000007());
 			for (int i = 0; i < directories.Length; i++)
 			{
+				c00005d.c000060 c = JsonConvert.DeserializeObject<c00005d.c000060>(File.ReadAllText(directories[i] + "\\RoomDetails.json"));
+				dictionary.Add(c.Room.Name, c);
 			}
-			return result;
+			return dictionary;
 		}
-
+		public static List<c00005d.c000061> m000035()
+		{
+			List<c00005d.c000061> list = new List<c00005d.c000061>();
+			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000024)
+			{
+				list.Add(keyValuePair.Value.Room);
+			}
+			return list;
+		}
 		// Token: 0x06000012 RID: 18 RVA: 0x00002688 File Offset: 0x00000888
 		public static Dictionary<string, c00005d.c000060> m00003b()
 		{
@@ -1411,16 +1421,16 @@ namespace vaultgamesesh
 				}
 			},
 			{
-				"Bawling",
+				"Bowling",
 				new c00005d.c000060
 				{
 					Room = new c00005d.c000061
 					{
 						RoomId = 28UL,
-						Name = "Bawling",
-						Description = "Go to the Two Footware Coridor Bawling Coridor to admire off branded Raw Data, Play Jumbotron on 4 arcade cabinets (each with 4 player split screen, and 16 player multiplayer), take a ball and hit the white cubes, and conimplate life in front of the lockers in this Beta RRO!",
+						Name = "Bowling",
+						Description = "shut up coffeeman this bowling description was so annoying",
 						CreatorPlayerId = 782441001UL,
-						ImageName = "bawling.png",
+						ImageName = "bowling.png",
 						State = 0,
 						Accessibility = 1,
 						SupportsLevelVoting = false,
@@ -1463,6 +1473,62 @@ namespace vaultgamesesh
 							Type = 0
 						}
 					}
+				}
+			},
+			{
+				File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt"),
+				new c00005d.c000060
+				{
+					Room = new c00005d.c000061
+					{ 
+						RoomId = 29UL,
+						Name = File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt"),
+						Description = "OpenRec Downloaded Custom Room",
+						CreatorPlayerId = APIServer.CachedPlayerID,
+						ImageName = File.ReadAllText("SaveData\\Rooms\\Downloaded\\imagename.txt"),
+						State = 0,
+						Accessibility = 1,
+						SupportsLevelVoting = false,
+						IsAGRoom = true,
+						CloningAllowed = false,
+						SupportsScreens = true,
+						SupportsTeleportVR = true,
+						SupportsWalkVR = true
+					},
+					Scenes = new List<c00005d.c00005f>
+					{
+						new c00005d.c00005f
+						{
+							RoomSceneId = 1L,
+							RoomId = 29UL,
+							RoomSceneLocationId = File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomsceneid.txt"),
+							Name = "Home",
+							IsSandbox = true,
+							DataBlobName = File.ReadAllText("SaveData\\Rooms\\Downloaded\\datablob.txt"),
+							MaxPlayers = 20,
+							CanMatchmakeInto = true,
+							DataModifiedAt = DateTime.Now
+						}
+					},
+					CoOwners = new List<int>(),
+					Hosts = new List<int>(),
+					CheerCount = 1,
+					FavoriteCount = 1,
+					VisitCount = 1,
+					Tags = new List<c00005d.c000063>
+					{
+						new c00005d.c000063
+						{
+							Tag = "rro",
+							Type = 2
+						},
+						new c00005d.c000063
+						{
+							Tag = "sport",
+							Type = 0
+						}
+					}
+
 				}
 			}
 		};
