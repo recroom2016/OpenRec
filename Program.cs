@@ -222,6 +222,7 @@ namespace start
                 Console.Title = "OpenRec Version Select";
                 Console.WriteLine("Please select the version of RecRoom the server should host: (2016, 2017, 2018)");
                 Console.WriteLine("fuck you all");
+                //imagine if yall actually look in the code one day and just find a random note signed tucker at the bottom of it and then i go missing for a very long time otherwise known as forever
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2016")
                 {
