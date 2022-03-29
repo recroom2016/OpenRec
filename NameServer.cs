@@ -15,7 +15,7 @@ namespace server
 		{
 			try
 			{
-				Console.WriteLine("NameServer.cs has started.");
+				Console.WriteLine("[NameServer.cs] has started.");
 				new Thread(new ThreadStart(this.StartListen)).Start();
 			}
 			catch (Exception ex)
@@ -32,19 +32,26 @@ namespace server
 			for (; ; )
 			{
 				this.listener.Start();
-				Console.WriteLine("NameServer.cs is listening.");
+				Console.WriteLine("[NameServer.cs] is listening.");
 				HttpListenerContext context = this.listener.GetContext();
 				HttpListenerRequest request = context.Request;
 				HttpListenerResponse response = context.Response;
 				string rawUrl = request.RawUrl;
 				string s = "";
-				s = "{\"API\":\"http://localhost:2018\",\"Notifications\":\"http://localhost:20161\",\"Images\":\"http://localhost:20182\"}";
+				if (start.Program.version == "2019")
+                {
+					s = "{\"API\":\"http://localhost:2019\",\"Notifications\":\"ws://localhost:20161\",\"Images\":\"http://localhost:20182\",\"Auth\":\"http://localhost:20182\",\"WWW\":\"http://localhost:20182\"}";
+				}
+				else
+                {
+					s = "{\"API\":\"http://localhost:2018\",\"Notifications\":\"http://localhost:20161\",\"Images\":\"http://localhost:20182\"}";
+				}
 				Console.WriteLine("API Response: " + s);
 				byte[] bytes = Encoding.UTF8.GetBytes(s);
 				response.ContentLength64 = (long)bytes.Length;
 				Stream outputStream = response.OutputStream;
 				outputStream.Write(bytes, 0, bytes.Length);
-				Thread.Sleep(400);
+				Thread.Sleep(1);
 				outputStream.Close();
 				this.listener.Stop();
 			}

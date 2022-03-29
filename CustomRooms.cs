@@ -6,24 +6,27 @@ using Newtonsoft.Json;
 using vaultgamesesh;
 using System.IO;
 using server;
+using api;
 
 namespace api
 {
     class CustomRooms
     {
-        public static void RoomDecode(string roomname, string roomsceneid, string imagename, string datablob)
+        public static void RoomDecode(string text)
         {
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomname.txt", roomname);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\datablob.txt", datablob);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomsceneid.txt", roomsceneid);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\imagename.txt", imagename);
+            ModernRooms.Root root2 = JsonConvert.DeserializeObject<ModernRooms.Root>(text);
+            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomname.txt", root2.Name);
+            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomid.txt", Convert.ToString(root2.RoomId));
+            File.WriteAllText("SaveData\\Rooms\\Downloaded\\datablob.txt", root2.SubRooms[0].DataBlob);
+            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomsceneid.txt", root2.SubRooms[0].UnitySceneId);
+            File.WriteAllText("SaveData\\Rooms\\Downloaded\\imagename.txt", root2.ImageName);
             ulong rand = Convert.ToUInt64(new Random().Next(0, 99));
             room = new Room
             {
-                RoomId = rand,
-                Name = roomname,
+                RoomId = root2.RoomId,
+                Name = root2.Name,
                 Description = "OpenRec Downloaded Room",
-                ImageName = imagename,
+                ImageName = root2.ImageName,
                 CreatorPlayerId = APIServer.CachedPlayerID,
                 State = 0,
                 Accessibility = 1,
@@ -42,14 +45,14 @@ namespace api
                 new Scene()
                 {
                     RoomSceneId = 1,
-                    RoomId = rand,
-                    RoomSceneLocationId = "a75f7547-79eb-47c6-8986-6767abcb4f92",
+                    RoomId = root2.RoomId,
+                    RoomSceneLocationId = root2.SubRooms[0].UnitySceneId,
                     Name = "Home",
                     IsSandbox = true,
-                    DataBlobName = datablob,
+                    DataBlobName =  root2.SubRooms[0].DataBlob,
                     MaxPlayers = 20,
                     CanMatchmakeInto = true,
-                    DataModifiedAt = DateTime.Now,
+                    DataModifiedAt = root2.SubRooms[0].DataSavedAt,
                     ReplicationId = null,
                     UseLevelBasedMatchmaking = false,
                     UseAgeBasedMatchmaking = false,
@@ -66,9 +69,9 @@ namespace api
                 InvitedCoOwners = new List<ulong>(),
                 Hosts = new List<ulong>(),
                 InvitedHosts = new List<ulong>(),
-                CheerCount = 999,
-                FavoriteCount = 999,
-                VisitCount = 999,
+                CheerCount = root2.Stats.CheerCount,
+                FavoriteCount = root2.Stats.FavoriteCount,
+                VisitCount = root2.Stats.VisitCount,
                 Tags = new List<aTag>
                 {
                     new aTag()

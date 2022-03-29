@@ -20,8 +20,8 @@ namespace ws
 			webSocketServer.AddWebSocketService<WebSocket.NotificationV2>("/api/notification/v2");
 			webSocketServer.AddWebSocketService<WebSocket.NotificationV2>("/hub/v1");
 			webSocketServer.Start();
-			Console.WriteLine("WebSocket.cs has started.");
-			Console.WriteLine("WebSocket.cs is listening.");
+			Console.WriteLine("[WebSocket.cs] has started.");
+			Console.WriteLine("[WebSocket.cs] is listening.");
 		}
 
 		public class NotificationV2 : WebSocketBehavior

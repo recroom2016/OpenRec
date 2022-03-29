@@ -15,7 +15,7 @@ namespace server
 		{
 			try
 			{
-				Console.WriteLine("ImageServer.cs has started.");
+				Console.WriteLine("[ImageServer.cs] has started.");
 				new Thread(new ThreadStart(this.StartListen)).Start();
 			}
 			catch (Exception ex)
@@ -30,23 +30,54 @@ namespace server
 			this.listener.Prefixes.Add("http://localhost:20182/");
 			for (; ; )
 			{
-				//image server always send out profile image for now, might cause issues later but ill fix it when I need too
+				
 				this.listener.Start();
-				Console.WriteLine("ImageServer.cs is listening.");
+				Console.WriteLine("{ImageServer.cs] is listening.");
 				HttpListenerContext context = this.listener.GetContext();
 				HttpListenerRequest request = context.Request;
 				HttpListenerResponse response = context.Response;
 				string rawUrl = request.RawUrl;
 				string text;
-				byte[] i = File.ReadAllBytes("SaveData\\profileimage.png");
+				byte[] i = File.ReadAllBytes("SaveData\\profileimage.png"); //File.ReadAllBytes("SaveData\\profileimage.png");
 				using (StreamReader streamReader = new StreamReader(request.InputStream, request.ContentEncoding))
 				{
 					text = streamReader.ReadToEnd();
 				}
-				if (rawUrl.StartsWith("//room/"))
+				if (rawUrl.StartsWith("/alt/"))
                 {
-					i = new WebClient().DownloadData("https://cdn.rec.net/" + rawUrl.Remove(0, 2));
+					i = File.ReadAllBytes("SaveData\\profileimage.png");
+				}
+				else if (rawUrl.StartsWith("/" + File.ReadAllText("SaveData\\Profile\\username.txt")))
+                {
+					i = File.ReadAllBytes("SaveData\\profileimage.png");
+				}
+				else if (rawUrl.StartsWith("//room/"))
+                {
+					i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
                 }
+				else
+                {
+					try
+                    {
+						i = new WebClient().DownloadData("https://img.rec.net" + rawUrl);
+					}
+					catch
+                    {
+						Console.WriteLine("[ImageServer.cs] Image not found on img.rec.net.");
+                    }
+				}
+				if (rawUrl.StartsWith("/CustomRoom.png"))
+                {
+					try
+					{
+						i = new WebClient().DownloadData("https://img.rec.net/" + File.ReadAllText("SaveData\\Rooms\\Downloaded\\imagename.txt"));
+					}
+					catch
+					{
+						Console.WriteLine("[ImageServer.cs] Image not found on img.rec.net.");
+						i = new WebClient().DownloadData("https://img.rec.net/DefaultRoomImage.jpg");
+					}
+				}
 				Console.WriteLine("Image Requested: " + rawUrl);
 				Console.WriteLine("Image Data: " + text);
 				Console.WriteLine("Image Response: ");
@@ -54,7 +85,7 @@ namespace server
 				response.ContentLength64 = (long)bytes.Length;
 				Stream outputStream = response.OutputStream;
 				outputStream.Write(bytes, 0, bytes.Length);
-				Thread.Sleep(400);
+				Thread.Sleep(1);
 				outputStream.Close();
 				this.listener.Stop();
 			}

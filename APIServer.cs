@@ -18,7 +18,7 @@ namespace server
 		{
 			try
 			{
-				Console.WriteLine("APIServer.cs has started.");
+				Console.WriteLine("[APIServer.cs] has started.");
 				new Thread(new ThreadStart(this.StartListen)).Start();
 			}
 			catch (Exception ex)
@@ -302,7 +302,7 @@ namespace server
 						}
 						if (rawUrl == "//api/sanitize/v1/isPure")
 						{
-							s = JsonConvert.SerializeObject(Sanitize.GetSanitize());
+							s = "{\"IsPure\":true}";
 						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -319,7 +319,7 @@ namespace server
 					for (; ; )
 					{
 						this.listener.Start();
-						Console.WriteLine("APIServer.cs is listening.");
+						Console.WriteLine("[APIServer.cs] is listening.");
 						HttpListenerContext context = this.listener.GetContext();
 						HttpListenerRequest request = context.Request;
 						HttpListenerResponse response = context.Response;
@@ -506,9 +506,9 @@ namespace server
 							s = BlankResponse;
 						}
 						if (Url == "storefronts/v1/allGiftDrops/2")
-                        {
+						{
 							s = BracketResponse;
-                        }
+						}
 						if (Url == "objectives/v1/myprogress")
 						{
 							s = JsonConvert.SerializeObject(new Objective2018());
@@ -546,7 +546,7 @@ namespace server
 							s = Activities.Charades.words();
 						}
 						if (Url == "gamesessions/v2/joinrandom")
-						{	
+						{
 							s = gamesesh.GameSessions.JoinRandom(text);
 						}
 						if (Url == "gamesessions/v2/create")
@@ -585,7 +585,7 @@ namespace server
 						{
 							s = BracketResponse; //JsonConvert.SerializeObject(c000099.m00000a(text));
 						}
-						if (Url.StartsWith("rooms/v2/saveData"))
+						if (Url.StartsWith("!rooms/v2/saveData"))
 						{
 							string text26 = "5GDNL91ZY43PXN2YJENTBL";
 							string path = c000004.m000007() + c000041.f000043.Room.Name;
@@ -623,9 +623,10 @@ namespace server
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
-						Thread.Sleep(100);
+						Thread.Sleep(1);
 						outputStream.Close();
 						this.listener.Stop();
+						
 					}
 				}
 			}

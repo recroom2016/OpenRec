@@ -12,10 +12,11 @@ namespace start
 		{
 			//sets up all the important files so openrec doesnt crash like lame vaultserver xD
 			Console.WriteLine("Setting up... (May take a minute to download everything.)");
-			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\App\\");
 			Directory.CreateDirectory("SaveData\\Profile\\");
+			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\Rooms\\");
+			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\Rooms\\Downloaded\\");
 			if (!(File.Exists("SaveData\\avatar.txt")))
 			{

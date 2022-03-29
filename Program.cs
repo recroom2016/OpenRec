@@ -205,24 +205,16 @@ namespace start
                 Console.Clear();
                 Console.WriteLine("Please type in the name of the room you would like to download: (Case sensitive)");
                 string roomname = Console.ReadLine();
-                Console.WriteLine("Now, please go to the link below and help us gather info about your room for you.");
-                Console.WriteLine("https://rooms.rec.net/rooms?name=" + roomname + "&include=297");
-                Console.WriteLine("Please find the string called ImageName and paste it below:");
-                string imagename = Console.ReadLine();
-                Console.WriteLine("Please find the string called UnitySceneId and paste it below:");
-                string roomsceneid = Console.ReadLine();
-                Console.WriteLine("Please find the string called DataBlob and paste it below:");
-                string datablob = Console.ReadLine();
-                CustomRooms.RoomDecode(roomname, roomsceneid, imagename, datablob);
+                string text = new WebClient().DownloadString("https://rooms.rec.net/rooms?name=" + roomname + "&include=297");
+                CustomRooms.RoomDecode(text);
+                Console.Clear();
+                Console.WriteLine("Success!");
                 goto Start;
-                
             }
             if (readline == "5")
             {
                 Console.Title = "OpenRec Version Select";
                 Console.WriteLine("Please select the version of RecRoom the server should host: (2016, 2017, 2018)");
-                Console.WriteLine("fuck you all");
-                //imagine if yall actually look in the code one day and just find a random note signed tucker at the bottom of it and then i go missing for a very long time otherwise known as forever
                 string readline2 = Console.ReadLine();
                 if (readline2 == "2016")
                 {

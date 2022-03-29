@@ -17,7 +17,8 @@ namespace vaultgamesesh
 			this.WebSock.AddWebSocketService<Late2018WebSock.NotificationWS>("/api/notification/v2");
 			this.WebSock.AddWebSocketService<Late2018WebSock.HubWS>("/hub/v1");
 			this.WebSock.Start();
-			Console.WriteLine("2018 WebSocket server started!");
+			Console.WriteLine("[LateWebSocket.cs] has started.");
+			Console.WriteLine("[LateWebSocket.cs] is listening.");
 		}
 
 		// Token: 0x04000047 RID: 71
