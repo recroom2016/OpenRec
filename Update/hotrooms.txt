@@ -4,7 +4,7 @@
         "Name": "Custom Room",
         "Description": "Custom Room",
         "CreatorPlayerId": 1,
-        "ImageName": "DefaultRoomImage.jpg",
+        "ImageName": "CustomRoom.png",
         "State": 0,
         "Accessibility": 1,
         "SupportsLevelVoting": false,
