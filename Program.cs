@@ -39,7 +39,7 @@ namespace start
                     bannedflag = true;
                 }
             }
-            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Custom Room Downloader" + Environment.NewLine + "5) Start Server");
+            Console.WriteLine("1) Changelog" + Environment.NewLine +"2) Change Settings" + Environment.NewLine + "3) Modify Profile" + Environment.NewLine + "4) Custom Room Downloader (Beta)" + Environment.NewLine + "5) Start Server");
             string readline = Console.ReadLine();
             if (readline == "1")
             {
@@ -205,7 +205,17 @@ namespace start
                 Console.Clear();
                 Console.WriteLine("Please type in the name of the room you would like to download: (Case sensitive)");
                 string roomname = Console.ReadLine();
-                string text = new WebClient().DownloadString("https://rooms.rec.net/rooms?name=" + roomname + "&include=297");
+                string text = "";
+                try
+                {
+                    text = new WebClient().DownloadString("https://rooms.rec.net/rooms?name=" + roomname + "&include=297");
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Failed to download room...");
+                    goto Start;
+                }
                 CustomRooms.RoomDecode(text);
                 Console.Clear();
                 Console.WriteLine("Success!");

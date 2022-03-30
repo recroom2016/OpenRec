@@ -88,7 +88,7 @@ namespace server
 						}
 						if (Url.StartsWith("players/v1/"))
 						{
-							s = getorcreate.GetOrCreate(CachedPlayerID);
+							s = BracketResponse;
 						}
 						if (Url == "avatar/v2")
 						{
@@ -124,10 +124,6 @@ namespace server
 						{
 							s = File.ReadAllText("SaveData\\avataritems.txt");
 						}
-						if (Url == "equipment/v1/getUnlocked")
-						{
-							s = File.ReadAllText("SaveData\\equipment.txt");
-						}
 						if (Url == "avatar/v2/gifts")
 						{
 							s = BracketResponse;
@@ -143,18 +139,6 @@ namespace server
 						if (Url == "activities/charades/v1/words")
 						{
 							s = Activities.Charades.words();
-						}
-						if (Url == "gamesessions/v2/joinrandom")
-						{
-							s = gamesesh.GameSessions.JoinRandom(text);
-						}
-						if (Url == "gamesessions/v2/create")
-						{
-							s = gamesesh.GameSessions.Create(text);
-						}
-						if (rawUrl == "//api/sanitize/v1/isPure")
-						{
-							s = JsonConvert.SerializeObject(Sanitize.GetSanitize());
 						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -433,7 +417,7 @@ namespace server
 						{
 							if (CachedVersionMonth == 09)
 							{
-								s = File.ReadAllText("SaveData\\storefronts2.txt");
+								s = BracketResponse;
 							}
 							else
 							{
@@ -614,16 +598,25 @@ namespace server
 						{
 							s = new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/hotrooms.txt");
 						}
-						if (Url.StartsWith("rooms/v4/details/29"))
+						if (Url.StartsWith("rooms/v2/instancedetails"))
+                        {
+							s = BracketResponse;
+						}
+						if (Url == "rooms/v4/details/29")
 						{
 							s = File.ReadAllText("SaveData\\Rooms\\Downloaded\\RoomDetails.json");
+							Thread.Sleep(100);
+						}
+						else if (Url.StartsWith("rooms/v4/details"))
+						{
+							s = JsonConvert.SerializeObject(c00005d.m000023(Convert.ToInt32(Url.Remove(0, 17))));
 						}
 						Console.WriteLine("API Response: " + s);
 						bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
-						Thread.Sleep(1);
+						Thread.Sleep(50);
 						outputStream.Close();
 						this.listener.Stop();
 						

@@ -1484,7 +1484,7 @@ namespace vaultgamesesh
 						RoomId = Convert.ToUInt64(File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomid.txt")),
 						Name = File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt"),
 						Description = "OpenRec Downloaded Custom Room",
-						CreatorPlayerId = APIServer.CachedPlayerID,
+						CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
 						ImageName = File.ReadAllText("SaveData\\Rooms\\Downloaded\\imagename.txt"),
 						State = 0,
 						Accessibility = 1,
@@ -1519,12 +1519,12 @@ namespace vaultgamesesh
 					{
 						new c00005d.c000063
 						{
-							Tag = "rro",
+							Tag = "custom",
 							Type = 2
 						},
 						new c00005d.c000063
 						{
-							Tag = "sport",
+							Tag = "",
 							Type = 0
 						}
 					}
