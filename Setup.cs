@@ -30,6 +30,10 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\avataritems.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avataritems.txt"));
 			}
+			if (!(File.Exists("SaveData\\avataritems2.txt")))
+			{
+				File.WriteAllText("SaveData\\avataritems2.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avataritems2.txt"));
+			}
 			if (!(File.Exists("SaveData\\equipment.txt")))
 			{
 				File.WriteAllText("SaveData\\equipment.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/equipment.txt"));

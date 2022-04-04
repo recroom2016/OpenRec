@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using server;
+using System.IO;
 
 namespace vaultgamesesh
 {
@@ -23,7 +24,7 @@ namespace vaultgamesesh
 			}
 			return new c000020.c000022
 			{
-				PlayerId = APIServer.CachedPlayerID,
+				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
 				IsOnline = true,
 				PlayerType = 2,
 				GameSession = gameSession

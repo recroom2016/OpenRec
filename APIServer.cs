@@ -30,7 +30,7 @@ namespace server
 		{
 			try
 			{
-				//2 different servers for 2 different stages of the game, the apis change so much idk anymore
+				//2 different servers for 3 different stages of the game, the apis change so much idk anymore
 				this.listener.Prefixes.Add("http://localhost:" + start.Program.version + "/");
 				if (start.Program.version == "2016")
 				{
@@ -43,6 +43,8 @@ namespace server
 						HttpListenerResponse response = context.Response;
 						string rawUrl = request.RawUrl;
 						string Url = "";
+						bool image = false;
+						byte[] imagebyte = null;
 						if (rawUrl.StartsWith("/api/"))
 						{
 							Url = rawUrl.Remove(0, 5);
@@ -86,10 +88,15 @@ namespace server
 						{
 							s = Amplitude.amplitude();
 						}
-						if (Url.StartsWith("players/v1/"))
+						if (Url == "players/v1/getorcreate")
 						{
-							s = BracketResponse;
+							s = getorcreate.GetOrCreate((ulong.Parse(text.Remove(0, 32).Remove(7, text.Length - 39))));
 						}
+						if (Url.StartsWith("images/v1/profile/"))
+                        {
+							image = true;
+							imagebyte = File.ReadAllBytes("SaveData\\profileimage.png");
+                        }
 						if (Url == "avatar/v2")
 						{
 							s = File.ReadAllText("SaveData\\avatar.txt");
@@ -141,11 +148,19 @@ namespace server
 							s = Activities.Charades.words();
 						}
 						Console.WriteLine("API Response: " + s);
-						byte[] bytes = Encoding.UTF8.GetBytes(s);
+						byte[] bytes = null;
+						if (image == true)
+						{
+							bytes = imagebyte;
+						}
+						else
+						{
+							bytes = Encoding.UTF8.GetBytes(s);
+						}
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
-						Thread.Sleep(200);
+						Thread.Sleep(20);
 						outputStream.Close();
 						this.listener.Stop();
 					}
@@ -293,7 +308,7 @@ namespace server
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
-						Thread.Sleep(200);
+						Thread.Sleep(20);
 						outputStream.Close();
 						this.listener.Stop();
 					}
@@ -460,7 +475,14 @@ namespace server
 						}
 						if (Url == "avatar/v3/items")
 						{
-							s = File.ReadAllText("SaveData\\avataritems.txt");
+							if (CachedVersionMonth == 09)
+							{
+								s = File.ReadAllText("SaveData\\avataritems2.txt");
+							}
+							else
+							{
+								s = File.ReadAllText("SaveData\\avataritems.txt");
+							}
 						}
 						if (Url == "equipment/v1/getUnlocked")
 						{
@@ -569,22 +591,22 @@ namespace server
 						{
 							s = BracketResponse; //JsonConvert.SerializeObject(c000099.m00000a(text));
 						}
-						if (Url.StartsWith("!rooms/v2/saveData"))
+						if (Url.StartsWith("rooms/v2/saveData"))
 						{
-							string text26 = "5GDNL91ZY43PXN2YJENTBL";
-							string path = c000004.m000007() + c000041.f000043.Room.Name;
-							File.WriteAllBytes(string.Concat(new string[]
-							{
-							c000004.m000007(),
-							c000041.f000043.Room.Name,
-							"\\room\\",
-							text26,
-							".room"
-							}), m00005d(list.ToArray(), "data.dat"));
-							c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
-							c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
-							File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "\\RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
-							s = JsonConvert.SerializeObject(c00005d.m000035());
+							//string text26 = "5GDNL91ZY43PXN2YJENTBL";
+							//string path = c000004.m000007() + c000041.f000043.Room.Name;
+							//File.WriteAllBytes(string.Concat(new string[]
+							//{
+							//c000004.m000007(),
+							//c000041.f000043.Room.Name,
+							//"\\room\\",
+							//text26,
+							//".room"
+							//}), m00005d(list.ToArray(), "data.dat"));
+							//c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
+							//c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
+							//File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "\\RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
+							//s = JsonConvert.SerializeObject(c00005d.m000035());
 						}
 						if (Url == "presence/v3/heartbeat")
 						{
@@ -602,6 +624,10 @@ namespace server
                         {
 							s = BracketResponse;
 						}
+						if (Url.StartsWith("rooms/v2/search?value="))
+                        {
+							s = CustomRooms.RoomSearch(Url.Remove(0, 22));
+                        }
 						if (Url == "rooms/v4/details/29")
 						{
 							s = File.ReadAllText("SaveData\\Rooms\\Downloaded\\RoomDetails.json");
@@ -616,7 +642,7 @@ namespace server
 						response.ContentLength64 = (long)bytes.Length;
 						Stream outputStream = response.OutputStream;
 						outputStream.Write(bytes, 0, bytes.Length);
-						Thread.Sleep(50);
+						Thread.Sleep(20);
 						outputStream.Close();
 						this.listener.Stop();
 						
@@ -629,7 +655,7 @@ namespace server
 				File.WriteAllText("crashdump.txt", Convert.ToString(ex4));
 			}
 		}
-		public static ulong CachedPlayerID = 1;
+		public static ulong CachedPlayerID = 9999999;
 		public static ulong CachedPlatformID = 10000;
 		public static int CachedVersionMonth = 01;
 
@@ -639,159 +665,12 @@ namespace server
 		public static string PlayerEventsResponse = "{\"Created\":[],\"Responses\":[]}";
 		public static string VersionCheckResponse = "{\"ValidVersion\":true}";
 		public static string ModerationBlockDetails = "{\"ReportCategory\":0,\"Duration\":0,\"GameSessionId\":0,\"Message\":\"\"}";
-		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"OpenRec\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2043-12-27T21:27:38.1880399-08:00\"}";
+		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"DormRoomBucket\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2025-12-27T21:27:38.1880399-08:00\"}";
 		public static string ChallengesV1GetCurrent = "{\"Success\":true,\"Message\":\"OpenRec\"}";
 		public static string ChecklistV1Current = "[{\"Order\":0,\"Objective\":3000,\"Count\":3,\"CreditAmount\":100},{\"Order\":1,\"Objective\":3001,\"Count\":3,\"CreditAmount\":100},{\"Order\":2,\"Objective\":3002,\"Count\":3,\"CreditAmount\":100}]";
 
 		public static string Banned = "{\"ReportCategory\":1,\"Duration\":10000000000000000,\"GameSessionId\":100,\"Message\":\"You have been banned. You are probably a little kid and are now whining at your VR headset. If you aren't a little kid, DM me to appeal.\"}";
+
 		private HttpListener listener = new HttpListener(); 
-
-
-
-
-		private static byte[] m00005d(byte[] p0, string p1)
-		{
-			BinaryReader binaryReader = new BinaryReader(new MemoryStream(p0));
-			try
-			{
-				while (binaryReader.BaseStream.Position != binaryReader.BaseStream.Length)
-				{
-					bool flag = true;
-					bool flag2 = false;
-					APIServer.c0000a7 c0000a = new APIServer.c0000a7();
-					while (flag)
-					{
-						List<byte> list = new List<byte>();
-						bool flag3 = true;
-						while (flag3)
-						{
-							byte b = binaryReader.ReadByte();
-							if (binaryReader.BaseStream.Position != binaryReader.BaseStream.Length)
-							{
-								if (b == 13)
-								{
-									binaryReader.ReadByte();
-									flag3 = false;
-								}
-								else
-								{
-									list.Add(b);
-								}
-							}
-							else
-							{
-								flag3 = false;
-							}
-						}
-						string @string = Encoding.ASCII.GetString(list.ToArray());
-						Console.WriteLine(@string);
-						if (@string.StartsWith("Content-Length: "))
-						{
-							string s = @string.Remove(0, 16);
-							c0000a.m000017(int.Parse(s));
-						}
-						if (@string.Contains(p1))
-						{
-							Console.WriteLine("Has file");
-							flag2 = true;
-						}
-						if (binaryReader.BaseStream.Position != binaryReader.BaseStream.Length)
-						{
-							if (binaryReader.ReadByte() == 13)
-							{
-								flag = false;
-								binaryReader.ReadByte();
-							}
-							else
-							{
-								binaryReader.BaseStream.Position -= 1L;
-							}
-						}
-						else
-						{
-							flag = false;
-						}
-					}
-					if (flag2)
-					{
-						List<byte> list2 = new List<byte>();
-						for (; ; )
-						{
-							if (binaryReader.ReadByte() == 13)
-							{
-								if (binaryReader.ReadByte() == 10)
-								{
-									if (binaryReader.ReadByte() == 45)
-									{
-										break;
-									}
-									binaryReader.BaseStream.Position -= 3L;
-								}
-								else
-								{
-									binaryReader.BaseStream.Position -= 2L;
-								}
-							}
-							else
-							{
-								binaryReader.BaseStream.Position -= 1L;
-							}
-							byte item = binaryReader.ReadByte();
-							list2.Add(item);
-						}
-						return list2.ToArray();
-					}
-					if (binaryReader.BaseStream.Position != binaryReader.BaseStream.Length)
-					{
-						binaryReader.ReadBytes(c0000a.m000016());
-					}
-				}
-			}
-			finally
-			{
-				((IDisposable)binaryReader).Dispose();
-			}
-			return null;
-		}
-
-		public sealed class c0000a7
-		{
-			public string m000001()
-			{
-				return this.f00000a;
-			}
-			public void m000034(string p0)
-			{
-				this.f00000a = p0;
-			}
-			public string m000005()
-			{
-				return this.f000002;
-			}
-			public void m00003f(string p0)
-			{
-				this.f000002 = p0;
-			}
-			public int m000016()
-			{
-				return this.f000020;
-			}
-			public void m000017(int p0)
-			{
-				this.f000020 = p0;
-			}
-			public byte[] m000061()
-			{
-				return this.f000084;
-			}
-			public void m000062(byte[] p0)
-			{
-				this.f000084 = p0;
-			}
-			private string f00000a;
-			private string f000002;
-			private int f000020;
-			private byte[] f000084;
-		}
 	}
 }

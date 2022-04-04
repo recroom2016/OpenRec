@@ -274,7 +274,7 @@ namespace start
             }
         }
         public static string version = "";
-        public static string appversion = "0.6.0";
+        public static string appversion = "0.6.1";
         public static bool bannedflag = false;
     }
 

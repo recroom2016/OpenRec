@@ -59,7 +59,7 @@ namespace gamesesh
 		{
 			return JsonConvert.SerializeObject(new GameSessions.PlayerStatus
 			{
-				PlayerId = APIServer.CachedPlayerID,
+				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
 				IsOnline = true,
 				InScreenMode = false,
 				GameSession = Config.localGameSession
@@ -110,7 +110,7 @@ namespace gamesesh
 		{
 			return new GameSessions.PlayerStatus
 			{
-				PlayerId = APIServer.CachedPlayerID,
+				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
 				IsOnline = true,
 				InScreenMode = false,
 				GameSession = Config.localGameSession
