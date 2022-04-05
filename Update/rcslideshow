@@ -1,0 +1,42 @@
+{
+    "Images": [
+        {
+            "SavedImageId": 1,
+            "ImageName": "boxers.png",
+            "Username": "Velp",
+            "RoomName": "^Boxers"
+        },
+        {
+            "SavedImageId": 2,
+            "ImageName": "bwarksdiner.png",
+            "Username": "BWarks",
+            "RoomName": "^BWarksDiner"
+        },
+        {
+            "SavedImageId": 3,
+            "ImageName": "deathtrapdungeon.png",
+            "Username": "Greybeard",
+            "RoomName": "DeathtrapDungeon"
+        },
+        {
+            "SavedImageId": 4,
+            "ImageName": "falloutshelter.png",
+            "Username": "Shoto",
+            "RoomName": "^FalloutShelter"
+        },
+        {
+            "SavedImageId": 5,
+            "ImageName": "foremily.png",
+            "Username": "MoodyMarlo",
+            "RoomName": "^ForEmily"
+        },
+        {
+            "SavedImageId": 6,
+            "ImageName": "peptocopter.png",
+            "Username": "Pepto",
+            "RoomName": "^PeptoCopter"
+        }
+
+    ],
+    "ValidTill": "2024-06-09T19:06:44.927Z"
+}
