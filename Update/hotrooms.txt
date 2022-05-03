@@ -270,21 +270,6 @@
         "SupportsTeleportVR": true
     },
     {
-        "RoomId": 1,
-        "Name": "DormRoom",
-        "Description": "Your private room",
-        "CreatorPlayerId": 72963398,
-        "ImageName": "DefaultRoomImage.jpg",
-        "State": 0,
-        "Accessibility": 1,
-        "SupportsLevelVoting": false,
-        "IsAGRoom": true,
-        "CloningAllowed": false,
-        "SupportsScreens": true,
-        "SupportsWalkVR": true,
-        "SupportsTeleportVR": true
-    },
-    {
         "RoomId": 2,
         "Name": "RecCenter",
         "Description": "A social hub to meet and mingle with friends new and old.",
