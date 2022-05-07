@@ -37,7 +37,7 @@ namespace server
 					for (; ; )
 					{
 						this.listener.Start();
-						Console.WriteLine("APIServer.cs is listening.");
+						Console.WriteLine("[APIServer.cs] is listening.");
 						HttpListenerContext context = this.listener.GetContext();
 						HttpListenerRequest request = context.Request;
 						HttpListenerResponse response = context.Response;
@@ -63,7 +63,10 @@ namespace server
 						{
 							Console.WriteLine("API Requested (rawUrl): " + rawUrl);
 						}
-						Console.WriteLine("API Data: " + text);
+						if (!(Url == "images/v2/profile"))
+						{
+							Console.WriteLine("API Data: " + text);
+						}
 						if (Url.StartsWith("versioncheck"))
 						{
 							s = VersionCheckResponse;
@@ -73,9 +76,9 @@ namespace server
 							s = Config2.GetDebugConfig();
 						}
 						if (Url == "notification/v2")
-                        {
+						{
 							s = "[]";
-                        }
+						}
 						if (Url == "PlayerReporting/v1/moderationBlockDetails")
 						{
 							s = ModerationBlockDetails;
@@ -93,10 +96,10 @@ namespace server
 							s = getorcreate.GetOrCreate((ulong.Parse(text.Remove(0, 32).Remove(7, text.Length - 39))));
 						}
 						if (Url.StartsWith("images/v1/profile/"))
-                        {
+						{
 							image = true;
 							imagebyte = File.ReadAllBytes("SaveData\\profileimage.png");
-                        }
+						}
 						if (Url == "avatar/v2")
 						{
 							s = File.ReadAllText("SaveData\\avatar.txt");
@@ -147,6 +150,12 @@ namespace server
 						{
 							s = Activities.Charades.words();
 						}
+						if (Url == "images/v2/profile/") //disabled with a / at the end
+                        {
+							s = BracketResponse;
+							int NewLength = text.Length - 50;
+							File.WriteAllBytes("SaveData\\profileimage.png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(NewLength - 48, 48)));
+                        }
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = null;
 						if (image == true)
@@ -170,7 +179,7 @@ namespace server
 					for (; ; )
 					{
 						this.listener.Start();
-						Console.WriteLine("APIServer.cs is listening.");
+						Console.WriteLine("[APIServer.cs] is listening.");
 						HttpListenerContext context = this.listener.GetContext();
 						HttpListenerRequest request = context.Request;
 						HttpListenerResponse response = context.Response;
@@ -237,10 +246,18 @@ namespace server
 						{
 							s = getorcreate.GetOrCreate(CachedPlayerID);
 						}
+						if (Url == "players/v1/list")
+                        {
+							s = BracketResponse;
+                        }
 						if (Url == "avatar/v2")
 						{
 							s = File.ReadAllText("SaveData\\avatar.txt");
 						}
+						if (Url == "avatar/v2/saved")
+                        {
+							s = BracketResponse;
+                        }
 						if (Url == "avatar/v2/set")
 						{
 							//for later 2018 builds compatibility
@@ -302,6 +319,12 @@ namespace server
 						if (rawUrl == "//api/sanitize/v1/isPure")
 						{
 							s = "{\"IsPure\":true}";
+						}
+						if (Url == "images/v3/profile")
+                        {
+							s = BracketResponse;
+							int NewLength = text.Length - 50;
+							File.WriteAllBytes("SaveData\\profileimage.png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(NewLength - 48, 48)));
 						}
 						Console.WriteLine("API Response: " + s);
 						byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -447,6 +470,10 @@ namespace server
 						{
 							s = File.ReadAllText("SaveData\\avatar.txt");
 						}
+						if (Url == "avatar/v2/saved")
+						{
+							s = BracketResponse;
+						}
 						if (Url == "avatar/v2/set")
 						{
 							//for later 2018 builds compatibility
@@ -481,7 +508,7 @@ namespace server
 							}
 							else
 							{
-								s = File.ReadAllText("SaveData\\avataritems.txt");
+								s = File.ReadAllText("SaveData\\avataritems2.txt");
 							}
 						}
 						if (Url == "equipment/v1/getUnlocked")
@@ -589,7 +616,7 @@ namespace server
 						}
 						if (Url == "rooms/v1/clone")
 						{
-							s = BracketResponse; //JsonConvert.SerializeObject(c000099.m00000a(text));
+							s = JsonConvert.SerializeObject(c000099.m00000a(text));
 						}
 						if (Url.StartsWith("rooms/v2/saveData"))
 						{
@@ -610,6 +637,14 @@ namespace server
 						}
 						if (Url == "presence/v3/heartbeat")
 						{
+							if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
+							{
+								Console.ForegroundColor = ConsoleColor.Red;
+								Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
+								Console.ForegroundColor = ConsoleColor.Green;
+								start.Program.bannedflag = true;
+								Late2018WebSock.instance.Broadcast(ws.Notification.Reponse.createBannedResponse());
+							}
 							s = JsonConvert.SerializeObject(Notification2018.Reponse.createResponse(4, c000020.m000027()));
 						}
 						if (Url == "rooms/v1/featuredRoomGroup")
@@ -621,13 +656,13 @@ namespace server
 							s = new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/hotrooms.txt");
 						}
 						if (Url.StartsWith("rooms/v2/instancedetails"))
-                        {
+						{
 							s = BracketResponse;
 						}
 						if (Url.StartsWith("rooms/v2/search?value="))
-                        {
-							s = CustomRooms.RoomSearch(Url.Remove(0, 22));
-                        }
+						{
+							CustomRooms.RoomGet(Url.Remove(0, 22));
+						}
 						if (Url == "rooms/v4/details/29")
 						{
 							s = File.ReadAllText("SaveData\\Rooms\\Downloaded\\RoomDetails.json");
@@ -637,6 +672,10 @@ namespace server
 						{
 							s = JsonConvert.SerializeObject(c00005d.m000023(Convert.ToInt32(Url.Remove(0, 17))));
 						}
+						if (Url == "images/v1/slideshow")
+						{
+							s = new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/rcslideshow.txt");
+						}
 						Console.WriteLine("API Response: " + s);
 						bytes = Encoding.UTF8.GetBytes(s);
 						response.ContentLength64 = (long)bytes.Length;
@@ -645,7 +684,7 @@ namespace server
 						Thread.Sleep(20);
 						outputStream.Close();
 						this.listener.Stop();
-						
+
 					}
 				}
 			}
@@ -653,9 +692,11 @@ namespace server
 			{
 				Console.WriteLine(ex4);
 				File.WriteAllText("crashdump.txt", Convert.ToString(ex4));
+				this.listener.Close();
+				new APIServer();
 			}
 		}
-		public static ulong CachedPlayerID = 9999999;
+		public static ulong CachedPlayerID = ulong.Parse(File.ReadAllText("SaveData\\Profile\\userid.txt"));
 		public static ulong CachedPlatformID = 10000;
 		public static int CachedVersionMonth = 01;
 
@@ -663,6 +704,7 @@ namespace server
 		public static string BracketResponse = "[]";
 
 		public static string PlayerEventsResponse = "{\"Created\":[],\"Responses\":[]}";
+		public static string VersionCheckResponse2 = "{\"VersionStatus\":0}";
 		public static string VersionCheckResponse = "{\"ValidVersion\":true}";
 		public static string ModerationBlockDetails = "{\"ReportCategory\":0,\"Duration\":0,\"GameSessionId\":0,\"Message\":\"\"}";
 		public static string ImagesV2Named = "[{\"FriendlyImageName\":\"DormRoomBucket\",\"ImageName\":\"DormRoomBucket\",\"StartTime\":\"2021-12-27T21:27:38.1880175-08:00\",\"EndTime\":\"2025-12-27T21:27:38.1880399-08:00\"}";

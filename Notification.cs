@@ -41,64 +41,64 @@ namespace ws
 		}
 
 		// Token: 0x0200002B RID: 43
-		public enum ResponseResult
+		public enum ResponseResults
 		{
-			// Token: 0x04000090 RID: 144
 			RelationshipChanged = 1,
-			// Token: 0x04000091 RID: 145
 			MessageReceived,
-			// Token: 0x04000092 RID: 146
 			MessageDeleted,
-			// Token: 0x04000093 RID: 147
 			PresenceHeartbeatResponse,
-			// Token: 0x04000094 RID: 148
 			SubscriptionListUpdated = 9,
-			// Token: 0x04000095 RID: 149
 			SubscriptionUpdateProfile = 11,
-			// Token: 0x04000096 RID: 150
 			SubscriptionUpdatePresence,
-			// Token: 0x04000097 RID: 151
 			SubscriptionUpdateGameSession,
-			// Token: 0x04000098 RID: 152
-			SubscriptionUpdateRoom,
-			// Token: 0x04000099 RID: 153
+			SubscriptionUpdateRoom = 15,
 			ModerationQuitGame = 20,
-			// Token: 0x0400009A RID: 154
 			ModerationUpdateRequired,
-			// Token: 0x0400009B RID: 155
 			ModerationKick,
-			// Token: 0x0400009C RID: 156
 			ModerationKickAttemptFailed,
-			// Token: 0x0400009D RID: 157
+			ServerMaintenance = 25,
 			GiftPackageReceived = 30,
-			// Token: 0x0400009E RID: 158
 			ProfileJuniorStatusUpdate = 40,
-			// Token: 0x0400009F RID: 159
 			RelationshipsInvalid = 50,
-			// Token: 0x040000A0 RID: 160
-			StorefrontBalanceAdd = 60
+			StorefrontBalanceAdd = 60,
+			ConsumableMappingAdded = 70,
+			ConsumableMappingRemoved,
+			PlayerEventCreated = 80,
+			PlayerEventUpdated,
+			PlayerEventDeleted,
+			PlayerEventResponseChanged,
+			PlayerEventResponseDeleted,
+			PlayerEventStateChanged,
+			ChatMessageReceived = 90
 		}
 
-		// Token: 0x0200002C RID: 44
 		public class Reponse
 		{
-			// Token: 0x1700005F RID: 95
-			// (get) Token: 0x0600010D RID: 269
-			// (set) Token: 0x0600010E RID: 270
 			public int Id { get; set; }
 
-			// Token: 0x17000060 RID: 96
-			// (get) Token: 0x0600010F RID: 271
-			// (set) Token: 0x06000110 RID: 272
 			public object Msg { get; set; }
-
-			// Token: 0x06000111 RID: 273
+			
 			public static Notification.Reponse createResponse(int id, object msg)
 			{
 				return new Notification.Reponse
 				{
 					Id = id,
 					Msg = msg
+				};
+			}
+
+			public static Notification.Reponse createBannedResponse()
+			{
+				return new Notification.Reponse
+				{
+					Id = (int)ResponseResults.ModerationKick,
+					Msg = new api.ModerationBlockDetails()
+                    {
+						ReportCategory = 1,
+						Duration = int.MaxValue,
+						GameSessionId = 100L,
+						Message = "You have been banned. You are probably a little kid and are now whining at your VR headset. If you aren't a little kid, DM me to appeal."
+					}
 				};
 			}
 		}

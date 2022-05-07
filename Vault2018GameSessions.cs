@@ -53,7 +53,7 @@ namespace vaultgamesesh
 				}
 				else
 				{
-					c000041.f000043 = c00005d.f000050[File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt")];
+					c000041.f000043 = c00005d.f000050["DormRoom"];
 				}
 			}
 			int num = 0;
@@ -73,13 +73,20 @@ namespace vaultgamesesh
 			}
 			text += c000004.f000003;
 			bool @private = c00006c.Private;
-			if (@private)
+            if (@private)
+            {
+                text += string.Format("Pri{0}", server.APIServer.CachedPlayerID);
+            }
+			long gameseshid = 20181L;
+			if (start.Program.bannedflag == true)
 			{
-				text += string.Format("Pri{0}", server.APIServer.CachedPlayerID);
+				gameseshid = 100L;
+				text += "BANNED";
 			}
+			
 			c000041.f000013 = new c000041.c000044
 			{
-				GameSessionId = 20181L,
+				GameSessionId = gameseshid,
 				PhotonRegionId = "us",
 				PhotonRoomId = text,
 				Name = c000041.f000043.Room.Name,

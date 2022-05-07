@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using server;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace vaultgamesesh
 {
-	// Token: 0x02000004 RID: 4
+	// Token: 0x02000007 RID: 7
 	internal sealed class c000020
 	{
-		// Token: 0x0600000C RID: 12 RVA: 0x0000225C File Offset: 0x0000045C
+		// Token: 0x0600001A RID: 26 RVA: 0x00002B20 File Offset: 0x00000D20
 		public static c000020.c000022 m000027()
 		{
 			bool flag = c000041.f000013 == null;
 			bool flag2 = flag;
+			bool flag3 = flag2;
 			c000041.c000044 gameSession;
-			if (flag2)
+			if (flag3)
 			{
 				gameSession = c000041.m00002f();
 			}
@@ -31,18 +31,13 @@ namespace vaultgamesesh
 			};
 		}
 
-		// Token: 0x02000026 RID: 38
-		public enum enum021
-		{
-
-		}
-
-		// Token: 0x02000027 RID: 39
+	
+		// Token: 0x0200003C RID: 60
 		public sealed class c000022
 		{
-			// Token: 0x17000035 RID: 53
-			// (get) Token: 0x060000CE RID: 206 RVA: 0x0000B1F8 File Offset: 0x000093F8
-			// (set) Token: 0x060000CF RID: 207 RVA: 0x0000B210 File Offset: 0x00009410
+			// Token: 0x17000088 RID: 136
+			// (get) Token: 0x0600017E RID: 382 RVA: 0x0000A768 File Offset: 0x00008968
+			// (set) Token: 0x0600017F RID: 383 RVA: 0x0000A780 File Offset: 0x00008980
 			public ulong PlayerId
 			{
 				[CompilerGenerated]
@@ -57,9 +52,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000036 RID: 54
-			// (get) Token: 0x060000D0 RID: 208 RVA: 0x0000B21C File Offset: 0x0000941C
-			// (set) Token: 0x060000D1 RID: 209 RVA: 0x0000B234 File Offset: 0x00009434
+			// Token: 0x17000089 RID: 137
+			// (get) Token: 0x06000180 RID: 384 RVA: 0x0000A78C File Offset: 0x0000898C
+			// (set) Token: 0x06000181 RID: 385 RVA: 0x0000A7A4 File Offset: 0x000089A4
 			public bool IsOnline
 			{
 				[CompilerGenerated]
@@ -74,9 +69,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000037 RID: 55
-			// (get) Token: 0x060000D2 RID: 210 RVA: 0x0000B240 File Offset: 0x00009440
-			// (set) Token: 0x060000D3 RID: 211 RVA: 0x0000B258 File Offset: 0x00009458
+			// Token: 0x1700008A RID: 138
+			// (get) Token: 0x06000182 RID: 386 RVA: 0x0000A7B0 File Offset: 0x000089B0
+			// (set) Token: 0x06000183 RID: 387 RVA: 0x0000A7C8 File Offset: 0x000089C8
 			public int PlayerType
 			{
 				[CompilerGenerated]
@@ -91,9 +86,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000038 RID: 56
-			// (get) Token: 0x060000D4 RID: 212 RVA: 0x0000B264 File Offset: 0x00009464
-			// (set) Token: 0x060000D5 RID: 213 RVA: 0x0000B27C File Offset: 0x0000947C
+			// Token: 0x1700008B RID: 139
+			// (get) Token: 0x06000184 RID: 388 RVA: 0x0000A7D4 File Offset: 0x000089D4
+			// (set) Token: 0x06000185 RID: 389 RVA: 0x0000A7EC File Offset: 0x000089EC
 			public c000041.c000044 GameSession
 			{
 				[CompilerGenerated]
@@ -108,16 +103,16 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x04000071 RID: 113
+			// Token: 0x040000C4 RID: 196
 			private ulong f000001;
 
-			// Token: 0x04000072 RID: 114
+			// Token: 0x040000C5 RID: 197
 			private bool f000037;
 
-			// Token: 0x04000073 RID: 115
+			// Token: 0x040000C6 RID: 198
 			private int f000020;
 
-			// Token: 0x04000074 RID: 116
+			// Token: 0x040000C7 RID: 199
 			private c000041.c000044 f000038;
 		}
 	}

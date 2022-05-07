@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using server;
 using Newtonsoft.Json;
+using server;
 
 namespace vaultgamesesh
 {
-	// Token: 0x02000006 RID: 6
+	// Token: 0x02000008 RID: 8
 	internal sealed class c00005d
 	{
-		// Token: 0x06000011 RID: 17 RVA: 0x0000264C File Offset: 0x0000084C
+		// Token: 0x0600001C RID: 28 RVA: 0x00002B94 File Offset: 0x00000D94
 		public static Dictionary<string, c00005d.c000060> m00003a()
 		{
 			Dictionary<string, c00005d.c000060> dictionary = new Dictionary<string, c00005d.c000060>();
@@ -22,6 +22,8 @@ namespace vaultgamesesh
 			}
 			return dictionary;
 		}
+
+		// Token: 0x0600001D RID: 29 RVA: 0x00002BFC File Offset: 0x00000DFC
 		public static List<c00005d.c000061> m000035()
 		{
 			List<c00005d.c000061> list = new List<c00005d.c000061>();
@@ -31,7 +33,8 @@ namespace vaultgamesesh
 			}
 			return list;
 		}
-		// Token: 0x06000012 RID: 18 RVA: 0x00002688 File Offset: 0x00000888
+
+		// Token: 0x0600001E RID: 30 RVA: 0x00002C6C File Offset: 0x00000E6C
 		public static Dictionary<string, c00005d.c000060> m00003b()
 		{
 			Dictionary<string, c00005d.c000060> result;
@@ -52,13 +55,14 @@ namespace vaultgamesesh
 			return result;
 		}
 
-		// Token: 0x06000013 RID: 19 RVA: 0x000026E8 File Offset: 0x000008E8
+		// Token: 0x0600001F RID: 31 RVA: 0x00002CC4 File Offset: 0x00000EC4
 		public static c00005d.c000060 m000023(int p0)
 		{
 			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000050)
 			{
 				bool flag = keyValuePair.Value.Room.RoomId == (ulong)((long)p0);
-				if (flag)
+				bool flag2 = flag;
+				if (flag2)
 				{
 					return keyValuePair.Value;
 				}
@@ -66,7 +70,7 @@ namespace vaultgamesesh
 			return c00005d.f000050["DormRoom"];
 		}
 
-		// Token: 0x0400000D RID: 13
+		// Token: 0x04000008 RID: 8
 		public static Dictionary<string, c00005d.c000060> f000024 = new Dictionary<string, c00005d.c000060>
 		{
 			{
@@ -326,7 +330,7 @@ namespace vaultgamesesh
 			}
 		};
 
-		// Token: 0x0400000E RID: 14
+		// Token: 0x04000009 RID: 9
 		public static Dictionary<string, c00005d.c000060> f000050 = new Dictionary<string, c00005d.c000060>
 		{
 			{
@@ -1528,23 +1532,22 @@ namespace vaultgamesesh
 							Type = 0
 						}
 					}
-
 				}
 			}
 		};
 
-		// Token: 0x0200002B RID: 43
+		// Token: 0x0200003D RID: 61
 		public enum enum05e
 		{
 
 		}
 
-		// Token: 0x0200002C RID: 44
+		// Token: 0x0200003E RID: 62
 		public sealed class c00005f
 		{
-			// Token: 0x1700004A RID: 74
-			// (get) Token: 0x060000FB RID: 251 RVA: 0x0000B4F0 File Offset: 0x000096F0
-			// (set) Token: 0x060000FC RID: 252 RVA: 0x0000B508 File Offset: 0x00009708
+			// Token: 0x1700008C RID: 140
+			// (get) Token: 0x06000187 RID: 391 RVA: 0x0000A800 File Offset: 0x00008A00
+			// (set) Token: 0x06000188 RID: 392 RVA: 0x0000A818 File Offset: 0x00008A18
 			public long RoomSceneId
 			{
 				[CompilerGenerated]
@@ -1559,9 +1562,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700004B RID: 75
-			// (get) Token: 0x060000FD RID: 253 RVA: 0x0000B514 File Offset: 0x00009714
-			// (set) Token: 0x060000FE RID: 254 RVA: 0x0000B52C File Offset: 0x0000972C
+			// Token: 0x1700008D RID: 141
+			// (get) Token: 0x06000189 RID: 393 RVA: 0x0000A824 File Offset: 0x00008A24
+			// (set) Token: 0x0600018A RID: 394 RVA: 0x0000A83C File Offset: 0x00008A3C
 			public ulong RoomId
 			{
 				[CompilerGenerated]
@@ -1576,9 +1579,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700004C RID: 76
-			// (get) Token: 0x060000FF RID: 255 RVA: 0x0000B538 File Offset: 0x00009738
-			// (set) Token: 0x06000100 RID: 256 RVA: 0x0000B550 File Offset: 0x00009750
+			// Token: 0x1700008E RID: 142
+			// (get) Token: 0x0600018B RID: 395 RVA: 0x0000A848 File Offset: 0x00008A48
+			// (set) Token: 0x0600018C RID: 396 RVA: 0x0000A860 File Offset: 0x00008A60
 			public string RoomSceneLocationId
 			{
 				[CompilerGenerated]
@@ -1593,9 +1596,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700004D RID: 77
-			// (get) Token: 0x06000101 RID: 257 RVA: 0x0000B55C File Offset: 0x0000975C
-			// (set) Token: 0x06000102 RID: 258 RVA: 0x0000B574 File Offset: 0x00009774
+			// Token: 0x1700008F RID: 143
+			// (get) Token: 0x0600018D RID: 397 RVA: 0x0000A86C File Offset: 0x00008A6C
+			// (set) Token: 0x0600018E RID: 398 RVA: 0x0000A884 File Offset: 0x00008A84
 			public string Name
 			{
 				[CompilerGenerated]
@@ -1610,9 +1613,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700004E RID: 78
-			// (get) Token: 0x06000103 RID: 259 RVA: 0x0000B580 File Offset: 0x00009780
-			// (set) Token: 0x06000104 RID: 260 RVA: 0x0000B598 File Offset: 0x00009798
+			// Token: 0x17000090 RID: 144
+			// (get) Token: 0x0600018F RID: 399 RVA: 0x0000A890 File Offset: 0x00008A90
+			// (set) Token: 0x06000190 RID: 400 RVA: 0x0000A8A8 File Offset: 0x00008AA8
 			public bool IsSandbox
 			{
 				[CompilerGenerated]
@@ -1627,9 +1630,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700004F RID: 79
-			// (get) Token: 0x06000105 RID: 261 RVA: 0x0000B5A4 File Offset: 0x000097A4
-			// (set) Token: 0x06000106 RID: 262 RVA: 0x0000B5BC File Offset: 0x000097BC
+			// Token: 0x17000091 RID: 145
+			// (get) Token: 0x06000191 RID: 401 RVA: 0x0000A8B4 File Offset: 0x00008AB4
+			// (set) Token: 0x06000192 RID: 402 RVA: 0x0000A8CC File Offset: 0x00008ACC
 			public string DataBlobName
 			{
 				[CompilerGenerated]
@@ -1644,9 +1647,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000050 RID: 80
-			// (get) Token: 0x06000107 RID: 263 RVA: 0x0000B5C8 File Offset: 0x000097C8
-			// (set) Token: 0x06000108 RID: 264 RVA: 0x0000B5E0 File Offset: 0x000097E0
+			// Token: 0x17000092 RID: 146
+			// (get) Token: 0x06000193 RID: 403 RVA: 0x0000A8D8 File Offset: 0x00008AD8
+			// (set) Token: 0x06000194 RID: 404 RVA: 0x0000A8F0 File Offset: 0x00008AF0
 			public int MaxPlayers
 			{
 				[CompilerGenerated]
@@ -1661,9 +1664,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000051 RID: 81
-			// (get) Token: 0x06000109 RID: 265 RVA: 0x0000B5EC File Offset: 0x000097EC
-			// (set) Token: 0x0600010A RID: 266 RVA: 0x0000B604 File Offset: 0x00009804
+			// Token: 0x17000093 RID: 147
+			// (get) Token: 0x06000195 RID: 405 RVA: 0x0000A8FC File Offset: 0x00008AFC
+			// (set) Token: 0x06000196 RID: 406 RVA: 0x0000A914 File Offset: 0x00008B14
 			public bool CanMatchmakeInto
 			{
 				[CompilerGenerated]
@@ -1678,9 +1681,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000052 RID: 82
-			// (get) Token: 0x0600010B RID: 267 RVA: 0x0000B610 File Offset: 0x00009810
-			// (set) Token: 0x0600010C RID: 268 RVA: 0x0000B628 File Offset: 0x00009828
+			// Token: 0x17000094 RID: 148
+			// (get) Token: 0x06000197 RID: 407 RVA: 0x0000A920 File Offset: 0x00008B20
+			// (set) Token: 0x06000198 RID: 408 RVA: 0x0000A938 File Offset: 0x00008B38
 			public DateTime DataModifiedAt
 			{
 				[CompilerGenerated]
@@ -1695,70 +1698,70 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000053 RID: 83
-			// (get) Token: 0x0600010D RID: 269 RVA: 0x0000B632 File Offset: 0x00009832
-			// (set) Token: 0x0600010E RID: 270 RVA: 0x0000B63A File Offset: 0x0000983A
+			// Token: 0x17000095 RID: 149
+			// (get) Token: 0x06000199 RID: 409 RVA: 0x0000A942 File Offset: 0x00008B42
+			// (set) Token: 0x0600019A RID: 410 RVA: 0x0000A94A File Offset: 0x00008B4A
 			public string ReplicationId { get; set; }
 
-			// Token: 0x17000054 RID: 84
-			// (get) Token: 0x0600010F RID: 271 RVA: 0x0000B643 File Offset: 0x00009843
-			// (set) Token: 0x06000110 RID: 272 RVA: 0x0000B64B File Offset: 0x0000984B
+			// Token: 0x17000096 RID: 150
+			// (get) Token: 0x0600019B RID: 411 RVA: 0x0000A953 File Offset: 0x00008B53
+			// (set) Token: 0x0600019C RID: 412 RVA: 0x0000A95B File Offset: 0x00008B5B
 			public bool UseLevelBasedMatchmaking { get; set; }
 
-			// Token: 0x17000055 RID: 85
-			// (get) Token: 0x06000111 RID: 273 RVA: 0x0000B654 File Offset: 0x00009854
-			// (set) Token: 0x06000112 RID: 274 RVA: 0x0000B65C File Offset: 0x0000985C
+			// Token: 0x17000097 RID: 151
+			// (get) Token: 0x0600019D RID: 413 RVA: 0x0000A964 File Offset: 0x00008B64
+			// (set) Token: 0x0600019E RID: 414 RVA: 0x0000A96C File Offset: 0x00008B6C
 			public bool UseAgeBasedMatchmaking { get; set; }
 
-			// Token: 0x17000056 RID: 86
-			// (get) Token: 0x06000113 RID: 275 RVA: 0x0000B665 File Offset: 0x00009865
-			// (set) Token: 0x06000114 RID: 276 RVA: 0x0000B66D File Offset: 0x0000986D
+			// Token: 0x17000098 RID: 152
+			// (get) Token: 0x0600019F RID: 415 RVA: 0x0000A975 File Offset: 0x00008B75
+			// (set) Token: 0x060001A0 RID: 416 RVA: 0x0000A97D File Offset: 0x00008B7D
 			public bool UseRecRoyaleMatchmaking { get; set; }
 
-			// Token: 0x17000057 RID: 87
-			// (get) Token: 0x06000115 RID: 277 RVA: 0x0000B676 File Offset: 0x00009876
-			// (set) Token: 0x06000116 RID: 278 RVA: 0x0000B67E File Offset: 0x0000987E
+			// Token: 0x17000099 RID: 153
+			// (get) Token: 0x060001A1 RID: 417 RVA: 0x0000A986 File Offset: 0x00008B86
+			// (set) Token: 0x060001A2 RID: 418 RVA: 0x0000A98E File Offset: 0x00008B8E
 			public int ReleaseStatus { get; set; }
 
-			// Token: 0x17000058 RID: 88
-			// (get) Token: 0x06000117 RID: 279 RVA: 0x0000B687 File Offset: 0x00009887
-			// (set) Token: 0x06000118 RID: 280 RVA: 0x0000B68F File Offset: 0x0000988F
+			// Token: 0x1700009A RID: 154
+			// (get) Token: 0x060001A3 RID: 419 RVA: 0x0000A997 File Offset: 0x00008B97
+			// (set) Token: 0x060001A4 RID: 420 RVA: 0x0000A99F File Offset: 0x00008B9F
 			public bool SupportsJoinInProgress { get; set; }
 
-			// Token: 0x0400008F RID: 143
+			// Token: 0x040000CF RID: 207
 			private long f00002c;
 
-			// Token: 0x04000090 RID: 144
+			// Token: 0x040000D0 RID: 208
 			private ulong f000023;
 
-			// Token: 0x04000091 RID: 145
+			// Token: 0x040000D1 RID: 209
 			private string f000003;
 
-			// Token: 0x04000092 RID: 146
+			// Token: 0x040000D2 RID: 210
 			private string f000035;
 
-			// Token: 0x04000093 RID: 147
+			// Token: 0x040000D3 RID: 211
 			private bool f000073;
 
-			// Token: 0x04000094 RID: 148
+			// Token: 0x040000D4 RID: 212
 			private string f00000e;
 
-			// Token: 0x04000095 RID: 149
+			// Token: 0x040000D5 RID: 213
 			private int f000007;
 
-			// Token: 0x04000096 RID: 150
+			// Token: 0x040000D6 RID: 214
 			private bool f000017;
 
-			// Token: 0x04000097 RID: 151
+			// Token: 0x040000D7 RID: 215
 			private DateTime f000074;
 		}
 
-		// Token: 0x0200002D RID: 45
+		// Token: 0x0200003F RID: 63
 		public sealed class c000060
 		{
-			// Token: 0x17000059 RID: 89
-			// (get) Token: 0x0600011A RID: 282 RVA: 0x0000B6A4 File Offset: 0x000098A4
-			// (set) Token: 0x0600011B RID: 283 RVA: 0x0000B6BC File Offset: 0x000098BC
+			// Token: 0x1700009B RID: 155
+			// (get) Token: 0x060001A6 RID: 422 RVA: 0x0000A9B4 File Offset: 0x00008BB4
+			// (set) Token: 0x060001A7 RID: 423 RVA: 0x0000A9CC File Offset: 0x00008BCC
 			public c00005d.c000061 Room
 			{
 				[CompilerGenerated]
@@ -1773,9 +1776,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700005A RID: 90
-			// (get) Token: 0x0600011C RID: 284 RVA: 0x0000B6C8 File Offset: 0x000098C8
-			// (set) Token: 0x0600011D RID: 285 RVA: 0x0000B6E0 File Offset: 0x000098E0
+			// Token: 0x1700009C RID: 156
+			// (get) Token: 0x060001A8 RID: 424 RVA: 0x0000A9D8 File Offset: 0x00008BD8
+			// (set) Token: 0x060001A9 RID: 425 RVA: 0x0000A9F0 File Offset: 0x00008BF0
 			public List<c00005d.c00005f> Scenes
 			{
 				[CompilerGenerated]
@@ -1790,9 +1793,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700005B RID: 91
-			// (get) Token: 0x0600011E RID: 286 RVA: 0x0000B6EC File Offset: 0x000098EC
-			// (set) Token: 0x0600011F RID: 287 RVA: 0x0000B704 File Offset: 0x00009904
+			// Token: 0x1700009D RID: 157
+			// (get) Token: 0x060001AA RID: 426 RVA: 0x0000A9FC File Offset: 0x00008BFC
+			// (set) Token: 0x060001AB RID: 427 RVA: 0x0000AA14 File Offset: 0x00008C14
 			public List<int> CoOwners
 			{
 				[CompilerGenerated]
@@ -1807,9 +1810,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700005C RID: 92
-			// (get) Token: 0x06000120 RID: 288 RVA: 0x0000B710 File Offset: 0x00009910
-			// (set) Token: 0x06000121 RID: 289 RVA: 0x0000B728 File Offset: 0x00009928
+			// Token: 0x1700009E RID: 158
+			// (get) Token: 0x060001AC RID: 428 RVA: 0x0000AA20 File Offset: 0x00008C20
+			// (set) Token: 0x060001AD RID: 429 RVA: 0x0000AA38 File Offset: 0x00008C38
 			public List<int> InvitedCoOwners
 			{
 				[CompilerGenerated]
@@ -1824,9 +1827,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700005D RID: 93
-			// (get) Token: 0x06000122 RID: 290 RVA: 0x0000B734 File Offset: 0x00009934
-			// (set) Token: 0x06000123 RID: 291 RVA: 0x0000B74C File Offset: 0x0000994C
+			// Token: 0x1700009F RID: 159
+			// (get) Token: 0x060001AE RID: 430 RVA: 0x0000AA44 File Offset: 0x00008C44
+			// (set) Token: 0x060001AF RID: 431 RVA: 0x0000AA5C File Offset: 0x00008C5C
 			public List<int> Hosts
 			{
 				[CompilerGenerated]
@@ -1841,9 +1844,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700005E RID: 94
-			// (get) Token: 0x06000124 RID: 292 RVA: 0x0000B758 File Offset: 0x00009958
-			// (set) Token: 0x06000125 RID: 293 RVA: 0x0000B770 File Offset: 0x00009970
+			// Token: 0x170000A0 RID: 160
+			// (get) Token: 0x060001B0 RID: 432 RVA: 0x0000AA68 File Offset: 0x00008C68
+			// (set) Token: 0x060001B1 RID: 433 RVA: 0x0000AA80 File Offset: 0x00008C80
 			public List<int> InvitedHosts
 			{
 				[CompilerGenerated]
@@ -1858,9 +1861,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700005F RID: 95
-			// (get) Token: 0x06000126 RID: 294 RVA: 0x0000B77C File Offset: 0x0000997C
-			// (set) Token: 0x06000127 RID: 295 RVA: 0x0000B794 File Offset: 0x00009994
+			// Token: 0x170000A1 RID: 161
+			// (get) Token: 0x060001B2 RID: 434 RVA: 0x0000AA8C File Offset: 0x00008C8C
+			// (set) Token: 0x060001B3 RID: 435 RVA: 0x0000AAA4 File Offset: 0x00008CA4
 			public int CheerCount
 			{
 				[CompilerGenerated]
@@ -1875,9 +1878,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000060 RID: 96
-			// (get) Token: 0x06000128 RID: 296 RVA: 0x0000B7A0 File Offset: 0x000099A0
-			// (set) Token: 0x06000129 RID: 297 RVA: 0x0000B7B8 File Offset: 0x000099B8
+			// Token: 0x170000A2 RID: 162
+			// (get) Token: 0x060001B4 RID: 436 RVA: 0x0000AAB0 File Offset: 0x00008CB0
+			// (set) Token: 0x060001B5 RID: 437 RVA: 0x0000AAC8 File Offset: 0x00008CC8
 			public int FavoriteCount
 			{
 				[CompilerGenerated]
@@ -1892,9 +1895,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000061 RID: 97
-			// (get) Token: 0x0600012A RID: 298 RVA: 0x0000B7C4 File Offset: 0x000099C4
-			// (set) Token: 0x0600012B RID: 299 RVA: 0x0000B7DC File Offset: 0x000099DC
+			// Token: 0x170000A3 RID: 163
+			// (get) Token: 0x060001B6 RID: 438 RVA: 0x0000AAD4 File Offset: 0x00008CD4
+			// (set) Token: 0x060001B7 RID: 439 RVA: 0x0000AAEC File Offset: 0x00008CEC
 			public int VisitCount
 			{
 				[CompilerGenerated]
@@ -1909,9 +1912,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000062 RID: 98
-			// (get) Token: 0x0600012C RID: 300 RVA: 0x0000B7E8 File Offset: 0x000099E8
-			// (set) Token: 0x0600012D RID: 301 RVA: 0x0000B800 File Offset: 0x00009A00
+			// Token: 0x170000A4 RID: 164
+			// (get) Token: 0x060001B8 RID: 440 RVA: 0x0000AAF8 File Offset: 0x00008CF8
+			// (set) Token: 0x060001B9 RID: 441 RVA: 0x0000AB10 File Offset: 0x00008D10
 			public List<c00005d.c000063> Tags
 			{
 				[CompilerGenerated]
@@ -1926,37 +1929,37 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x04000098 RID: 152
+			// Token: 0x040000D8 RID: 216
 			private c00005d.c000061 f00002d;
 
-			// Token: 0x04000099 RID: 153
+			// Token: 0x040000D9 RID: 217
 			private List<c00005d.c00005f> f000031;
 
-			// Token: 0x0400009A RID: 154
+			// Token: 0x040000DA RID: 218
 			private List<int> f000034;
 
-			// Token: 0x0400009B RID: 155
+			// Token: 0x040000DB RID: 219
 			private List<int> f00002a;
 
-			// Token: 0x0400009C RID: 156
+			// Token: 0x040000DC RID: 220
 			private int f000005;
 
-			// Token: 0x0400009D RID: 157
+			// Token: 0x040000DD RID: 221
 			private int f000006;
 
-			// Token: 0x0400009E RID: 158
+			// Token: 0x040000DE RID: 222
 			private int f000007;
 
-			// Token: 0x0400009F RID: 159
+			// Token: 0x040000DF RID: 223
 			private List<c00005d.c000063> f000075;
 		}
 
-		// Token: 0x0200002E RID: 46
+		// Token: 0x02000040 RID: 64
 		public sealed class c000061
 		{
-			// Token: 0x17000063 RID: 99
-			// (get) Token: 0x0600012F RID: 303 RVA: 0x0000B814 File Offset: 0x00009A14
-			// (set) Token: 0x06000130 RID: 304 RVA: 0x0000B82C File Offset: 0x00009A2C
+			// Token: 0x170000A5 RID: 165
+			// (get) Token: 0x060001BB RID: 443 RVA: 0x0000AB24 File Offset: 0x00008D24
+			// (set) Token: 0x060001BC RID: 444 RVA: 0x0000AB3C File Offset: 0x00008D3C
 			public ulong RoomId
 			{
 				[CompilerGenerated]
@@ -1971,9 +1974,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000064 RID: 100
-			// (get) Token: 0x06000131 RID: 305 RVA: 0x0000B838 File Offset: 0x00009A38
-			// (set) Token: 0x06000132 RID: 306 RVA: 0x0000B850 File Offset: 0x00009A50
+			// Token: 0x170000A6 RID: 166
+			// (get) Token: 0x060001BD RID: 445 RVA: 0x0000AB48 File Offset: 0x00008D48
+			// (set) Token: 0x060001BE RID: 446 RVA: 0x0000AB60 File Offset: 0x00008D60
 			public string Name
 			{
 				[CompilerGenerated]
@@ -1988,9 +1991,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000065 RID: 101
-			// (get) Token: 0x06000133 RID: 307 RVA: 0x0000B85C File Offset: 0x00009A5C
-			// (set) Token: 0x06000134 RID: 308 RVA: 0x0000B874 File Offset: 0x00009A74
+			// Token: 0x170000A7 RID: 167
+			// (get) Token: 0x060001BF RID: 447 RVA: 0x0000AB6C File Offset: 0x00008D6C
+			// (set) Token: 0x060001C0 RID: 448 RVA: 0x0000AB84 File Offset: 0x00008D84
 			public string Description
 			{
 				[CompilerGenerated]
@@ -2005,9 +2008,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000066 RID: 102
-			// (get) Token: 0x06000135 RID: 309 RVA: 0x0000B880 File Offset: 0x00009A80
-			// (set) Token: 0x06000136 RID: 310 RVA: 0x0000B898 File Offset: 0x00009A98
+			// Token: 0x170000A8 RID: 168
+			// (get) Token: 0x060001C1 RID: 449 RVA: 0x0000AB90 File Offset: 0x00008D90
+			// (set) Token: 0x060001C2 RID: 450 RVA: 0x0000ABA8 File Offset: 0x00008DA8
 			public ulong CreatorPlayerId
 			{
 				[CompilerGenerated]
@@ -2022,9 +2025,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000067 RID: 103
-			// (get) Token: 0x06000137 RID: 311 RVA: 0x0000B8A4 File Offset: 0x00009AA4
-			// (set) Token: 0x06000138 RID: 312 RVA: 0x0000B8BC File Offset: 0x00009ABC
+			// Token: 0x170000A9 RID: 169
+			// (get) Token: 0x060001C3 RID: 451 RVA: 0x0000ABB4 File Offset: 0x00008DB4
+			// (set) Token: 0x060001C4 RID: 452 RVA: 0x0000ABCC File Offset: 0x00008DCC
 			public string ImageName
 			{
 				[CompilerGenerated]
@@ -2039,9 +2042,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000068 RID: 104
-			// (get) Token: 0x06000139 RID: 313 RVA: 0x0000B8C8 File Offset: 0x00009AC8
-			// (set) Token: 0x0600013A RID: 314 RVA: 0x0000B8E0 File Offset: 0x00009AE0
+			// Token: 0x170000AA RID: 170
+			// (get) Token: 0x060001C5 RID: 453 RVA: 0x0000ABD8 File Offset: 0x00008DD8
+			// (set) Token: 0x060001C6 RID: 454 RVA: 0x0000ABF0 File Offset: 0x00008DF0
 			public int State
 			{
 				[CompilerGenerated]
@@ -2056,9 +2059,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000069 RID: 105
-			// (get) Token: 0x0600013B RID: 315 RVA: 0x0000B8EC File Offset: 0x00009AEC
-			// (set) Token: 0x0600013C RID: 316 RVA: 0x0000B904 File Offset: 0x00009B04
+			// Token: 0x170000AB RID: 171
+			// (get) Token: 0x060001C7 RID: 455 RVA: 0x0000ABFC File Offset: 0x00008DFC
+			// (set) Token: 0x060001C8 RID: 456 RVA: 0x0000AC14 File Offset: 0x00008E14
 			public int Accessibility
 			{
 				[CompilerGenerated]
@@ -2073,9 +2076,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700006A RID: 106
-			// (get) Token: 0x0600013D RID: 317 RVA: 0x0000B910 File Offset: 0x00009B10
-			// (set) Token: 0x0600013E RID: 318 RVA: 0x0000B928 File Offset: 0x00009B28
+			// Token: 0x170000AC RID: 172
+			// (get) Token: 0x060001C9 RID: 457 RVA: 0x0000AC20 File Offset: 0x00008E20
+			// (set) Token: 0x060001CA RID: 458 RVA: 0x0000AC38 File Offset: 0x00008E38
 			public bool SupportsLevelVoting
 			{
 				[CompilerGenerated]
@@ -2090,9 +2093,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700006B RID: 107
-			// (get) Token: 0x0600013F RID: 319 RVA: 0x0000B934 File Offset: 0x00009B34
-			// (set) Token: 0x06000140 RID: 320 RVA: 0x0000B94C File Offset: 0x00009B4C
+			// Token: 0x170000AD RID: 173
+			// (get) Token: 0x060001CB RID: 459 RVA: 0x0000AC44 File Offset: 0x00008E44
+			// (set) Token: 0x060001CC RID: 460 RVA: 0x0000AC5C File Offset: 0x00008E5C
 			public bool IsAGRoom
 			{
 				[CompilerGenerated]
@@ -2107,9 +2110,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700006C RID: 108
-			// (get) Token: 0x06000141 RID: 321 RVA: 0x0000B958 File Offset: 0x00009B58
-			// (set) Token: 0x06000142 RID: 322 RVA: 0x0000B970 File Offset: 0x00009B70
+			// Token: 0x170000AE RID: 174
+			// (get) Token: 0x060001CD RID: 461 RVA: 0x0000AC68 File Offset: 0x00008E68
+			// (set) Token: 0x060001CE RID: 462 RVA: 0x0000AC80 File Offset: 0x00008E80
 			public bool CloningAllowed
 			{
 				[CompilerGenerated]
@@ -2124,9 +2127,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700006D RID: 109
-			// (get) Token: 0x06000143 RID: 323 RVA: 0x0000B97C File Offset: 0x00009B7C
-			// (set) Token: 0x06000144 RID: 324 RVA: 0x0000B994 File Offset: 0x00009B94
+			// Token: 0x170000AF RID: 175
+			// (get) Token: 0x060001CF RID: 463 RVA: 0x0000AC8C File Offset: 0x00008E8C
+			// (set) Token: 0x060001D0 RID: 464 RVA: 0x0000ACA4 File Offset: 0x00008EA4
 			public bool SupportsScreens
 			{
 				[CompilerGenerated]
@@ -2141,9 +2144,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700006E RID: 110
-			// (get) Token: 0x06000145 RID: 325 RVA: 0x0000B9A0 File Offset: 0x00009BA0
-			// (set) Token: 0x06000146 RID: 326 RVA: 0x0000B9B8 File Offset: 0x00009BB8
+			// Token: 0x170000B0 RID: 176
+			// (get) Token: 0x060001D1 RID: 465 RVA: 0x0000ACB0 File Offset: 0x00008EB0
+			// (set) Token: 0x060001D2 RID: 466 RVA: 0x0000ACC8 File Offset: 0x00008EC8
 			public bool SupportsWalkVR
 			{
 				[CompilerGenerated]
@@ -2158,9 +2161,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x1700006F RID: 111
-			// (get) Token: 0x06000147 RID: 327 RVA: 0x0000B9C4 File Offset: 0x00009BC4
-			// (set) Token: 0x06000148 RID: 328 RVA: 0x0000B9DC File Offset: 0x00009BDC
+			// Token: 0x170000B1 RID: 177
+			// (get) Token: 0x060001D3 RID: 467 RVA: 0x0000ACD4 File Offset: 0x00008ED4
+			// (set) Token: 0x060001D4 RID: 468 RVA: 0x0000ACEC File Offset: 0x00008EEC
 			public bool SupportsTeleportVR
 			{
 				[CompilerGenerated]
@@ -2175,62 +2178,62 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000070 RID: 112
-			// (get) Token: 0x06000149 RID: 329 RVA: 0x0000B9E6 File Offset: 0x00009BE6
-			// (set) Token: 0x0600014A RID: 330 RVA: 0x0000B9EE File Offset: 0x00009BEE
+			// Token: 0x170000B2 RID: 178
+			// (get) Token: 0x060001D5 RID: 469 RVA: 0x0000ACF6 File Offset: 0x00008EF6
+			// (set) Token: 0x060001D6 RID: 470 RVA: 0x0000ACFE File Offset: 0x00008EFE
 			public string ReplicationId { get; set; }
 
-			// Token: 0x17000071 RID: 113
-			// (get) Token: 0x0600014B RID: 331 RVA: 0x0000B9F7 File Offset: 0x00009BF7
-			// (set) Token: 0x0600014C RID: 332 RVA: 0x0000B9FF File Offset: 0x00009BFF
+			// Token: 0x170000B3 RID: 179
+			// (get) Token: 0x060001D7 RID: 471 RVA: 0x0000AD07 File Offset: 0x00008F07
+			// (set) Token: 0x060001D8 RID: 472 RVA: 0x0000AD0F File Offset: 0x00008F0F
 			public int ReleaseStatus { get; set; }
 
-			// Token: 0x040000A2 RID: 162
+			// Token: 0x040000E2 RID: 226
 			private ulong f000001;
 
-			// Token: 0x040000A3 RID: 163
+			// Token: 0x040000E3 RID: 227
 			private string f000002;
 
-			// Token: 0x040000A4 RID: 164
+			// Token: 0x040000E4 RID: 228
 			private string f000003;
 
-			// Token: 0x040000A5 RID: 165
+			// Token: 0x040000E5 RID: 229
 			private ulong f000076;
 
-			// Token: 0x040000A6 RID: 166
+			// Token: 0x040000E6 RID: 230
 			private string f000036;
 
-			// Token: 0x040000A7 RID: 167
+			// Token: 0x040000E7 RID: 231
 			private int f000006;
 
-			// Token: 0x040000A8 RID: 168
+			// Token: 0x040000E8 RID: 232
 			private int f000007;
 
-			// Token: 0x040000A9 RID: 169
+			// Token: 0x040000E9 RID: 233
 			private bool f000017;
 
-			// Token: 0x040000AA RID: 170
+			// Token: 0x040000EA RID: 234
 			private bool f000077;
 
-			// Token: 0x040000AB RID: 171
+			// Token: 0x040000EB RID: 235
 			private bool f000018;
 
-			// Token: 0x040000AC RID: 172
+			// Token: 0x040000EC RID: 236
 			private bool f000019;
 
-			// Token: 0x040000AD RID: 173
+			// Token: 0x040000ED RID: 237
 			private bool f00001a;
 
-			// Token: 0x040000AE RID: 174
+			// Token: 0x040000EE RID: 238
 			private bool f00001b;
 		}
 
-		// Token: 0x0200002F RID: 47
+		// Token: 0x02000041 RID: 65
 		public sealed class c000062
 		{
-			// Token: 0x17000072 RID: 114
-			// (get) Token: 0x0600014E RID: 334 RVA: 0x0000BA14 File Offset: 0x00009C14
-			// (set) Token: 0x0600014F RID: 335 RVA: 0x0000BA2C File Offset: 0x00009C2C
+			// Token: 0x170000B4 RID: 180
+			// (get) Token: 0x060001DA RID: 474 RVA: 0x0000AD24 File Offset: 0x00008F24
+			// (set) Token: 0x060001DB RID: 475 RVA: 0x0000AD3C File Offset: 0x00008F3C
 			public string RoomName
 			{
 				[CompilerGenerated]
@@ -2245,9 +2248,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000073 RID: 115
-			// (get) Token: 0x06000150 RID: 336 RVA: 0x0000BA38 File Offset: 0x00009C38
-			// (set) Token: 0x06000151 RID: 337 RVA: 0x0000BA50 File Offset: 0x00009C50
+			// Token: 0x170000B5 RID: 181
+			// (get) Token: 0x060001DC RID: 476 RVA: 0x0000AD48 File Offset: 0x00008F48
+			// (set) Token: 0x060001DD RID: 477 RVA: 0x0000AD60 File Offset: 0x00008F60
 			public long RoomId
 			{
 				[CompilerGenerated]
@@ -2262,9 +2265,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000074 RID: 116
-			// (get) Token: 0x06000152 RID: 338 RVA: 0x0000BA5C File Offset: 0x00009C5C
-			// (set) Token: 0x06000153 RID: 339 RVA: 0x0000BA74 File Offset: 0x00009C74
+			// Token: 0x170000B6 RID: 182
+			// (get) Token: 0x060001DE RID: 478 RVA: 0x0000AD6C File Offset: 0x00008F6C
+			// (set) Token: 0x060001DF RID: 479 RVA: 0x0000AD84 File Offset: 0x00008F84
 			public string ImageName
 			{
 				[CompilerGenerated]
@@ -2279,22 +2282,22 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x040000AF RID: 175
+			// Token: 0x040000EF RID: 239
 			private string f00000a;
 
-			// Token: 0x040000B0 RID: 176
+			// Token: 0x040000F0 RID: 240
 			private long f00002e;
 
-			// Token: 0x040000B1 RID: 177
+			// Token: 0x040000F1 RID: 241
 			private string f000003;
 		}
 
-		// Token: 0x02000030 RID: 48
+		// Token: 0x02000042 RID: 66
 		public sealed class c000063
 		{
-			// Token: 0x17000075 RID: 117
-			// (get) Token: 0x06000155 RID: 341 RVA: 0x0000BA88 File Offset: 0x00009C88
-			// (set) Token: 0x06000156 RID: 342 RVA: 0x0000BAA0 File Offset: 0x00009CA0
+			// Token: 0x170000B7 RID: 183
+			// (get) Token: 0x060001E1 RID: 481 RVA: 0x0000AD98 File Offset: 0x00008F98
+			// (set) Token: 0x060001E2 RID: 482 RVA: 0x0000ADB0 File Offset: 0x00008FB0
 			public string Tag
 			{
 				[CompilerGenerated]
@@ -2309,9 +2312,9 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x17000076 RID: 118
-			// (get) Token: 0x06000157 RID: 343 RVA: 0x0000BAAC File Offset: 0x00009CAC
-			// (set) Token: 0x06000158 RID: 344 RVA: 0x0000BAC4 File Offset: 0x00009CC4
+			// Token: 0x170000B8 RID: 184
+			// (get) Token: 0x060001E3 RID: 483 RVA: 0x0000ADBC File Offset: 0x00008FBC
+			// (set) Token: 0x060001E4 RID: 484 RVA: 0x0000ADD4 File Offset: 0x00008FD4
 			public int Type
 			{
 				[CompilerGenerated]
@@ -2326,32 +2329,32 @@ namespace vaultgamesesh
 				}
 			}
 
-			// Token: 0x040000B2 RID: 178
+			// Token: 0x040000F2 RID: 242
 			private string f00000a;
 
-			// Token: 0x040000B3 RID: 179
+			// Token: 0x040000F3 RID: 243
 			private int f00000b;
 		}
 
-		// Token: 0x02000031 RID: 49
+		// Token: 0x02000043 RID: 67
 		public enum enum064
 		{
 
 		}
 
-		// Token: 0x02000032 RID: 50
+		// Token: 0x02000044 RID: 68
 		public enum enum065
 		{
 
 		}
 
-		// Token: 0x02000033 RID: 51
+		// Token: 0x02000045 RID: 69
 		public enum enum066
 		{
 
 		}
 
-		// Token: 0x02000034 RID: 52
+		// Token: 0x02000046 RID: 70
 		public enum enum067
 		{
 

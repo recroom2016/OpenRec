@@ -8,6 +8,7 @@ namespace start
 {
 	class Setup
 	{
+		public static bool firsttime = false;
 		public static void setup()
 		{
 			//sets up all the important files so openrec doesnt crash like lame vaultserver xD
@@ -18,6 +19,11 @@ namespace start
 			Directory.CreateDirectory("SaveData\\Rooms\\");
 			Directory.CreateDirectory("SaveData\\Images\\");
 			Directory.CreateDirectory("SaveData\\Rooms\\Downloaded\\");
+			if (!(File.Exists("SaveData\\App\\firsttime.txt")))
+			{
+				File.WriteAllText("SaveData\\App\\firsttime.txt", "this text file has no use other than to tell the program whether to bring up the intro or not, so i can just write random shit here. among us balls, you suck mad dick you big fat fa----");
+				firsttime = true;
+			}
 			if (!(File.Exists("SaveData\\avatar.txt")))
 			{
 				File.WriteAllText("SaveData\\avatar.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/avatar.txt"));
@@ -56,7 +62,7 @@ namespace start
 			}
 			if (!(File.Exists("SaveData\\Profile\\username.txt")))
 			{
-				File.WriteAllText("SaveData\\Profile\\username.txt", "DefaultUsername");
+				File.WriteAllText("SaveData\\Profile\\username.txt", "OpenRec User#" + new Random().Next(0, 1000000));
 			}
 			if (!(File.Exists("SaveData\\Profile\\level.txt")))
 			{
@@ -74,6 +80,10 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\settings.txt", Newtonsoft.Json.JsonConvert.SerializeObject(api.Settings.CreateDefaultSettings()));
 			}
+			if (!(File.Exists("SaveData\\profileimage.png")))
+			{
+				File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData("https://github.com/OpenRecRoom/OpenRec/raw/main/profileimage.png"));
+			}
 			if (!(File.Exists("SaveData\\App\\privaterooms.txt")))
 			{
 				File.WriteAllText("SaveData\\App\\privaterooms.txt", "Disabled");
@@ -86,13 +96,16 @@ namespace start
 			{
 				File.WriteAllText("SaveData\\App\\facefeaturesadd.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/facefeaturesadd.txt"));
 			}
-			if (!(File.Exists("SaveData\\Images\\count.txt")))
-			{
-				File.WriteAllText("SaveData\\Images\\count.txt", "0");
+			goto tryagain;
+
+		tryagain:
+			try
+            {
+				api.CustomRooms.RoomGet("gizmoface");
 			}
-			if (!(File.Exists("SaveData\\profileimage.png")))
-			{
-				File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData("https://github.com/OpenRecRoom/OpenRec/raw/main/profileimage.png"));
+			catch
+            {
+				goto tryagain;
 			}
 			Console.WriteLine("Done!");
 			Console.Clear();
