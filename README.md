@@ -7,7 +7,7 @@ OpenRec is a RecRoom server software made by recroom2016!
  - Nightly
 
 The master branch is the public branch where all the latest updates a published.
-The nightly branch is where all the experimental updates that are needed to be tested before release.
+The nightly branch is where all the experimental updates that are needed to be tested before release are.
 
 ---
 
