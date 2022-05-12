@@ -99,13 +99,17 @@ namespace start
 			goto tryagain;
 
 		tryagain:
-			try
+			if (!File.Exists("SaveData\\Rooms\\Downloaded\\roomname.txt"))
             {
-				api.CustomRooms.RoomGet("gizmoface");
-			}
-			catch
-            {
-				goto tryagain;
+				try
+				{
+					api.CustomRooms.RoomGet("gizmoface");
+				}
+				catch
+				{
+					goto tryagain;
+				}
+				
 			}
 			Console.WriteLine("Done!");
 			Console.Clear();

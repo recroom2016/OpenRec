@@ -263,7 +263,7 @@ namespace start
                                 Console.WriteLine("Failed to download profile...");
                                 goto Start;
                             }
-                            ;
+                        
                             List<ProfieStealer.Root> profile = JsonConvert.DeserializeObject<List<ProfieStealer.Root>>(data);
                             byte[] profileimage = new WebClient().DownloadData("https://img.rec.net/" + profile[0].profileImage + "?cropSquare=true&width=192&height=192");
                             File.WriteAllBytes("SaveData\\profileimage.png", profileimage);
@@ -317,7 +317,9 @@ namespace start
                         Console.WriteLine("Failed to download profile...");
                         goto Start;
                     }
+                    
                     ProfieStealer.ProfileSteal(data2);
+                    
                     Console.Clear();
                     Console.WriteLine("Success!");
                     goto Start;
@@ -403,7 +405,7 @@ namespace start
             }
         }
         public static string version = "";
-        public static string appversion = "0.7.0";
+        public static string appversion = "0.6.9";
         public static bool bannedflag = false;
     }
 
