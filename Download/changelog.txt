@@ -1,4 +1,4 @@
-Feature Patch v0.6.9:
+Feature Patch v0.6.9: sex build
 -Added tutorial and info hints
 -Added custom rooms back into 2018 (no saving yet)
 -Added Profile Downloader
