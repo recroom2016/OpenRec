@@ -1,1 +1,1 @@
-[487454, 4701796, 1623123, 1423224]
+[{"UserId":487454,"Reason":"Banned."}, {"UserId":4701796,"Reason":"Banned."}, {"UserId":1623123,"Reason":"Banned."}, {"UserId":1423224,"Reason":"Banned."}]
