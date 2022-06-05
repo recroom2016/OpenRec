@@ -103,7 +103,7 @@ namespace start
             {
 				try
 				{
-					api.CustomRooms.RoomGet("gizmoface");
+					api.CustomRooms.RoomGet("gogo9");
 				}
 				catch
 				{

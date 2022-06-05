@@ -55,6 +55,10 @@ namespace server
                 {
 					i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
                 }
+				else if (rawUrl.StartsWith("//data/"))
+				{
+					i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
+				}
 				else
                 {
 					try

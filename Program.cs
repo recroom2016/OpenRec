@@ -53,6 +53,7 @@ namespace start
 
                 else
                 {
+                    Console.Clear();
                     goto Start;
                 }
             }
@@ -401,9 +402,12 @@ namespace start
                         new APIServer();
                         new WebSocket();
                     }
+                    
                 }
+                Console.WriteLine(msg);
             }
         }
+        public static string msg = "//This is the server sending and recieving data from recroom." + Environment.NewLine + "//Ignore this if you don't know what this means." + Environment.NewLine + "//Please start up the build now.";
         public static string version = "";
         public static string appversion = "0.6.9";
         public static bool bannedflag = false;
