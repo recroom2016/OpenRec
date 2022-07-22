@@ -73,16 +73,7 @@ namespace start
             {
                 Console.WriteLine("This version of OpenRec is outdated. We recommend you install the latest version, OpenRec " + new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Download/version.txt"));
             }
-            if (File.Exists("SaveData\\Profile\\userid.txt"))
-            {
-                if (new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/banned.txt").Contains(File.ReadAllText("SaveData\\Profile\\userid.txt")))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You are banned. Using this version of OpenRec will not work, please download OpenRec 0.4.2 or prior.");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    bannedflag = true;
-                }
-            }
+            
             Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
             Console.WriteLine("(1) What's New" + Environment.NewLine +"(2) Change Settings" + Environment.NewLine + "(3) Modify Profile" + Environment.NewLine + "(4) Build Download Links" + Environment.NewLine + "(5) Start Server");
             string readline = Console.ReadLine();
@@ -367,7 +358,7 @@ namespace start
                 }
                 else if (readline2 == "2018")
                 {
-                    Console.WriteLine("May, July or September (Beta) 2018: (M, J, S)");
+                    Console.WriteLine("May, July or September (SEPTEMBER MIGHT NOT WORK) 2018: (M, J, S)");
                     string readline3 = Console.ReadLine();
                     if ((readline3 == "M") || (readline3 == "m"))
                     {
